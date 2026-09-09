@@ -20,6 +20,21 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+      - name: Initialize evidence for this Lean run
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          directory = Path("verification")
+          directory.mkdir(exist_ok=True)
+          initial = {"status": "not-run", "kind": "ci-stage-status",
+                     "commit": os.environ["GITHUB_SHA"], "run_id": os.environ["GITHUB_RUN_ID"],
+                     "message": "This CI run has not completed this check."}
+          for name in ("result.json", "metadata-check.json", "config-check.json"):
+              (directory / name).write_text(json.dumps(initial, indent=2) + "\n")
+          for name in ("build.log", "axioms.log"):
+              (directory / name).write_text("")
+          PY
       - name: Check the statement layout and pinned dependencies
         run: python3 scripts/validate_comparator.py --output verification/config-check.json
       - name: Check verifier scripts
@@ -68,8 +83,23 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+      - name: Initialize evidence for this Comparator run
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          directory = Path("verification")
+          directory.mkdir(exist_ok=True)
+          initial = {"status": "not-run", "kind": "local-comparator-verification",
+                     "requested_mode": "full", "comparator_started": False, "nanoda_required": True,
+                     "commit": os.environ["GITHUB_SHA"], "run_id": os.environ["GITHUB_RUN_ID"],
+                     "message": "This CI run has not completed Comparator or NanoDa."}
+          for name in ("comparator-run.json", "comparator-preflight.json"):
+              (directory / name).write_text(json.dumps(initial, indent=2) + "\n")
+          (directory / "comparator.log").write_text("")
+          PY
       - name: Require functioning Linux confinement
-        run: bash scripts/verify-comparator.sh --preflight-only
+        run: bash scripts/verify-comparator.sh --preflight-only --report verification/comparator-preflight.json
       - name: Free space for the independent kernel check
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
         with:
@@ -105,6 +135,7 @@ jobs:
           name: comparator-verification-report
           path: |
             verification/comparator-run.json
+            verification/comparator-preflight.json
             verification/comparator.log
           if-no-files-found: error
           retention-days: 30
