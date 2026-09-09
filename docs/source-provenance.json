@@ -1,0 +1,736 @@
+{
+  "upstream_repository": "https://github.com/DiarHaidary/nelson-nguyen-sparse-fock",
+  "upstream_revision": "3a8969bfa135b7b5042d7090df992780b8ac567b",
+  "vendor_sources": [
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/AxiomAudit.lean",
+      "sha256": "254081f353268524711e53aa9bcb9354b4d31029a6244d7628ff8e18061a2be2",
+      "upstream_paths": [
+        "formal/SparseFockFormal/AxiomAudit.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/BandCoefficientBounds.lean",
+      "sha256": "bfd11b41fd503c2aac826d4221159ef781e33ab47a237004efdd4c918e63bf45",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/BandCoefficientBounds.lean",
+        "formal/SparseFockFormal/BandCoefficientBounds.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/BandEnvelope.lean",
+      "sha256": "37827df8380036ba43cee27ef78174d99e4ce52751c3b5d6be52b11b52f9b538",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/BandEnvelope.lean",
+        "formal/SparseFockFormal/BandEnvelope.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/BandInventory.lean",
+      "sha256": "0e3611fae10c69515abf879666819ec9fb94cbac52d3500cf56a27f4fdf1d92b",
+      "upstream_paths": [
+        "formal/SparseFockFormal/BandInventory.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ConcreteBandAssembly.lean",
+      "sha256": "7a2fe6d054b2cf1c86402bceaf84a5607eb7c0e0fe2a37313f25e64d6c902b40",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ConcreteBandAssembly.lean",
+        "formal/SparseFockFormal/ConcreteBandAssembly.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ConcreteBandEnvelope.lean",
+      "sha256": "3411bcc001e2de7309de59186c1271336adedeb4414e96ba623240e7c5274791",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ConcreteBandEnvelope.lean",
+        "formal/SparseFockFormal/ConcreteBandEnvelope.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ConcreteLadder.lean",
+      "sha256": "6c34bc14af5c1150f48c51b5366c0689cde51c9819c38b7ea3dd02453715aecf",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ConcreteLadder.lean",
+        "formal/SparseFockFormal/ConcreteLadder.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ConcreteLadderIteration.lean",
+      "sha256": "0bd1bbf6a4d6e2bd47dfbe66e2d2d5bafadc1af466c4e826bfef49dced4ee936",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ConcreteLadderIteration.lean",
+        "formal/SparseFockFormal/ConcreteLadderIteration.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ConcreteMomentEndgame.lean",
+      "sha256": "c54162551616042c6ed0c78a796cd290db9bf1877909a833b7cfab416d295a99",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ConcreteMomentEndgame.lean",
+        "formal/SparseFockFormal/ConcreteMomentEndgame.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/Counting.lean",
+      "sha256": "e4c1cdae85f7494a31829c7c0d6ef4c418943ae5541f3656545d87e3aae03753",
+      "upstream_paths": [
+        "formal/SparseFockFormal/Counting.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/DirectionalBounds.lean",
+      "sha256": "50139ab4f40c269e3211cd842b97c25b9671c8ba6c5468f3873b33de7f1dc1c0",
+      "upstream_paths": [
+        "formal/SparseFockFormal/DirectionalBounds.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/DirectionalConcrete.lean",
+      "sha256": "bad777eee7feb0338eec8f49ca51e2e4dc5ce7fea18bceca52295ab79e58c872",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/DirectionalConcrete.lean",
+        "formal/SparseFockFormal/DirectionalConcrete.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/DirectionalNormalized.lean",
+      "sha256": "caee03366f9386e6173d4b67286b56d064aa494d1ecdd9e2cf8340551fafa802",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/DirectionalNormalized.lean",
+        "formal/SparseFockFormal/DirectionalNormalized.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/DistributionBridges.lean",
+      "sha256": "cce969f49ec341bde8b0a947b1a072eab9ccc3a4c4952fe65707844123461d76",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/DistributionBridges.lean",
+        "formal/SparseFockFormal/DistributionBridges.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/EndgameAxiomAudit.lean",
+      "sha256": "4b775e3194960b62109a5ca85d4ebbbcbc42cbce5f99c4ef0571c3e4b5188701",
+      "upstream_paths": [
+        "formal/SparseFockFormal/EndgameAxiomAudit.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ExternalOperators.lean",
+      "sha256": "ccc143a48f06ff4aee27fce8c94e63b2e2021394e023cb1edfe905b8f01caa9b",
+      "upstream_paths": [
+        "formal/SparseFockFormal/ExternalOperators.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteHilbert.lean",
+      "sha256": "c7cf947dd9e4468e28b9ce86c32ae1a7530d8bb4659755fa60719cf5fa0c45a2",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/FiniteHilbert.lean",
+        "formal/SparseFockFormal/FiniteHilbert.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteL2.lean",
+      "sha256": "3458808efc640543597fb374d2a3998975e8933cd1b793d287449606c54bad31",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/FiniteL2.lean",
+        "formal/SparseFockFormal/FiniteL2.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteLocalMoments.lean",
+      "sha256": "8c10470fd008a7d2cc2d52d9160bc0d40d78104a74da0bb8b54b949a0defde53",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/FiniteLocalMoments.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteProbability.lean",
+      "sha256": "dd4dc454139c756000138340cdb135ea7db4e898bbe9296d9dd3bf1efbb034f1",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/FiniteProbability.lean",
+        "formal/SparseFockFormal/FiniteProbability.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteProductLaw.lean",
+      "sha256": "f990daf01874e59571fe5178cac9f4728ec449146eef69577fb825d2fa29bdff",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/FiniteProductLaw.lean",
+        "formal/SparseFockFormal/FiniteProductLaw.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/FiniteSiteOperators.lean",
+      "sha256": "ca70e8da263360d345c7593627fcc529675a68c4def02f08e8e1fb02969cfd59",
+      "upstream_paths": [
+        "formal/SparseFockFormal/FiniteSiteOperators.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/GlobalBands.lean",
+      "sha256": "7045bd45c7e06c94ed37306f1b45742b986dff2940d50322e5304d8a524f0a65",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/GlobalBands.lean",
+        "formal/SparseFockFormal/GlobalBands.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/HeavyBandsConcrete.lean",
+      "sha256": "91b2bc471a05fdd1cc715051dc0a8bfbd249a69291b144f969c4b4f3b355c14b",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/HeavyBandsConcrete.lean",
+        "formal/SparseFockFormal/HeavyBandsConcrete.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/IndependentFrameAssembly.lean",
+      "sha256": "f859e83b7ff1e3f33dcc8f4bf4c2b16b59bac7e50fe20d8b42cb7c993346e77b",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/IndependentFrameAssembly.lean",
+        "formal/SparseFockFormal/IndependentFrameAssembly.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/IndependentFrameMeasure.lean",
+      "sha256": "2eef9fbba097066e97429122b4301e4fd07bc3208b613cad81ebea3cf6ebcb0b",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/IndependentFrameMeasure.lean",
+        "formal/SparseFockFormal/IndependentFrameMeasure.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/IntermediateBandClaims.lean",
+      "sha256": "f843eb4be8e7bf2964d9318a0061b2dbabd962f096074215e80a7b934d38d76a",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/IntermediateBandClaims.lean",
+        "formal/SparseFockFormal/IntermediateBandClaims.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/LadderEndgame.lean",
+      "sha256": "d3cd862d510dac017a1f21f4e21164e5b0c5ae1f4921c6dff109852640b2200b",
+      "upstream_paths": [
+        "formal/SparseFockFormal/LadderEndgame.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/LightBandsConcrete.lean",
+      "sha256": "6b4be7db59725d295166a7d22d4191de635e7bec7eb04adb957fe3be23d378a6",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/LightBandsConcrete.lean",
+        "formal/SparseFockFormal/LightBandsConcrete.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/LightSectorAbstract.lean",
+      "sha256": "fafac44df0de9b0cbb3d13725f60aabd8b7b342732824184da64f1f73b73f812",
+      "upstream_paths": [
+        "formal/SparseFockFormal/LightSectorAbstract.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/LightSectorConcrete.lean",
+      "sha256": "10c69d78265b8cd6efd0076a51c8927171b87bc775340ebd0c88a148edc92d08",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/LightSectorConcrete.lean",
+        "formal/SparseFockFormal/LightSectorConcrete.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/LocalOperators.lean",
+      "sha256": "d94e0198b80005bb901934280275a6d709a419fb2b36994c7309850d6b0c3c08",
+      "upstream_paths": [
+        "formal/SparseFockFormal/LocalOperators.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MainTheorem.lean",
+      "sha256": "d7d9acf6a652e20c1fdf558cd3db97a0f4eb21cbedb4c01a3f61e43edb3b9549",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MainTheorem.lean",
+        "formal/SparseFockFormal/MainTheorem.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MainTheoremAssembly.lean",
+      "sha256": "ea856ef48963a8e5ca01aaff5c534187e4d9ef8b9b40e037c98391854f419f8b",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MainTheoremAssembly.lean",
+        "formal/SparseFockFormal/MainTheoremAssembly.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MatrixFrameBridge.lean",
+      "sha256": "586b9b0ee21a3a1a4009a78d216ef1ea9cd6699e0c2c319b86799b7a5058c244",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MatrixFrameBridge.lean",
+        "formal/SparseFockFormal/MatrixFrameBridge.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MatrixTail.lean",
+      "sha256": "c453c9c177cabfe4202bd51ce9844c8de03da0e81fa0ef849dd9d400610c416e",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MatrixTail.lean",
+        "formal/SparseFockFormal/MatrixTail.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MixedBandsConcrete.lean",
+      "sha256": "bb59d465b9ba315122215ca2196a5a5aa5224e8d66bac5ee472830a26e468223",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MixedBandsConcrete.lean",
+        "formal/SparseFockFormal/MixedBandsConcrete.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/MomentTransfer.lean",
+      "sha256": "dba5b1a14ba0c5fdcb83619d71aaf75bf44b98a41a3185b6f3fa81c01cf0e896",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/MomentTransfer.lean",
+        "formal/SparseFockFormal/MomentTransfer.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/NamedBands.lean",
+      "sha256": "67b9dede88c3bd16e221dc6177a039685b1ecf036e314d594042794050f0ad38",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/NamedBands.lean",
+        "formal/SparseFockFormal/NamedBands.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/PaperParameters.lean",
+      "sha256": "d76751eb160e853d72ba1b717de70918115880b7a402f54bb12f8832e4c2b2ce",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/PaperParameters.lean",
+        "formal/SparseFockFormal/PaperParameters.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ParsevalFrame.lean",
+      "sha256": "de2efb35f199947c6924a3989e473a0235f7d50494df33025512cbabc03c9a22",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ParsevalFrame.lean",
+        "formal/SparseFockFormal/ParsevalFrame.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/Pattern.lean",
+      "sha256": "0febc88dcbb2f9747dcfa508cd475dd35461716ac067e0e2aeedc0736bf005ae",
+      "upstream_paths": [
+        "formal/SparseFockFormal/Pattern.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ProbabilisticEndgame.lean",
+      "sha256": "5682a1f77ce8aecf6554b20c993b5152a433119cbde0f268e1e85296abe7bb94",
+      "upstream_paths": [
+        "formal/SparseFockFormal/ProbabilisticEndgame.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ProductFock.lean",
+      "sha256": "ead8e5b0e14698ebb5d3f6d5555df1eb15c99f4250dbd894f4324bb42f6a7712",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/ProductFock.lean",
+        "formal/SparseFockFormal/ProductFock.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/ScalarBounds.lean",
+      "sha256": "9a7457eef5b91d5edab5ab267ac2c9d99a7de15b9e2153e20825a155f82fdc48",
+      "upstream_paths": [
+        "formal/SparseFockFormal/ScalarBounds.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/SparseIIDCoupling.lean",
+      "sha256": "20d802ddee75398c1232e7ac5d76eddd3c1edca10a3686f3b1bfd7136540fef9",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/SparseIIDCoupling.lean",
+        "formal/SparseFockFormal/SparseIIDCoupling.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/SparseIIDTransfer.lean",
+      "sha256": "068d47440c1e9028fb6faf14ae3f51229e86e0fd04f0f4c5f57d98a9a582fcc1",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/SparseIIDTransfer.lean",
+        "formal/SparseFockFormal/SparseIIDTransfer.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/SparseIIDUnconditional.lean",
+      "sha256": "fc1dc130b51355ee95867d0bcf04e8032ffe736480d27d554dff6f358985762f",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/SparseIIDUnconditional.lean",
+        "formal/SparseFockFormal/SparseIIDUnconditional.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/SparseStackDistribution.lean",
+      "sha256": "9c25d719874a58718679538a9a9b905a17216f4318db702e7b2df539d1038a3b",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/SparseStackDistribution.lean",
+        "formal/SparseFockFormal/SparseStackDistribution.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/SparseStackModel.lean",
+      "sha256": "5c47364a3d1b1d94fd28f84649f9ddd123ce0afac84a4117e93c092b376fee8d",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/SparseStackModel.lean",
+        "formal/SparseFockFormal/SparseStackModel.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean",
+      "sha256": "08a98297d4e6a0decb66c512f0e672d07faa9fcf373a37575544a0b9a2672b70",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/TernaryJacobi.lean",
+        "formal/SparseFockFormal/TernaryJacobi.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/TracePowerConvexity.lean",
+      "sha256": "bd441e104cea27ea1c6d082131cf35075eca701e87c791d6cb1af8eb2f02e017",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/TracePowerConvexity.lean",
+        "formal/SparseFockFormal/TracePowerConvexity.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/TwoLevelAndBandCompleteness.lean",
+      "sha256": "223149e6848cb12351c47a1f0b91d8bfc618a50eea3412c317efdac99680abea",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/TwoLevelAndBandCompleteness.lean",
+        "formal/SparseFockFormal/TwoLevelAndBandCompleteness.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/TypedBlockCS.lean",
+      "sha256": "d185107609a45b88d5bc48044ef1b30777e3e18352dc09e2b3b80162fedad689",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/TypedBlockCS.lean",
+        "formal/SparseFockFormal/TypedBlockCS.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    },
+    {
+      "path": "vendor/sparse-fock/SparseFockFormal/VacuumMoment.lean",
+      "sha256": "d23e43b3fcf001380ba5299c6e8fda4241e76493d98e9b5de676bb46b4e807ad",
+      "upstream_paths": [
+        "extensions/limited-independence-exact-s-osnap/lean/SparseFockFormal/VacuumMoment.lean",
+        "formal/SparseFockFormal/VacuumMoment.lean"
+      ],
+      "match": "exact_or_line_endings_only"
+    }
+  ],
+  "unchanged_srht_sources": [
+    {
+      "path": "SRHT/ActualMomentTransfer.lean",
+      "sha256": "a3afdfb5ae2c00b5e41bfc37b7f5cc9c04ac05b67afd17cd69b6c8e2a2f75ece"
+    },
+    {
+      "path": "SRHT/Alignment.lean",
+      "sha256": "d01bf2774e0a509967c34afe5b4b0def134f0c53ed32948d497b8fc7b5688ca9"
+    },
+    {
+      "path": "SRHT/AlignmentObstruction.lean",
+      "sha256": "c35a9aa43650eb15d5cfbb66498086d4f035a90dcf12068bf51f51b2e0d4176e"
+    },
+    {
+      "path": "SRHT/BernoulliGeneral.lean",
+      "sha256": "ee22ac9f79c8c96bdcb25b1ef157c3225c14068261b0ee0c90dfb0dc9dc37a3e"
+    },
+    {
+      "path": "SRHT/BernoulliMoment.lean",
+      "sha256": "8dec9b1b0adc87c32355466ad4c9fecf88fbdfe3553606118a22ff1da49d81f0"
+    },
+    {
+      "path": "SRHT/BernoulliRepresentation.lean",
+      "sha256": "3b5257c7aa58d70d975c16c5c8ea7d43bae8743f49228da690a856c9ac81bb1a"
+    },
+    {
+      "path": "SRHT/BernoulliSupport.lean",
+      "sha256": "b9f7cfe73af6890802e6de13b49e25d21af42767bb9cb4c7868e63daff2a51b1"
+    },
+    {
+      "path": "SRHT/BernoulliVariance.lean",
+      "sha256": "85d8039137d1dfcdbbab74ab0f61f5fd3cb171d3c34d7772e01001def39aeb06"
+    },
+    {
+      "path": "SRHT/BinaryBasis.lean",
+      "sha256": "c6da31d7146e383dc6826d0e5e0b213b11e58f9b51877127249a060aed1d4d6a"
+    },
+    {
+      "path": "SRHT/ConfidenceObstruction.lean",
+      "sha256": "cf6fc3435d9978e0aa6d7977e8e703db51138107386788706b9a8ddb52546963"
+    },
+    {
+      "path": "SRHT/Cutoff.lean",
+      "sha256": "69f661b73a5e00da203f591597647d216054756ace793f08cf2eb78abef6e0cc"
+    },
+    {
+      "path": "SRHT/FixedSizeTail.lean",
+      "sha256": "2b8b722a5046a8e1ba08fcae340ac951b438685f740d94da3839be6c51d78c1b"
+    },
+    {
+      "path": "SRHT/GaussianObstruction.lean",
+      "sha256": "5f41d7afb8f0ff8cb671a1aea172e9ba92b99fddd38f959dbb058c297e8efcff"
+    },
+    {
+      "path": "SRHT/GradeCompression.lean",
+      "sha256": "b3f8f74ac967d77072745fe3ce568e72b04b90371d8db1d17c92bb35c2a0c64a"
+    },
+    {
+      "path": "SRHT/HardCore.lean",
+      "sha256": "9ceffe87a31409a70a183281274981de98e010f1ed4eb5f2261b5191bf7e7c2b"
+    },
+    {
+      "path": "SRHT/LimitedIndependence.lean",
+      "sha256": "1d0db5699afc31bb2b54228bca1c85ad0e9e4efa82abdf6a0ae2cebbfeec17d6"
+    },
+    {
+      "path": "SRHT/LinearDimension.lean",
+      "sha256": "4f65b458a2dc38deeaef4f2bc8f543fca8be734fce2f4de549d80e11899d31e6"
+    },
+    {
+      "path": "SRHT/LogConfidence.lean",
+      "sha256": "f7594eaf316c4d1b79d5626699492a7eb015c49bc7b4aa87a3d3847d3a335575"
+    },
+    {
+      "path": "SRHT/Main.lean",
+      "sha256": "d841dd5753340c1e219077ca0babea5bead8393faf3e3f26caff02e6dc9f72b8"
+    },
+    {
+      "path": "SRHT/MatrixNorm.lean",
+      "sha256": "965e222e1ccd22bb458953faa6b4b02c2dd95cb4cb1d5ed718848e8e383bd93e"
+    },
+    {
+      "path": "SRHT/MatrixNormTransport.lean",
+      "sha256": "c4960fe887cb8872e834c83a844d9fdf61b432bdd44087ed78c3b972615a16c5"
+    },
+    {
+      "path": "SRHT/MatrixRepresentation.lean",
+      "sha256": "bedbb96884692c33c18a33111a53c7e84bc60a390a1504c69f1d70e806cb5416"
+    },
+    {
+      "path": "SRHT/Model.lean",
+      "sha256": "9cda4cbed17f16bdff97fe5da677b6592dbb32531a1d9fc0c74e6f62cb5c55a2"
+    },
+    {
+      "path": "SRHT/OccupationBasis.lean",
+      "sha256": "117131e9b25bd29172f0735c28fe0a9d2c68e7e7e4585e73ec5e7e18ff842ab4"
+    },
+    {
+      "path": "SRHT/OrthogonalBands.lean",
+      "sha256": "09c206900d28344037ec755e30190fba14a3601093f3769a148413fd4dd0654a"
+    },
+    {
+      "path": "SRHT/Parameters.lean",
+      "sha256": "1f1759125d04d4fbbe9a00334e2d2c498e6f01b1b3c6cb8eea5fc3aff3756971"
+    },
+    {
+      "path": "SRHT/PositiveSelector.lean",
+      "sha256": "9014eaf75af759cad421a85d149cac50438101139c06a166375f51fbde4b5ba7"
+    },
+    {
+      "path": "SRHT/ProductBasis.lean",
+      "sha256": "0da10e11b20561edd14724a26a4f834855603513f75eca8e45b9fcbd1be0deb1"
+    },
+    {
+      "path": "SRHT/ProjectionBounds.lean",
+      "sha256": "c1b0cdef7d6ba4dd38af744719934023337c21ee63c26c9a686d41e2c26184d6"
+    },
+    {
+      "path": "SRHT/Quantitative.lean",
+      "sha256": "e71bb116289bd5ab2573d053e70bb324984812143db6c867f69ac6fb5447a8d2"
+    },
+    {
+      "path": "SRHT/SamplingBernoulli.lean",
+      "sha256": "b1b224f088dcffdf6d82aa7788216966ed88a7cf93495ea4c9fc4c8e56b9a701"
+    },
+    {
+      "path": "SRHT/SamplingConditional.lean",
+      "sha256": "a95a71cea57d50240e719e2fa39093514f39ab3ba97d3f9e76d2a18273ed40ac"
+    },
+    {
+      "path": "SRHT/SamplingCoupling.lean",
+      "sha256": "4dcfac8b26b845711c2896fc2239208e842439272fafa69c92646a68ae365d6e"
+    },
+    {
+      "path": "SRHT/SamplingFinite.lean",
+      "sha256": "f5c70c3f242bfdf7b2869cbe0c57787d3559b10a50ec18217454a2fd1cf99ff2"
+    },
+    {
+      "path": "SRHT/SamplingTransfer.lean",
+      "sha256": "9a315b7ab0c775c966d927dc0cd00041ce8ec8c0d31847ec19c303210b7e2d92"
+    },
+    {
+      "path": "SRHT/SelectorRepresentation.lean",
+      "sha256": "02144bf77383c49eb48bcb37f074c67c2af9898104140dd48c006412213f444c"
+    },
+    {
+      "path": "SRHT/SignCompression.lean",
+      "sha256": "4bb43c94aaece8a07a015c3133b888e0cee37e610db43865329e1f714cc9a519"
+    },
+    {
+      "path": "SRHT/SmallRows.lean",
+      "sha256": "34ef2a554f4619f2156362c6d9fb2887ac4e5ceb4747e2d9e6c4780727e4c3b9"
+    },
+    {
+      "path": "SRHT/SmallRowsAssembly.lean",
+      "sha256": "3f8513fd792a84a2112bc8da668e167c0234c82a7d9deba2ac728e09d088ea18"
+    },
+    {
+      "path": "SRHT/SmallRowsAudit.lean",
+      "sha256": "335b5441133c5f56b459626fa4ad862ab312bbe5496e1422ba396371134ba1ca"
+    },
+    {
+      "path": "SRHT/SmallRowsE.lean",
+      "sha256": "2cdbe5ee836769ea5ff08e6d63b20b5d68bcf4b5596b893c3797825565425706"
+    },
+    {
+      "path": "SRHT/SmallRowsFinal.lean",
+      "sha256": "884a1b5f98c3ea977dfeb115e6f68a6a1a0a30401ea3d00558242fff82c45711"
+    },
+    {
+      "path": "SRHT/SmallRowsGrade.lean",
+      "sha256": "f7177f327829cd78a0ef3f566b0a7cfc9e9a945cdfd62b5697f9aa384954a432"
+    },
+    {
+      "path": "SRHT/SmallRowsGrades.lean",
+      "sha256": "4dc2e6bccd1e52ccbd5c4f1820730a34df41faac17693e4bc2b615c3960c947b"
+    },
+    {
+      "path": "SRHT/SmallRowsLift.lean",
+      "sha256": "97a412f203b4313a61fa2966d598d203da7d3eda499f004b0b5f9a78e9f91c23"
+    },
+    {
+      "path": "SRHT/SmallRowsLinear.lean",
+      "sha256": "ef321de2c9b677cbb8030da03f06352ecbf37f2740bf4ee542da62498a949f47"
+    },
+    {
+      "path": "SRHT/SmallRowsLinearBands.lean",
+      "sha256": "1a552559b80ceec3627ed8e336e6ad8b508df928eb56c7c31748680d5c215b63"
+    },
+    {
+      "path": "SRHT/SmallRowsMixed.lean",
+      "sha256": "88bf85052b17a6c053637c300220d75a67784c8680f553cbb4b457cef928fc43"
+    },
+    {
+      "path": "SRHT/SmallRowsNormalBound.lean",
+      "sha256": "a86c06fbdec5d63852a183e923f0f83ec765ebdaa752c3d0aad90596899ba628"
+    },
+    {
+      "path": "SRHT/SmallRowsX.lean",
+      "sha256": "7d3c1f8607dc74e925cc3bd57cbf94083dc2afd4a0aafea4539ab32724e9adee"
+    },
+    {
+      "path": "SRHT/SmallRowsY.lean",
+      "sha256": "f6562f568333c700f751d46f643dc9ca6ad1f12b403df1c7d26e76481ff0911d"
+    },
+    {
+      "path": "SRHT/StrongAlignment.lean",
+      "sha256": "165bc19f15406afb4c6a64a7b49728fd8226f5c23c132fb406eaf442a80db938"
+    },
+    {
+      "path": "SRHT/SupportMiss.lean",
+      "sha256": "522d05ee0c1ec66353f3eef3b9abfe9b134cd734919f0a1fdd76c7a4fd5ccfbd"
+    },
+    {
+      "path": "SRHT/TensorWalsh.lean",
+      "sha256": "ac2cc38fd0e57965d7944d73601a3c3028552bd64f552a6cae994712e7736bec"
+    },
+    {
+      "path": "SRHT/TwoSignDecomposition.lean",
+      "sha256": "f893f9c456cc35d3ed4a3d3fa2ad726a834339610134ef91fc876dcd575715a4"
+    },
+    {
+      "path": "SRHT/TwoSignRepresentation.lean",
+      "sha256": "c8d235726a17bde30134795be4ea679447029d183bcc8132c03293792a5a4d25"
+    },
+    {
+      "path": "SRHT/VacuumMoment.lean",
+      "sha256": "f9b5e547dfa066385a451ff85084c8e17b07d421495d33f4b7f652abb1aa6c7c"
+    },
+    {
+      "path": "SRHT/Walsh.lean",
+      "sha256": "df7d226dd0b2b480071aed9eedd967f394e6168c8646f6a3df1d2630c0acaf8b"
+    }
+  ],
+  "informal_reports": [
+    {
+      "path": "docs/SRHT_Technical_Report.md",
+      "sha256": "9e128ea9986d89e7020523a38fb9d02dddee978ba4de3396418a72abcb6bdaca"
+    },
+    {
+      "path": "docs/SRHT_Technical_Report.pdf",
+      "sha256": "b0523b3692d4a0596d9b249334105c15b31975961c3468f471aad386c40b7f91"
+    },
+    {
+      "path": "docs/SRHT_Technical_Report.tex",
+      "sha256": "8caa2485d8ab43127e8a745bfd4e125d57c2815394d847e6a4f3a5917e433948"
+    }
+  ],
+  "hash_convention": "SHA-256 of source bytes as copied before Git line-ending normalization; provenance hashes are not Comparator reports."
+}

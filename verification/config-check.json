@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "kind": "layout-config-only",
+  "toolchain": "leanprover/lean4:v4.33.0",
+  "theorem_names": [
+    "RerandomizedSTT.problem_5_6"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "challenge_bytes": 4097,
+  "challenge_lines": 82,
+  "definition_names": [],
+  "enable_nanoda": true
+}

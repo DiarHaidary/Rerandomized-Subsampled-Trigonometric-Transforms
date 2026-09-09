@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Rerandomized Subsampled Trigonometric Transforms"
+  description: >-
+    A Lean formalization of a two-round real Walsh subsampled randomized
+    Hadamard embedding. For every fixed d-dimensional real subspace of a
+    Walsh space of dimension n, independent unbiased diagonal signs and a
+    uniform sample of M distinct rows preserve every squared Euclidean norm
+    within factors 1-epsilon and 1+epsilon with probability at least 1-delta.
+    The prescribed M is at most n and at most
+    [8192(1+432/delta)+1]d/epsilon^2. Thus, at any fixed failure probability,
+    the embedding dimension is O(d/epsilon^2), the scaling asked for in
+    Problem 5.6 of arXiv:2602.05394v3 for its Walsh model. The recorded
+    Challenge/Solution declaration states the actual finite sampling law,
+    transform, success event, and quantitative dimension bound.
+  authors:
+    - "Diar Heidary"
+  license: "MIT"
+  responsible_maintainers:
+    - "Diar Heidary"
+
+# This repository includes the substantive proof development, not only a wrapper.
+classification:
+  arxiv: ["math.NA", "cs.DS"]
+  msc2020: ["60B20", "68W20"]
+
+sources:
+  - title: "Two-round Walsh SRHT: a self-contained moment and embedding proof"
+    authors: ["Diar Heidary"]
+    type: paper
+    location: "docs/SRHT_Technical_Report.md"
+    relationship: formalizes
+    note: >-
+      Project technical report revised 7 September 2026. The informal research
+      development preceded this Palomar layout. The report was subsequently
+      aligned with the verified operator estimates and finite conditional-Jensen
+      sampling argument. It is included with LaTeX and PDF companions.
+      Research direction and responsibility belong to the human author;
+      substantive automated mathematical and Lean work is disclosed below.
+    license: "MIT"
+    author_endorsement: participated
+  - title: "Linear Systems and Eigenvalue Problems: Open Questions from a Simons Workshop"
+    authors:
+      - "Noah Amsel"
+      - "Yves Baumann"
+      - "Paul Beckman"
+      - "Peter Bürgisser"
+      - "Chris Camaño"
+      - "Tyler Chen"
+      - "Edmond Chow"
+      - "Anil Damle"
+      - "Michal Derezinski"
+      - "Mark Embree"
+      - "Ethan N. Epperly"
+      - "Robert Falgout"
+      - "Mark Fornace"
+      - "Anne Greenbaum"
+      - "Chen Greif"
+      - "Diana Halikias"
+      - "Zhen Huang"
+      - "Elias Jarlebring"
+      - "Yiannis Koutis"
+      - "Daniel Kressner"
+      - "Rasmus Kyng"
+      - "Jörg Liesen"
+      - "Jackie Lok"
+      - "Raphael A. Meyer"
+      - "Yuji Nakatsukasa"
+      - "Kate Pearce"
+      - "Richard Peng"
+      - "David Persson"
+      - "Eliza Rebrova"
+      - "Ryan Schneider"
+      - "Rikhav Shah"
+      - "Edgar Solomonik"
+      - "Nikhil Srivastava"
+      - "Alex Townsend"
+      - "Robert J. Webber"
+      - "Jess Williams"
+    contributors:
+      - name: "Ethan N. Epperly"
+        role: "Scribe of Section 5.3, which contains Problem 5.6"
+    id: "arXiv:2602.05394v3"
+    type: paper
+    location: "https://arxiv.org/pdf/2602.05394v3"
+    relationship: other
+    note: >-
+      Problem source, not a supplied proof: Definition 5.3 specifies the
+      rerandomized Walsh transform; Problem 5.6 asks for dimension
+      O(r/epsilon^2). Definition 5.1 uses squared Euclidean norms. See
+      notes/SOURCE_FIDELITY.md for the exact transpose and parameter mapping.
+    license: "arXiv non-exclusive distribution license; not relicensed by this repository"
+    author_endorsement: not-contacted
+  - title: "A Sparse-Fock Proof of the Upper Edge for Fully Independent SparseStack"
+    authors: ["Diar Heidary"]
+    type: paper
+    location: "https://github.com/DiarHaidary/nelson-nguyen-sparse-fock/tree/3a8969bfa135b7b5042d7090df992780b8ac567b/paper"
+    relationship: background
+    note: >-
+      Background for the finite occupation-space and operator method. The
+      SRHT bounds are proved in this development; they are not hypotheses
+      imported from a SparseStack theorem. Reused Lean infrastructure is
+      separately recorded under related_formalizations.
+    license: "MIT"
+    author_endorsement: participated
+
+related_formalizations:
+  - id: "https://github.com/DiarHaidary/nelson-nguyen-sparse-fock/tree/3a8969bfa135b7b5042d7090df992780b8ac567b"
+    relationship: builds-on
+    note: >-
+      The vendored SparseFockFormal library originated in this project,
+      including finite probability, finite L2 spaces, matrix tails, and the
+      limited-independence extension. Original namespaces and MIT attribution
+      are retained. The present repository includes the consumed sources and
+      any SRHT-specific adaptations, so it is a substantive development rather
+      than a thin external Comparator wrapper.
+
+status:
+  scope: >-
+    The selected declaration RerandomizedSTT.problem_5_6 concerns independent
+    fair sign assignments, uniform distinct-row sampling, real Walsh matrices
+    of order 2^k, all orthonormal real d-frames with 1 <= d <= 2^k,
+    0 < epsilon < 1, and 0 < delta < 1/2. It includes the explicit prescribed
+    row count, positivity, the ambient cap, the dimension-linear bound with
+    its displayed dependence on delta, and the simultaneous norm guarantee.
+    The full proof library also contains limited-independence, Bernoulli
+    moment, cubic-logarithmic confidence, and support-obstruction theorems;
+    these are documented in notes/REPORT_COVERAGE.md and audited in Audit.lean,
+    but are not separately selected claims in this Comparator configuration.
+    Complex Fourier/DCT models, arbitrary non-Walsh sizes, optimized constants,
+    executable transform complexity, novelty, and a universal Gaussian
+    confidence bound are not asserted by the selected declaration.
+  # Deliberate Challenge theorem holes specify the statement to be compared.
+  # These counts concern Solution and the substantive proof sources only.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: agent
+      models: ["GPT-6 (Codex, current layout and statement review)"]
+      framework: "OpenAI Codex"
+      tool_setup: >-
+        Human-directed research and formalization using collaborating agents,
+        Lean 4.33.0, mathlib, finite source audits, and local build tools.
+        Agents wrote mathematical arguments and Lean proofs as well as the
+        Palomar packaging. Historical model identifiers for every earlier
+        session were not preserved in this metadata.
+      cost:
+        wall_time: "Not tracked across the complete research history"
+        spend_usd: "Not tracked"
+        hardware: "Local Windows workstation; hosted language models"
+      prompting_notes: >-
+        The human requested investigation of rerandomized SRHTs, continued
+        development to substantive results, complete Lean verification, and
+        this Palomar-compatible public repository linked to Problem 5.6.
+    - method: other
+      models: ["Claude (model identifier not recorded in the supplied audit)"]
+      framework: "Anthropic Claude"
+      tool_setup: >-
+        A user-supplied critique compared an earlier technical report against
+        the then-current Lean coverage. The response and ensuing corrections
+        are retained in notes/CLAUDE_AUDIT_RESPONSE.md.
+  spend_usd: "Not tracked"
+  notes: >-
+    Human direction and responsibility do not imply that the human manually
+    authored or independently checked every proof. Automated source review and
+    Lean kernel checking are distinct forms of evidence; neither constitutes
+    independent human refereeing or a novelty assessment.
+
+fidelity:
+  divergences: >-
+    The selected theorem uses the transpose of the source's sketching matrix,
+    with the same squared-norm event, and makes distinct-row sampling and
+    finite independence explicit. Walsh order n=2^k is part of the formal
+    model. The big-O claim is replaced by an explicit row prescription and
+    a dimension-linear bound whose constant depends on delta. At fixed delta
+    this is the requested dimension order; it must not be read as a constant
+    uniform over all confidence levels. The full project report has additional
+    conclusions outside the single Comparator claim. See notes/SOURCE_FIDELITY.md.
+
+review:
+  status: agent-reviewed
+  reviewers:
+    - "Codex srht_literature agent: separate model and endpoint source audit, 7 September 2026"
+    - "Claude: user-supplied report/Lean coverage critique"
+    - "Codex agents: Problem 5.6 statement and Palomar layout review"
+  notes: >-
+    notes/MODEL_AUDIT.md records a separate source-level model audit, not a
+    line-by-line independent review of the full operator proof. The inherited
+    Lean verification record reports a successful build and 32 transitive
+    axiom audits at 2026-09-07T18:12:28.6675937Z, using only propext,
+    Classical.choice, and Quot.sound. That historical record is not a claim
+    that Palomar, Comparator, or NanoDa has accepted this new repository
+    snapshot. Current packaging checks and any Comparator results must be
+    read from the committed verification records or the matching CI run.
+    No independent human peer review, Palomar editorial outcome, registry
+    registration, or publication-priority determination is claimed.
+
+alignment:
+  namespace: "RerandomizedSTT"
+  statements:
+    - source: "arXiv:2602.05394v3, Definitions 5.1 and 5.3, Problem 5.6; project report Theorem 1"
+      lean: "RerandomizedSTT.problem_5_6"
+      module: "Solution"
+      status: proved
+      note: >-
+        Challenge.lean states the independently sampled Walsh model and
+        quantitative dimension bound. Solution.lean connects it to the
+        complete finite-probability and operator proof in SRHT. The precise
+        source correspondence and limits are documented in notes/SOURCE_FIDELITY.md.
+
+acknowledgements: >-
+  Lean and mathlib contributors; authors and participants of the Simons
+  workshop problem collection; the earlier SparseFock formalization; OpenAI
+  Codex and the disclosed automated review tools. These credits do not imply
+  endorsement of this result or its source correspondence.

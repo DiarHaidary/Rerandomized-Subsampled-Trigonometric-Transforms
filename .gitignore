@@ -1,0 +1,10 @@
+.lake/
+.cache/
+docbuild/.lake/
+__pycache__/
+*.pyc
+verification/ci-downloads/
+*.olean
+*.ilean
+*.c
+*.o

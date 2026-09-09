@@ -1,0 +1,10 @@
+{
+  "kind": "pinned-palomar-metadata-contract",
+  "status": "passed",
+  "checked_at": "2026-09-09T15:33:59.468617+00:00",
+  "policy_commit": "ef2fa1eadcb246c2346ddba39b52eaa53d4bb763",
+  "metadata_sha256": "0e262db5eb093d99aed94a0100b2f9c09d71a523f0406c6274e1e66edcc3582a",
+  "project_name": "Rerandomized Subsampled Trigonometric Transforms",
+  "declared_license": "MIT",
+  "scope": "Structured metadata minimum; no editorial review, license detection, or registry submission"
+}

@@ -1,0 +1,12 @@
+* text=auto
+*.lean text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.tex text eol=lf
+lean-toolchain text eol=lf
+*.pdf binary

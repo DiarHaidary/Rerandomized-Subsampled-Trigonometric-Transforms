@@ -1,0 +1,18 @@
+import SparseFockFormal.MainTheorem
+import SparseFockFormal.TwoLevelAndBandCompleteness
+
+#print axioms SparseFock.SparseIIDUnconditional.unconditional_convex_order
+#print axioms SparseFock.TracePowerConvexity.convexOn_traceEvenPower
+#print axioms SparseFock.VacuumMoment.vacuum_moment_identity
+#print axioms SparseFock.TwoLevelEndpoint.vacuum_moment_identity_globalJacobi
+#print axioms SparseFock.ConcreteLadderIteration.vacuum_diagonal_sum_le
+#print axioms SparseFock.LightSectorConcrete.ghat_gradeProjection_norm_le_all
+#print axioms SparseFock.HeavyBandsConcrete.Hzero_gradeProjection_norm
+#print axioms SparseFock.LightBandsConcrete.normalized_Lzero_gradeProjection_norm_le_envelope
+#print axioms SparseFock.MixedBandsConcrete.norm_normalized_mixed_zero_restricted_le
+#print axioms SparseFock.ConcreteBandEnvelope.concrete_band_bound_le_beta
+#print axioms SparseFock.ConcreteMomentEndgame.rounded_operator_norm_failure_le_delta_of_band_bounds
+#print axioms SparseFock.MainTheorem.rounded_band_bound
+#print axioms SparseFock.MainTheorem.fully_independent_sparseStack
+#print axioms SparseFock.MainTheorem.fully_independent_sparseStack_matrix
+#print axioms SparseFock.MainTheorem.fully_independent_sparseStack_independent_frame

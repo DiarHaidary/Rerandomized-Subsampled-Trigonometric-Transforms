@@ -1,0 +1,110 @@
+name: Lean and Comparator verification
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Check the statement layout and pinned dependencies
+        run: python3 scripts/validate_comparator.py --output verification/config-check.json
+      - name: Check verifier scripts
+        run: |
+          python3 -m unittest discover -s scripts/tests -v
+          bash -n scripts/verify-comparator.sh
+      - name: Install the pinned metadata parser
+        run: python3 -m pip install --require-hashes -r scripts/verification-requirements.txt
+      - name: Apply the current pinned Palomar metadata contract
+        run: python3 scripts/validate_metadata.py --cache "$RUNNER_TEMP/srht-metadata"
+      - name: Free space for Lean and Mathlib
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          build: false
+          test: false
+      - name: Build all proofs and audit their transitive axioms
+        shell: pwsh
+        run: ./Verify.ps1
+      - name: Save the Lean verification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: lean-verification-report
+          path: |
+            verification/result.json
+            verification/build.log
+            verification/axioms.log
+            verification/config-check.json
+            verification/metadata-check.json
+          if-no-files-found: error
+          retention-days: 30
+
+  comparator:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Require functioning Linux confinement
+        run: bash scripts/verify-comparator.sh --preflight-only
+      - name: Free space for the independent kernel check
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: false
+      - name: Install pinned elan
+        run: |
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            --output "$RUNNER_TEMP/elan.tar.gz" \
+            https://github.com/leanprover/elan/releases/download/v4.2.3/elan-x86_64-unknown-linux-gnu.tar.gz
+          echo "df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          mkdir "$RUNNER_TEMP/elan"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP/elan"
+          "$RUNNER_TEMP/elan/elan-init" -y --no-modify-path --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: "1.24.0"
+          cache: false
+      - name: Install the pinned parser used by the confinement helpers
+        run: python3 -m pip install --require-hashes -r scripts/verification-requirements.txt
+      - name: Run Comparator and required NanoDa replay
+        run: bash scripts/verify-comparator.sh --cache "$RUNNER_TEMP/srht-verifier"
+      - name: Save the actual result
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: comparator-verification-report
+          path: |
+            verification/comparator-run.json
+            verification/comparator.log
+          if-no-files-found: error
+          retention-days: 30

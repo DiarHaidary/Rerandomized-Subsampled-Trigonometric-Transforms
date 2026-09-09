@@ -1,0 +1,68 @@
+ℹ [3080/3156] Replayed SparseFockFormal.FiniteProductLaw
+info: vendor/sparse-fock/SparseFockFormal/FiniteProductLaw.lean:48:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3155/3156] Replayed SRHT.Model
+warning: SRHT/Model.lean:214:0: automatically included section variable(s) unused in theorem `SRHT.isometry_norm_le_one`:
+  [DecidableEq I]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq I] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: SRHT/Model.lean:237:0: automatically included section variable(s) unused in theorem `SRHT.rowLeverage_nonneg`:
+  [Fintype I]
+  [DecidableEq I]
+  [DecidableEq J]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype I] [DecidableEq I] [DecidableEq J] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: SRHT/Model.lean:254:0: automatically included section variable(s) unused in theorem `SRHT.rowLeverage_projection_diagonal`:
+  [Fintype I]
+  [DecidableEq I]
+  [DecidableEq J]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype I] [DecidableEq I] [DecidableEq J] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: SRHT/Model.lean:258:0: automatically included section variable(s) unused in theorem `SRHT.sum_rowLeverage`:
+  [DecidableEq I]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq I] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3156/3156] Built SRHT.Alignment (8.1s)
+warning: SRHT/Alignment.lean:43:31: This simp argument is unused:
+  ne_of_gt (flat_pos k)
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [support, horizontal, ne_of_lt (flat_pos k), eq_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SRHT/Alignment.lean:51:29: This simp argument is unused:
+  ne_of_gt (flat_pos k)
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [support, vertical, ne_of_lt (flat_pos k), eq_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SRHT/Alignment.lean:69:53: This simp argument is unused:
+  Matrix.kronecker_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.mulVec, dotProduct, tensorWalsh, Fintype.sum_prod_type, horizontal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SRHT/Alignment.lean:89:53: This simp argument is unused:
+  Matrix.kronecker_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.mulVec, dotProduct, tensorWalsh, Fintype.sum_prod_type, vertical]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SRHT/Alignment.lean:129:35: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: SRHT/Alignment.lean:205:28: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+Build completed successfully (3156 jobs).

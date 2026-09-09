@@ -1,0 +1,106 @@
+import SRHT.Main
+import SRHT.LinearDimension
+import Mathlib.Analysis.CStarAlgebra.Matrix
+import Mathlib.Analysis.SpecialFunctions.Log.Base
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Data.Fintype.BigOperators
+
+/-! # Rerandomized subsampled trigonometric transforms: the Walsh case
+
+This statement answers the two-round real Walsh case of Problem 5.6 in
+https://arxiv.org/abs/2602.05394v3. Its probability is a literal uniform finite
+average over two independent sign assignments and a set of distinct rows.
+Comparator compares this complete proof against `Challenge.lean`.
+-/
+
+namespace RerandomizedSTT
+noncomputable section
+open scoped BigOperators
+
+/-- The binary group indexing the `n = 2^k` rows and columns of the Walsh matrix. -/
+abbrev Index (k : ℕ) := Fin k → ZMod 2
+
+/-- One independent fair bit per diagonal entry; a bit represents a sign. -/
+abbrev Signs (k : ℕ) := Index k → ZMod 2
+
+/-- The real sign represented by a bit: zero is `+1`, one is `-1`. -/
+def sign (b : ZMod 2) : ℝ := if b = 0 then 1 else -1
+
+/-- The normalized Walsh matrix, with entries `n^(-1/2) (-1)^(a dot b)`. -/
+def hadamard (k : ℕ) : Matrix (Index k) (Index k) ℝ :=
+  fun a b => (Real.sqrt (Fintype.card (Index k) : ℝ))⁻¹ * ∏ i, sign (a i * b i)
+
+/-- The two-round matrix `H D_y H D_x`; each diagonal entry is a real sign. -/
+def rerandomized {k : ℕ} (x y : Signs k) : Matrix (Index k) (Index k) ℝ :=
+  hadamard k * Matrix.diagonal (fun i => sign (y i)) *
+    hadamard k * Matrix.diagonal (fun i => sign (x i))
+
+/-- All sets of exactly `M` distinct row labels, sampled uniformly below. -/
+def Rows (k M : ℕ) := {T : Finset (Index k) // T.card = M}
+
+instance (k M : ℕ) : Fintype (Rows k M) := by classical unfold Rows; infer_instance
+
+/-- The literal matrix `sqrt(n/M) R H D_y H D_x U`, indexed by its selected rows. -/
+def selectedFrame {k d : ℕ} (U : Matrix (Index k) (Fin d) ℝ)
+    (x y : Signs k) (T : Finset (Index k)) : Matrix T (Fin d) ℝ :=
+  fun j b => Real.sqrt ((Fintype.card (Index k) : ℝ) / T.card) *
+    (rerandomized x y * U) j.1 b
+
+/-- Simultaneous squared Euclidean norm preservation of every vector in the frame. -/
+def Embeds {k d : ℕ} (U : Matrix (Index k) (Fin d) ℝ)
+    (x y : Signs k) (T : Finset (Index k)) (ε : ℝ) : Prop :=
+  ∀ v : EuclideanSpace ℝ (Fin d),
+    let w : EuclideanSpace ℝ T := WithLp.toLp 2 ((selectedFrame U x y T).mulVec (WithLp.ofLp v))
+    (1 - ε) * ‖v‖ ^ 2 ≤ ‖w‖ ^ 2 ∧ ‖w‖ ^ 2 ≤ (1 + ε) * ‖v‖ ^ 2
+
+/-- The fraction of all triples `(x,y,T)` satisfying `Embeds`: independent uniform
+signs and uniform sampling without replacement, with no unspecified probability law. -/
+def successProbability {k d : ℕ} (U : Matrix (Index k) (Fin d) ℝ)
+    (M : ℕ) (ε : ℝ) : ℝ := by
+  classical
+  exact (∑ z : Signs k × (Signs k × Rows k M),
+    if Embeds U z.1 z.2.1 z.2.2.val ε then (1 : ℝ) else 0) /
+      Fintype.card (Signs k × (Signs k × Rows k M))
+
+/-- The explicit row count: `min(n, ceil(8192 (d + 27 q^3) / ε^2))`,
+where `q = ceil(log_4(4d/δ))`. Sampling every row is allowed when this saturates. -/
+def sampleSize (k d : ℕ) (ε δ : ℝ) : ℕ :=
+  min (2 ^ k) ⌈8192 * ((d + 27 * ⌈Real.logb 4 (4 * (d : ℝ) / δ)⌉₊ ^ 3 : ℕ) : ℝ) / ε ^ 2⌉₊
+
+/-- For every fixed real orthonormal frame, two independent sign rounds followed
+by uniform distinct-row sampling give an OSE with probability at least `1-δ`.
+The explicit row budget is at most `C(δ) d/ε²`, independent of the ambient size;
+thus any fixed `0<δ<1/2` gives the dimension dependence asked for in Problem 5.6. -/
+theorem problem_5_6 {k d : ℕ} (U : Matrix (Index k) (Fin d) ℝ)
+    (hU : U.transpose * U = 1) (hd : 1 ≤ d) (hdn : d ≤ 2 ^ k)
+    (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2) :
+    1 ≤ sampleSize k d ε δ ∧ sampleSize k d ε δ ≤ 2 ^ k ∧
+    (sampleSize k d ε δ : ℝ) ≤ (8192 * (1 + 432 / δ) + 1) * (d : ℝ) / ε ^ 2 ∧
+    1 - δ ≤ successProbability U (sampleSize k d ε δ) ε := by
+  classical
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · exact SRHT.rowCount_pos (by positivity) hd hε
+  · exact SRHT.rowCount_le (2 ^ k) d ε δ
+  · exact SRHT.rowCount_dimension_linear hd hε hε1.le hδ hδ1
+  · have h := SRHT.two_round_srht_ose_independent U hU hd hdn ε δ hε hε1 hδ hδ1
+    convert h using 1
+    unfold successProbability SparseFock.FiniteLaw.prob SparseFock.FiniteLaw.expect
+    rw [Finset.sum_div]
+    apply Finset.sum_congr rfl
+    intro z _
+    have hw : (SRHT.sketchLaw (SRHT.rowCount_le (2 ^ k) d ε δ)).weight z =
+        (Fintype.card (Signs k × (Signs k × Rows k (sampleSize k d ε δ))) : ℝ)⁻¹ := by
+      rcases z with ⟨x, y, T⟩
+      change (SRHT.signLaw k).weight x * ((SRHT.signLaw k).weight y *
+        (Fintype.card (Rows k (sampleSize k d ε δ)) : ℝ)⁻¹) = _
+      rw [SRHT.signLaw_weight, SRHT.signLaw_weight]
+      simp [Signs, Index, Fintype.card_prod, one_div, inv_pow, mul_comm]
+    rw [hw]
+    unfold SparseFock.FiniteLaw.indicator
+    change (if Embeds U z.1 z.2.1 z.2.2.val ε then (1 : ℝ) else 0) / _ =
+      _ * (if SRHT.FixedSizeTail.IsOSE U z.1 z.2.1 z.2.2.val ε then 1 else 0)
+    exact div_eq_inv_mul _ _
+
+end
+end RerandomizedSTT
+

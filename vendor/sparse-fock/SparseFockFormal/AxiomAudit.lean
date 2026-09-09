@@ -1,0 +1,48 @@
+import SparseFockFormal
+import SparseFockFormal.MainTheorem
+
+#print axioms SparseFock.Pattern.grade_eq_card_light_add_two_mul_card_heavy
+#print axioms SparseFock.Pattern.card_light_eq_sum_card_lightInRow
+#print axioms SparseFock.Counting.claimA_count
+#print axioms SparseFock.Counting.claimB_count
+#print axioms SparseFock.Counting.claimC_count
+#print axioms SparseFock.Counting.pattern_claimA_count
+#print axioms SparseFock.Counting.pattern_claimB_count
+#print axioms SparseFock.Counting.pattern_claimC_count
+#print axioms SparseFock.ScalarBounds.blockGram_row_bound
+#print axioms SparseFock.ScalarBounds.blockGram_finite_row_bound
+#print axioms SparseFock.ScalarBounds.mixed_product_into_envelope
+#print axioms SparseFock.ScalarBounds.parameter_envelope
+#print axioms SparseFock.ScalarBounds.final_parameter_envelope
+#print axioms SparseFock.LocalOperator.jacobi_apply
+#print axioms SparseFock.LocalOperator.rPromote_mul_pCreate
+#print axioms SparseFock.TwoLevelEndpoint.expect_eta
+#print axioms SparseFock.TwoLevelEndpoint.expect_eta_sq
+#print axioms SparseFock.TwoLevelEndpoint.iidLaw_prob_cylinder
+#print axioms SparseFock.TwoLevelEndpoint.local_mulOp_eta
+#print axioms SparseFock.TwoLevelEndpoint.multiplicationOperator_eq_globalJacobi
+#print axioms SparseFock.TwoLevelEndpoint.vacuum_moment_identity_globalJacobi
+#print axioms SparseFock.BandInventory.word_has_unique_cell
+#print axioms SparseFock.BandInventory.nine_cell_count_total
+#print axioms SparseFock.FiniteOperator.transpose_wordKernel
+#print axioms SparseFock.ExternalOperator.transpose_orderedWordTerm
+#print axioms SparseFock.LightSectorAbstract.blockGram_of_pairwise_certificate
+#print axioms SparseFock.LightSectorAbstract.compressed_lightSector_bound
+#print axioms SparseFock.DirectionalBounds.yPlus_count_sharp
+#print axioms SparseFock.DirectionalBounds.yZero_count
+#print axioms SparseFock.DirectionalBounds.lightHop_count
+#print axioms SparseFock.LadderEndgame.vacuum_prefix_grade_le_total
+#print axioms SparseFock.LadderEndgame.sum_bandWords_le
+#print axioms SparseFock.ProbabilisticEndgame.markov_even_power
+#print axioms SparseFock.ProbabilisticEndgame.conditional_final_failure_numeric
+#print axioms SparseFock.ProbabilisticEndgame.rounded_parameter_package
+
+#print axioms SparseFock.TracePowerConvexity.convexOn_traceEvenPower
+#print axioms SparseFock.LightSectorConcrete.hardCoreCompressedG_eq_ghatBlock
+#print axioms SparseFock.LightSectorConcrete.ghat_gradeProjection_norm_le_all
+#print axioms SparseFock.HeavyBandsConcrete.Hzero_gradeProjection_norm
+#print axioms SparseFock.LightBandsConcrete.normalized_Lminus_gradeProjection_norm_le_envelope
+#print axioms SparseFock.MixedBandsConcrete.norm_normalized_mixed_zero_restricted_le
+#print axioms SparseFock.ConcreteBandEnvelope.concrete_band_envelope
+#print axioms SparseFock.MainTheorem.fully_independent_sparseStack
+#print axioms SparseFock.MainTheorem.fully_independent_sparseStack_matrix

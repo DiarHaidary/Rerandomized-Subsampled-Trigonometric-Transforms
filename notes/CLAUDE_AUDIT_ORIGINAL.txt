@@ -1,0 +1,54 @@
+I'll read the tex report's theorems and then compare against every Lean file in the working directory.
+
+**Verdict:** the Lean project formalizes Theorem 1, Theorem 2, Lemma 3, the small-row estimate, the cutoff identity and the limited-independence transfer, and the stated endpoints match the tex statements. Three parts of the report are handled differently or not at all: the Section 10 sampling argument is replaced by a different coupling, the Section 11.2 asymptotic is proved only in a weaker form, and Appendix A is absent. I read the sources only, as you asked. No build was run, though the repo's own `verification/result.json` records a passing build and axiom audit dated 2026-09-07.
+
+## Correspondence table
+
+| Report item | Lean theorem | Status |
+|---|---|---|
+| Theorem 1, eq. (1.7), norm form | `SRHT.two_round_srht_norm_failure` in [Main.lean](SRHT/Main.lean) | Matches. Same `q`, `D_q`, `M`, `0<ε<1`, `0<δ<1/2`, `min(n,4q)`-wise signs, uniform distinct-row subset independent of signs. |
+| Theorem 1, vector form (1.6) | `SRHT.two_round_srht_ose`, `two_round_srht_ose_independent` | Matches. `IsOSE` is the two-sided inequality for every `v` in Euclidean `R^d`. |
+| Theorem 2, eq. (1.9), full independence | `BernoulliMoment.moment_bound` | Matches, but only for `ρ = M/n` with `0<M<n` rather than arbitrary `ρ`. The general-`p` version is `moment_le_of_subset_bound`. |
+| Theorem 2, limited-independence clause | `ActualMomentTransfer.bernoulli_moment_match_min` | Proved as a separate moment-equality lemma with `min(n,4q)` signs and `min(n,2q)` selectors. Nobody composes it with `moment_bound` into one named statement. |
+| (1.1)-(1.2) Walsh orthogonality | [Walsh.lean](SRHT/Walsh.lean) | Matches. |
+| (2.1)-(2.4) hard-core algebra | [HardCore.lean](SRHT/HardCore.lean) `annihilate_create`, `annihilateMode_createMode` | Matches. |
+| (2.11) Bernoulli local matrix | `BinaryBasis.bernoulli_jacobi`, `amplitude_eq` | Matches `σ`, `τ`. |
+| (3.3), (3.7) four-channel split | `TwoSignDecomposition.liftedFrame_decomposition`, `four_blocks_norm_sq_le`, `rawRaising_norm_sq_le` etc. | Matches with `μ` replaced by its upper bound 1. |
+| (4.4) five-term identity | `SmallRows.gramKernel_normalOrder` | Exact matrix identity, matches. |
+| (4.7) `‖E_0‖ ≤ d` | `doubleCommutator_norm_le` | Matches. |
+| (4.11) `X ⪯ pI` | `xTransfer_compressed_norm_le` | Matches. |
+| (4.13) `F ⪰ 0`, dropped | `negativeCorrection_compressed_norm_le` | Deviates. Bounded by `2p‖P‖` in norm instead of being dropped. |
+| (4.17) `‖Y‖ ≤ μ t v` | `SmallRowsY.yTransfer_compressed_norm_le` | Matches. |
+| (4.23) `‖M‖ ≤ pv` | `mixedTransfer_compressed_norm_le` | Matches. |
+| (4.25) boxed estimate | `collectedDouble_isometry_norm_sq_le_all` | Weaker by the extra `2(r-1)` and with `μ=1`. |
+| (5.3) `D_q/n` per grade block | `SmallRows.effect_diagonal_norm_le`, `small_row_cost_le` | Same final `d+27q³`, different intermediate polynomial. |
+| (5.4)-(5.6) nine-neighbour bound `9D_q/n` | `SmallRows.sign_cutoff_small_rows_norm_le` via `GradeCompression.grade_schur_nine` | Matches. Proof uses a positive block-Schur lemma rather than (5.5). |
+| Lemma 3, (6.2) and (6.6) | `PositiveSelector.norm_creation_le`, `norm_annihilation_le`, `norm_occupancy_le`, `norm_bernoulliOperator_le` | Matches, including the "sum bounded by identity" variant. |
+| (7.1)-(7.2) compressed operator | `BernoulliMoment.compressed_matrix_eq`, `Parameters.bernoulli_envelope_le` | Matches. |
+| (7.3)-(7.4) vacuum identity and cutoff | `VacuumMoment.moment_le_of_compressed_norm`, `Cutoff.matrix_cutoff_pow_of_reachability` | Matches. |
+| Section 8 polynomial matching | `LimitedIndependence.twoRound_trace_moment_match`, `ActualMomentTransfer.fixed_sign_moment_match_min` | Matches. `MatchesUpTo` quantifies over all observables on at most `k` coordinates. |
+| Section 9, (9.1)-(9.2) | `Parameters.envelope_le_half`, `FixedSizeTail.tail_of_moment_bound` | Matches. The endpoint actually uses `amplified_envelope_le_half` with the factor 4 below. |
+| Section 10 coupling and Chernoff | `SamplingCoupling`, `SamplingConditional`, `SamplingTransfer`, `SamplingBernoulli` | Not formalized as written. See below. |
+| Section 11.1 constants | `FixedSizeTail.rowCount_norm_failure_of_bernoulli_bound`, `full_rows_success` | Matches, and the proper-sampling branch gets `δ/4` instead of `δ`. |
+| Section 11.2, eq. (11.5) | `rowCount_dimension_linear` in [LinearDimension.lean](SRHT/LinearDimension.lean) | Weaker. See below. |
+| Appendix A | none | Not formalized. |
+
+## Deliberate deviations in proof route
+
+- **Negative correction.** The report discards `-F` by positivity. The Lean proof bounds it in norm, paying an extra `2(r-1)`. The collected bound becomes `d + 3p + ps + ts`, which `small_row_cost_le` still fits under `d + 27q³`. The final constant is unchanged.
+- **Fixed-size sampling.** Section 10 uses continuous priorities, two Bernoulli thresholds and Chernoff bounds (10.4)-(10.8). None of that exists in Lean. Instead a finite nested fill/thin coupling plus conditional Jensen on the convex map `A ↦ tr(A^{2q})` gives the fixed-size moment at most `4^{2q}` times the Bernoulli moment (`Sampling.bernoulli_trace_moment_transfer`). The 8192 constant absorbs the factor 4 through `amplified_envelope_le_half`. This is documented in `notes/finite_jensen_sampling.md` and is a different proof of the same Theorem 1.
+- **Leverage parameter.** The report tracks `μ = max ℓ_i` throughout Sections 3 to 5. Lean sets `μ` to its upper bound 1 everywhere, which is all Theorem 1 needs.
+
+## Not formalized or weaker than stated
+
+- **Equation (11.5).** The report claims `M = O(ε⁻²[d + log³(1/δ)])`. The Lean result is `M ≤ (8192(1+432/δ)+1)·d/ε²`, which is linear in `d` but polynomial rather than logarithmic in `1/δ`. The README states the weaker form correctly. The tex asymptotic is not a proved theorem in this project.
+- **Appendix A.** The support-alignment obstruction, (A.2)-(A.4) and A.4, has no Lean counterpart anywhere in the tree.
+- **Theorem 2 for general `ρ`.** Only `ρ = M/n` is stated, as noted above.
+
+## Minor statement-level differences that do not weaken anything
+
+- The Lean failure event is `ε ≤ ‖G_M − I‖`, which is larger than the report's `> ε`, so the Lean bound is slightly stronger.
+- `two_round_srht_ose` carries an explicit `d ≤ 2^k` hypothesis. The report derives it from `UᵀU = I`. Redundant but harmless.
+- `failureOrder` is defined via `logb 4`; `failureOrder_original` proves it equals the report's `⌈log(4d/δ)/(2 log 2)⌉`.
+- Rows are an unordered `Finset` of size `M` rather than an ordered selection. The Gram and norm conclusions are identical.
+- The `k = 0` and `M = n` endpoints are covered by the full-row branch, as the report requires.
