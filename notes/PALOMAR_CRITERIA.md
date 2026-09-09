@@ -66,8 +66,12 @@ not repository dependencies and are discarded by Palomar verification.
    audited Lean declarations and recorded source snapshot. The new package passed its complete build and all 33 transitive axiom audits on 9 September 2026, including the compared declaration. See `verification/result.json` and `verification/axioms.log`.
 2. **Comparator with independent NanoDa checking:** verifies that the selected
    Solution declaration implements the Challenge declaration under the
-   permitted foundations. It is a separate check from compilation. Use the
-   pinned verification script or CI; preserve their actual outcomes.
+   permitted foundations. This check passed in
+   [Linux CI run 34373116757](../verification/ci/34373116757/README.md) for
+   commit `f813b5c3c14ddda0cd0dc429e657b0dbe6f94079` on 9 September 2026.
+   Both NanoDa and Lean's default kernel accepted the exported Solution;
+   the active confinement controls also passed. The complete logs and tool
+   revisions are preserved with the verification record.
 3. **Palomar mechanical verification and editorial review:** are server-side
    outcomes tied to a public repository, exact commit, and selected
    configuration. Local checks do not constitute either outcome.
