@@ -1,0 +1,125 @@
+RerandomizedSTT.problem_5_6 {k d : ℕ} (U : Matrix (RerandomizedSTT.Index k) (Fin d) ℝ) (hU : U.transpose * U = 1)
+  (hd : 1 ≤ d) (hdn : d ≤ 2 ^ k) (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2) :
+  1 ≤ RerandomizedSTT.sampleSize k d ε δ ∧
+    RerandomizedSTT.sampleSize k d ε δ ≤ 2 ^ k ∧
+      ↑(RerandomizedSTT.sampleSize k d ε δ) ≤ (8192 * (1 + 432 / δ) + 1) * ↑d / ε ^ 2 ∧
+        1 - δ ≤ RerandomizedSTT.successProbability U (RerandomizedSTT.sampleSize k d ε δ) ε
+SRHT.two_round_srht_ose {k d : ℕ} (U : Matrix (SRHT.WalshIndex k) (Fin d) ℝ) (hU : U.transpose * U = 1) (hd : 1 ≤ d)
+  (hdn : d ≤ 2 ^ k) (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2)
+  (μx μy : SparseFock.FiniteLaw (SRHT.SignAssignment k))
+  (hx : SparseFock.FiniteLocalMoments.MatchesUpTo μx (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ)))
+  (hy : SparseFock.FiniteLocalMoments.MatchesUpTo μy (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ))) :
+  1 - δ ≤ (μx.product (μy.product (SRHT.uniformRowLaw ⋯))).prob {z | SRHT.FixedSizeTail.IsOSE U z.1 z.2.1 (↑z.2.2) ε}
+SRHT.two_round_srht_norm_failure {k d : ℕ} (U : Matrix (SRHT.WalshIndex k) (Fin d) ℝ) (hU : U.transpose * U = 1)
+  (hd : 1 ≤ d) (hdn : d ≤ 2 ^ k) (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2)
+  (μx μy : SparseFock.FiniteLaw (SRHT.SignAssignment k))
+  (hx : SparseFock.FiniteLocalMoments.MatchesUpTo μx (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ)))
+  (hy : SparseFock.FiniteLocalMoments.MatchesUpTo μy (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ))) :
+  (μx.product (μy.product (SRHT.uniformRowLaw ⋯))).prob {z | ε ≤ ‖SRHT.sampledGram U z.1 z.2.1 ↑z.2.2 - 1‖} ≤ δ
+SRHT.two_round_srht_ose_independent {k d : ℕ} (U : Matrix (SRHT.WalshIndex k) (Fin d) ℝ) (hU : U.transpose * U = 1)
+  (hd : 1 ≤ d) (hdn : d ≤ 2 ^ k) (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2) :
+  1 - δ ≤ (SRHT.sketchLaw ⋯).prob {z | SRHT.FixedSizeTail.IsOSE U z.1 z.2.1 (↑z.2.2) ε}
+SRHT.rowCount_dimension_linear {n d : ℕ} {ε δ : ℝ} (hd : 1 ≤ d) (hε : 0 < ε) (hε1 : ε ≤ 1) (hδ : 0 < δ)
+  (hδ1 : δ < 1 / 2) : ↑(SRHT.rowCount n d ε δ) ≤ (8192 * (1 + 432 / δ) + 1) * ↑d / ε ^ 2
+SRHT.failureOrder_original (d : ℕ) (δ : ℝ) : SRHT.failureOrder d δ = ⌈Real.log (4 * ↑d / δ) / (2 * Real.log 2)⌉₊
+SRHT.BernoulliGeneral.moment_bound {k d : ℕ} (U : Matrix (SRHT.TwoSignRepresentation.G k) (Fin d) ℝ)
+  (hU : U.transpose * U = 1) (p : ℝ) (hp : 0 < p) (hp1 : p < 1) (q : ℕ) (hq : 1 ≤ q) :
+  ((SRHT.BernoulliGeneral.law k p hp hp1).expect fun z => (SRHT.BernoulliGeneral.gramError U p z ^ (2 * q)).trace) ≤
+    ↑d * SRHT.momentEnvelope (↑(SRHT.effectiveDimension d q)) (p * 2 ^ k) ^ (2 * q)
+SRHT.BernoulliGeneral.moment_bound_limited {k d : ℕ} (U : Matrix (SRHT.TwoSignRepresentation.G k) (Fin d) ℝ)
+  (hU : U.transpose * U = 1) (p : ℝ) (hp : 0 < p) (hp1 : p < 1) (q : ℕ) (hq : 1 ≤ q)
+  {μx μy μz : SparseFock.FiniteLaw (SRHT.SignAssignment k)}
+  (hx : SparseFock.FiniteLocalMoments.MatchesUpTo μx (SRHT.signLaw k) (min (2 ^ k) (4 * q)))
+  (hy : SparseFock.FiniteLocalMoments.MatchesUpTo μy (SRHT.signLaw k) (min (2 ^ k) (4 * q)))
+  (hz : SparseFock.FiniteLocalMoments.MatchesUpTo μz (SRHT.BernoulliVariance.iidLaw p ⋯ ⋯) (min (2 ^ k) (2 * q))) :
+  ((μx.product (μy.product μz)).expect fun z => (SRHT.BernoulliGeneral.gramError U p z ^ (2 * q)).trace) ≤
+    ↑d * SRHT.momentEnvelope (↑(SRHT.effectiveDimension d q)) (p * 2 ^ k) ^ (2 * q)
+SRHT.BernoulliGeneral.tail_bound_limited {k d : ℕ} (U : Matrix (SRHT.TwoSignRepresentation.G k) (Fin d) ℝ)
+  (hU : U.transpose * U = 1) (p : ℝ) (hp : 0 < p) (hp1 : p < 1) (q : ℕ) (hq : 1 ≤ q)
+  {μx μy μz : SparseFock.FiniteLaw (SRHT.SignAssignment k)}
+  (hx : SparseFock.FiniteLocalMoments.MatchesUpTo μx (SRHT.signLaw k) (min (2 ^ k) (4 * q)))
+  (hy : SparseFock.FiniteLocalMoments.MatchesUpTo μy (SRHT.signLaw k) (min (2 ^ k) (4 * q)))
+  (hz : SparseFock.FiniteLocalMoments.MatchesUpTo μz (SRHT.BernoulliVariance.iidLaw p ⋯ ⋯) (min (2 ^ k) (2 * q)))
+  (a : ℝ) (ha : 0 < a) (ha1 : a < 1) (hsize : 256 * ↑(SRHT.effectiveDimension d q) / a ^ 2 ≤ p * 2 ^ k) :
+  (μx.product (μy.product μz)).prob {z | a ≤ ‖SRHT.BernoulliGeneral.gramError U p z‖} ≤ ↑d * (1 / 2) ^ (2 * q)
+SRHT.rowCount_log_confidence_capped {n d : ℕ} {ε δ : ℝ} (hd : 1 ≤ d) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ)
+  (hδ1 : δ < 1 / 2) : ↑(SRHT.rowCount n d ε δ) ≤ min (↑n) (110592001 * (↑d + Real.log (1 / δ) ^ 3) / ε ^ 2)
+SRHT.two_round_srht_ose_log_confidence {k d : ℕ} (U : Matrix (SRHT.WalshIndex k) (Fin d) ℝ) (hU : U.transpose * U = 1)
+  (hd : 1 ≤ d) (hdn : d ≤ 2 ^ k) (ε δ : ℝ) (hε : 0 < ε) (hε1 : ε < 1) (hδ : 0 < δ) (hδ1 : δ < 1 / 2)
+  (μx μy : SparseFock.FiniteLaw (SRHT.SignAssignment k))
+  (hx : SparseFock.FiniteLocalMoments.MatchesUpTo μx (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ)))
+  (hy : SparseFock.FiniteLocalMoments.MatchesUpTo μy (SRHT.signLaw k) (min (2 ^ k) (4 * SRHT.failureOrder d δ))) :
+  ↑(SRHT.rowCount (2 ^ k) d ε δ) ≤ min (2 ^ k) (110592001 * (↑d + Real.log (1 / δ) ^ 3) / ε ^ 2) ∧
+    1 - δ ≤ (μx.product (μy.product (SRHT.uniformRowLaw ⋯))).prob {z | SRHT.FixedSizeTail.IsOSE U z.1 z.2.1 (↑z.2.2) ε}
+SRHT.AlignmentObstruction.failure_lower (k t : ℕ) {M : ℕ} (hM : M ≤ (2 ^ k) ^ 2) (ε : ℝ) (hε : ε < 1) :
+  (1 / 2) ^ (t * 2 ^ k) * SRHT.SupportMiss.missRatio ((2 ^ k) ^ 2) (2 ^ k) M ≤
+    SRHT.AlignmentObstruction.failureProbability k t hM ε
+SRHT.AlignmentObstruction.necessary_rows (k t : ℕ) {M : ℕ} (hM : M ≤ (2 ^ k) ^ 2) (ε δ : ℝ) (hε : ε < 1) (hδ : 0 ≤ δ)
+  (hfailure : SRHT.AlignmentObstruction.failureProbability k t hM ε ≤ δ) :
+  ↑((2 ^ k) ^ 2 - 2 ^ k + 1) * (1 - 2 ^ t * δ ^ (1 / 2 ^ k)) ≤ ↑M
+SRHT.AlignmentObstruction.two_round_three_quarters (k : ℕ) {M : ℕ} (hM : M ≤ (2 ^ k) ^ 2) (ε : ℝ) (hε : ε < 1)
+  (hfailure : SRHT.AlignmentObstruction.failureProbability k 2 hM ε ≤ (1 / 2) ^ (4 * 2 ^ k)) :
+  3 / 4 * ↑((2 ^ k) ^ 2 - 2 ^ k + 1) ≤ ↑M
+SRHT.StrongAlignment.two_round_failure_lower {k M : ℕ} (hM : M ≤ Fintype.card (SRHT.Alignment.Site k)) (ε : ℝ)
+  (hε0 : 0 < ε) (hε1 : ε < 1) :
+  (2 * 2 ^ k * (1 / 2) ^ 2 ^ k) ^ 2 * SRHT.SupportMiss.missRatio ((2 ^ k) ^ 2) (2 ^ k) M ≤
+    ((SRHT.Alignment.bitLaw k).product ((SRHT.Alignment.bitLaw k).product (SRHT.SupportMiss.missLaw hM))).prob
+      {z |
+        SRHT.Alignment.sampleEnergy (SRHT.Alignment.step z.2.1 (SRHT.Alignment.step z.1 (SRHT.Alignment.horizontal k)))
+            ↑z.2.2 <
+          1 - ε}
+SRHT.GaussianObstruction.exists_dyadic_failure (C ε a : ℝ) (t k₀ : ℕ) (hε : 0 < ε) (hε1 : ε < 1)
+  (ha : ↑t * Real.log 2 < a) :
+  ∃ k,
+    k₀ ≤ k ∧
+      1 ≤ k ∧
+        0 < SRHT.ConfidenceObstruction.exponentialConfidence a (2 ^ k) ∧
+          SRHT.ConfidenceObstruction.exponentialConfidence a (2 ^ k) < 1 / 2 ∧
+            ∀ (M : ℕ) (hM : M ≤ (2 ^ k) ^ 2),
+              ↑M ≤ C / ε ^ 2 * (1 + Real.log (1 / SRHT.ConfidenceObstruction.exponentialConfidence a (2 ^ k))) →
+                SRHT.ConfidenceObstruction.exponentialConfidence a (2 ^ k) <
+                  SRHT.AlignmentObstruction.failureProbability k t hM ε
+SRHT.GaussianObstruction.no_universal_logarithmic_budget (t : ℕ) (ε : ℝ) (hε : 0 < ε) (hε1 : ε < 1) :
+  ¬∃ C,
+      ∀ (k : ℕ),
+        1 ≤ k →
+          ∀ (δ : ℝ),
+            0 < δ →
+              δ < 1 / 2 →
+                ∃ M,
+                  ∃ (hM : M ≤ (2 ^ k) ^ 2),
+                    ↑M ≤ C / ε ^ 2 * (1 + Real.log (1 / δ)) ∧ SRHT.AlignmentObstruction.failureProbability k t hM ε ≤ δ
+'SRHT.two_round_srht_ose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RerandomizedSTT.problem_5_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.two_round_srht_norm_failure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.two_round_srht_ose_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliMoment.moment_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.SmallRows.sign_cutoff_small_rows_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliMoment.compressed_matrix_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.ActualMomentTransfer.fixed_to_bernoulli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.ActualMomentTransfer.fixed_sign_moment_match_min' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.rowCount_dimension_linear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliGeneral.moment_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliGeneral.moment_bound_limited' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliGeneral.tail_bound_limited' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.BernoulliGeneral.expected_rows' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.rowCount_log_confidence_capped' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.two_round_srht_ose_log_confidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.Alignment.tensorWalsh_eq_reindex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.Alignment.horizontal_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.Alignment.aligned_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.Alignment.evolve_of_aligned' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.SupportMiss.miss_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.SupportMiss.missRatio_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.SupportMiss.missRatio_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.SupportMiss.missRatio_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.AlignmentObstruction.failure_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.AlignmentObstruction.necessary_rows' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.AlignmentObstruction.two_round_three_quarters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.StrongAlignment.two_round_failure_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.GaussianObstruction.exists_dyadic_failure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.GaussianObstruction.no_universal_logarithmic_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.PositiveSelector.norm_creation_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.PositiveSelector.norm_occupancy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SRHT.PositiveSelector.norm_bernoulliOperator_le_of_sum_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+

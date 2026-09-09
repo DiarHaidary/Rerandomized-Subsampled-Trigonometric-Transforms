@@ -1,10 +1,12 @@
 # Rerandomized Subsampled Trigonometric Transforms
 
-**Historical verification, 9 September 2026:** the clean Linux build, all 33
-axiom audits, Comparator, NanoDa, and Lean's default kernel passed for commit
-`f813b5c3c14ddda0cd0dc429e657b0dbe6f94079`. The
-[verification record](verification/ci/34373116757/README.md) preserves the
-reports and exact checked commit.
+**Verified compatibility fix:** the complete Linux build, all 33 axiom
+audits, Comparator, NanoDa, and Lean's default kernel passed for source commit
+`261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. The
+[new verification record](verification/ci/34396410088/README.md) preserves the
+reports and exact checked commit. The
+[historical record](verification/ci/34373116757/README.md) for the earlier
+source commit `f813b5c3c14ddda0cd0dc429e657b0dbe6f94079` remains available.
 
 **Rendering compatibility update:** Challenge and Solution now name their
 existing finite-index instance `indexFintype`. This addresses the `ZMod 2`
@@ -13,10 +15,9 @@ dependency failure documented in the
 Fresh local checks pass: the complete Lean build, all 33 axiom audits, the
 proof-source scan, the trusted Verso literate build, and the unmodified
 official core-notation audit. Their evidence is recorded
-[separately](verification/renderability/fix/). Comparator and NanoDa still
-require a fresh CI run for this change. These local checks do not establish
-a complete Palomar server rendering pass or acceptance; the earlier
-successful verification does not certify the changed snapshot.
+[separately](verification/renderability/fix/); the new Linux CI record above
+confirms Comparator and NanoDa for the changed sources. These checks do not
+establish a complete Palomar server rendering pass or acceptance.
 
 This repository contains the complete Lean proof development for two-round
 Walsh SRHT embedding bounds and a Palomar Challenge/Solution interface for

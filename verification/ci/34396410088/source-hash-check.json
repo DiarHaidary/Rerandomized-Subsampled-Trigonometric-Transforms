@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "commit": "261302eb6c6d2c37f726e92801ff7f790e8dcbc1",
+  "sourceFilesChecked": 121,
+  "method": "SHA256 of exact git blob bytes compared with downloaded Comparator source_sha256 inventory",
+  "allMatched": true
+}

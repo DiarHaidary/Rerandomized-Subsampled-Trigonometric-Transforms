@@ -63,19 +63,23 @@ not repository dependencies and are discarded by Palomar verification.
 ## Evidence that must remain distinct
 
 1. **Lean build and transitive axiom audits:** check proof terms for the
-   audited Lean declarations and recorded source snapshot. The historical
-   package passed its complete build and all 33 transitive axiom audits on
-   9 September 2026, including the compared declaration. See
-   `verification/result.json`, `verification/axioms.log`, and the exact-commit
-   Linux record below. Those results do not by themselves verify later edits.
+   audited Lean declarations and recorded source snapshot. The updated
+   package passed its complete Linux build and all 33 transitive axiom audits,
+   including the compared declaration, at source commit
+   `261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. See the
+   [new Linux verification record](../verification/ci/34396410088/README.md).
+   The earlier `verification/result.json`, `verification/axioms.log`, and
+   [historical Linux record](../verification/ci/34373116757/README.md) remain
+   evidence for their recorded snapshots, not for later edits.
 2. **Comparator with independent NanoDa checking:** verifies that the selected
    Solution declaration implements the Challenge declaration under the
-   permitted foundations. This check passed in
-   [Linux CI run 34373116757](../verification/ci/34373116757/README.md) for
+   permitted foundations. This check passed for the compatibility fix in
+   [Linux CI run 34396410088](../verification/ci/34396410088/README.md), checking
+   source commit `261302eb6c6d2c37f726e92801ff7f790e8dcbc1`.
+   Both NanoDa and Lean's default kernel accepted the exported Solution.
+   The [earlier successful run](../verification/ci/34373116757/README.md) checked
    commit `f813b5c3c14ddda0cd0dc429e657b0dbe6f94079` on 9 September 2026.
-   Both NanoDa and Lean's default kernel accepted the exported Solution;
-   the active confinement controls also passed. The complete logs and tool
-   revisions are preserved with the verification record.
+   The logs and tool revisions are preserved with each verification record.
 3. **Palomar mechanical verification and editorial review:** are server-side
    outcomes tied to a public repository, exact commit, and selected
    configuration. Local checks do not constitute either outcome. The
@@ -111,9 +115,11 @@ audits, and the proof-source scan. The trusted Verso literate build (2,610
 jobs) and the unmodified official core-notation audit also passed on the
 changed Challenge. The [fix verification record](../verification/renderability/fix/)
 keeps their evidence separate from the historical passing proof checks and
-the original failing rendering diagnostic. A fresh Comparator/NanoDa CI run
-is still pending. These scoped local successes do not establish a complete
-Linux rendering-gate pass or Palomar acceptance.
+the original failing rendering diagnostic. The fresh
+[Linux CI run](../verification/ci/34396410088/README.md) also passed Comparator,
+NanoDa, and Lean replay for source commit
+`261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. These successes do not establish a
+complete Palomar server rendering-gate pass or Palomar acceptance.
 
 The status page records submission at 17:48:26 UTC on 9 September 2026 and
 selects the old exact commit. A push does not update that selected snapshot.

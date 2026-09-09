@@ -39,11 +39,14 @@ Windows. The Verso checkout was restored to its pinned, unmodified source
 before the final literate build. No audit output was fabricated, and no
 renderer or audit patch is part of this fix.
 
-Fresh Linux Comparator and NanoDa verification is required for this changed
-snapshot; its result will be linked here after CI finishes. This local record
-does not claim a complete Palomar server rendering pass, automated review,
-or registration. The earlier successful CI result remains attached to its
-original checked source commit.
+Fresh [Linux CI run 34396410088](https://github.com/DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms/actions/runs/34396410088)
+passed the complete build, all 33 audits, Comparator, NanoDa, and Lean replay
+for source commit `261302eb6c6d2c37f726e92801ff7f790e8dcbc1`.
+The [archived CI evidence](../../ci/34396410088/README.md) includes the exact
+committed source hashes. `local-checks.json` preserves the earlier local
+check's timing and the fact that CI was still pending when it was recorded.
+Neither record claims a complete Palomar server rendering pass, automated
+review, or registration.
 
 ## Existing Palomar submission
 

@@ -1,0 +1,76 @@
+{
+  "kind": "local-comparator-verification",
+  "status": "preflight-passed",
+  "requested_mode": "preflight-only",
+  "comparator_started": false,
+  "nanoda_required": true,
+  "started_at": "2026-09-09T19:40:05.258355+00:00",
+  "stage": "environment-preflight",
+  "configuration": {
+    "status": "passed",
+    "kind": "layout-config-only",
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "theorem_names": [
+      "RerandomizedSTT.problem_5_6"
+    ],
+    "permitted_axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ],
+    "challenge_bytes": 4484,
+    "challenge_lines": 89,
+    "definition_names": [],
+    "enable_nanoda": true
+  },
+  "pins": {
+    "project_toolchain": "leanprover/lean4:v4.33.0",
+    "minimum_landlock_abi": 4,
+    "tools": {
+      "comparator": {
+        "repository": "https://github.com/leanprover/comparator.git",
+        "commit": "575674928e239f5bc452aab72d1dd7b0f1326494",
+        "toolchain": "leanprover/lean4:v4.34.0-rc1"
+      },
+      "lean4export": {
+        "repository": "https://github.com/leanprover/lean4export.git",
+        "commit": "15f6055e299ad5b89345e533cc2192f4cc00f659",
+        "toolchain": "leanprover/lean4:v4.33.0"
+      },
+      "nanoda": {
+        "repository": "https://github.com/robsimmons/nanoda_lib.git",
+        "commit": "68d5ca9db226849b41a6fff59d796ff19d0a8840"
+      },
+      "landrun": {
+        "repository": "https://github.com/zouuup/landrun.git",
+        "commit": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4"
+      },
+      "palomar_submission": {
+        "repository": "https://github.com/PalomarRegistry/PalomarSubmission.git",
+        "commit": "ef2fa1eadcb246c2346ddba39b52eaa53d4bb763"
+      }
+    },
+    "references": {
+      "template": "128a6c5ce5f48622e69927ccd639cbff401022e8",
+      "policy": "e9c8c238f5695b10f75db7175648a1d0195352c1"
+    }
+  },
+  "environment": {
+    "system": "Linux",
+    "release": "6.17.0-1022-azure",
+    "minimum_landlock_abi": 4,
+    "status": "passed",
+    "failures": [],
+    "uid": 1001,
+    "landlock_abi": 7,
+    "manager_probes": [
+      {
+        "manager": "system",
+        "exit_code": 0,
+        "detail": ""
+      }
+    ],
+    "systemd_manager": "system"
+  },
+  "finished_at": "2026-09-09T19:40:05.294267+00:00"
+}
