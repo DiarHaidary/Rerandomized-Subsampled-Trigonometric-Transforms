@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verifiedAtUtc": "2026-09-09T15:34:09.5490392Z",
+  "verifiedAtUtc": "2026-09-09T15:49:58.6012922Z",
   "leanVersion": "Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
   "auditedResults": 33,
   "auditedTheorems": [
@@ -53,7 +53,7 @@
     },
     {
       "path": "Challenge.lean",
-      "sha256": "39c750f870ca8293ea5ab3fb7130d412add5cd1ce58908c1d5bf15a93feda8d4"
+      "sha256": "648a4b4ef7dcb4fe2e9a24c699a50945273aaac19319a8d5d6bf801b7686fd1b"
     },
     {
       "path": "comparator.json",
@@ -73,7 +73,7 @@
     },
     {
       "path": "Solution.lean",
-      "sha256": "bfff62660cba384713d4cfaa418824254bea5faeff8cea876e216735336c41ae"
+      "sha256": "e0c27aaa0e3b5cc3fac454c7bbc3cae1f7c408319010db3751499d577bb063a0"
     },
     {
       "path": "SRHT.lean",

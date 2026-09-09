@@ -1,4 +1,4 @@
-⚠ [3095/3136] Replayed SparseFockFormal.FiniteL2
+⚠ [3097/3267] Replayed SparseFockFormal.FiniteL2
 warning: vendor/sparse-fock/SparseFockFormal/FiniteL2.lean:49:0: automatically included section variable(s) unused in theorem `SparseFock.FiniteL2.WeightedONBasis.reconstruct`:
   [DecidableEq I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -48,7 +48,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq A] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3097/3136] Replayed SRHT.ProductBasis
+⚠ [3099/3267] Replayed SRHT.ProductBasis
 warning: SRHT/ProductBasis.lean:16:0: automatically included section variable(s) unused in theorem `SRHT.ProductBasis.local_reproducing`:
   [DecidableEq I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -77,7 +77,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3156/3362] Replayed SRHT.BinaryBasis
+⚠ [3157/3267] Replayed SRHT.BinaryBasis
 warning: SRHT/BinaryBasis.lean:66:58: This simp argument is unused:
   eq_comm
 
@@ -92,14 +92,14 @@ Hint: Omit it from the simp argument list.
   [apply] simp [signBasisFun]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-ℹ [3158/3362] Replayed SparseFockFormal.FiniteProductLaw
+ℹ [3159/3267] Replayed SparseFockFormal.FiniteProductLaw
 info: vendor/sparse-fock/SparseFockFormal/FiniteProductLaw.lean:48:2: Try this:
   [apply] ring_nf
   
   The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
     
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
-⚠ [3159/3362] Replayed SRHT.Model
+⚠ [3160/3267] Replayed SRHT.Model
 warning: SRHT/Model.lean:214:0: automatically included section variable(s) unused in theorem `SRHT.isometry_norm_le_one`:
   [DecidableEq I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -128,7 +128,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3160/3362] Replayed SRHT.HardCore
+⚠ [3161/3267] Replayed SRHT.HardCore
 warning: SRHT/HardCore.lean:59:0: automatically included section variable(s) unused in theorem `SRHT.HardCore.erase_insert_relation`:
   [Fintype G]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -222,7 +222,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype I] [DecidableEq I] [DecidableEq J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3162/3362] Replayed SRHT.MatrixNorm
+⚠ [3163/3267] Replayed SRHT.MatrixNorm
 warning: SRHT/MatrixNorm.lean:15:0: automatically included section variable(s) unused in theorem `SRHT.MatrixNorm.submatrix_equiv_mulVec`:
   [Fintype I]
   [Fintype I']
@@ -243,7 +243,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype I] [Fintype K'] [DecidableEq I] [DecidableEq K'] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3173/3362] Replayed SRHT.MatrixRepresentation
+⚠ [3174/3267] Replayed SRHT.MatrixRepresentation
 warning: SRHT/MatrixRepresentation.lean:20:0: automatically included section variable(s) unused in theorem `SRHT.MatrixRepresentation.rect_square`:
   [DecidableEq I]
   [Fintype A]
@@ -302,7 +302,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3174/3362] Replayed SRHT.SmallRows
+⚠ [3175/3267] Replayed SRHT.SmallRows
 warning: SRHT/SmallRows.lean:92:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.gramKernel_normalOrder`:
   [Fintype R]
   [DecidableEq R]
@@ -324,7 +324,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [Matrix.transpose_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3175/3362] Replayed SRHT.TwoSignRepresentation
+⚠ [3176/3267] Replayed SRHT.TwoSignRepresentation
 warning: SRHT/TwoSignRepresentation.lean:80:50: This simp argument is unused:
   Finset.sum_mul
 
@@ -339,7 +339,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [Matrix.mul_apply, Matrix.replicateRow, rowEffect, v]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3177/3362] Replayed SRHT.VacuumMoment
+⚠ [3178/3267] Replayed SRHT.VacuumMoment
 warning: SRHT/VacuumMoment.lean:34:2: Try this: 
   letI̵
 
@@ -354,7 +354,7 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _hK
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [3179/3362] Replayed SRHT.ProjectionBounds
+⚠ [3180/3267] Replayed SRHT.ProjectionBounds
 warning: SRHT/ProjectionBounds.lean:12:8: automatically included section variable(s) unused in theorem `SRHT.ProjectionBounds.projection_transpose`:
   [Fintype I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -386,7 +386,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3265/3362] Replayed SRHT.PositiveSelector
+⚠ [3267/3350] Replayed SRHT.PositiveSelector
 warning: SRHT/PositiveSelector.lean:25:0: automatically included section variable(s) unused in theorem `SRHT.PositiveSelector.positive_row_energy`:
   [Fintype J]
   [DecidableEq J]
@@ -413,7 +413,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3266/3362] Replayed SRHT.SelectorRepresentation
+⚠ [3268/3350] Replayed SRHT.SelectorRepresentation
 warning: SRHT/SelectorRepresentation.lean:37:8: automatically included section variable(s) unused in theorem `SRHT.SelectorRepresentation.regroup_apply`:
   [DecidableEq J]
   [DecidableEq ι]
@@ -508,7 +508,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype ι] [DecidableEq ι] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3267/3362] Replayed SRHT.SmallRowsE
+⚠ [3269/3350] Replayed SRHT.SmallRowsE
 warning: SRHT/SmallRowsE.lean:115:35: This simp argument is unused:
   Matrix.one_apply
 
@@ -561,7 +561,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [ite_mul, mul_ite, mul_zero, zero_mul, Finset.sum_ite_eq', Finset.mem_univ]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3268/3362] Replayed SRHT.SmallRowsLinear
+⚠ [3270/3350] Replayed SRHT.SmallRowsLinear
 warning: SRHT/SmallRowsLinear.lean:16:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.raisingCoefficient_gram`:
   [Fintype D]
   [DecidableEq D]
@@ -609,7 +609,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype D] [DecidableEq D] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3270/3362] Replayed SRHT.SmallRowsLift
+⚠ [3272/3350] Replayed SRHT.SmallRowsLift
 warning: SRHT/SmallRowsLift.lean:70:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rawDoubleExtraction_apply`:
   [Fintype G]
   [Fintype R]
@@ -634,7 +634,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [Prod.mk.injEq, ite_and, Fintype.sum_ite_eq', Finset.sum_ite_irrel, Finset.sum_const_zero]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3271/3362] Replayed SRHT.SmallRowsGrades
+⚠ [3273/3350] Replayed SRHT.SmallRowsGrades
 warning: SRHT/SmallRowsGrades.lean:9:0: automatically included section variable(s) unused in theorem `SRHT.HardCore.create_card`:
   [Fintype G]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -647,7 +647,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype G] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3272/3362] Replayed SRHT.SmallRowsLinearBands
+⚠ [3274/3350] Replayed SRHT.SmallRowsLinearBands
 warning: SRHT/SmallRowsLinearBands.lean:18:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.twoGradeProjection_apply`:
   [Fintype V]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -720,7 +720,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [Matrix.submatrix_apply, mul_rowGradeProjection_apply, Equiv.prodComm_apply, Equiv.prodCongr_apply]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3273/3362] Replayed SRHT.SmallRowsX
+⚠ [3275/3350] Replayed SRHT.SmallRowsX
 warning: SRHT/SmallRowsX.lean:39:16: This simp argument is unused:
   Matrix.one_apply
 
@@ -773,7 +773,7 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: SRHT/SmallRowsX.lean:270:57: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-⚠ [3274/3362] Replayed SRHT.SmallRowsY
+⚠ [3276/3350] Replayed SRHT.SmallRowsY
 warning: SRHT/SmallRowsY.lean:50:33: This simp argument is unused:
   Fintype.sum_ite_eq
 
@@ -819,7 +819,7 @@ Hint: Omit it from the simp argument list.
     localCorrection_entry, kernel]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3275/3362] Replayed SRHT.SmallRowsNormalBound
+⚠ [3277/3350] Replayed SRHT.SmallRowsNormalBound
 warning: SRHT/SmallRowsNormalBound.lean:84:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.collectedDouble_card`:
   [Fintype R]
   [DecidableEq R]
@@ -831,7 +831,7 @@ Note: This linter can be disabled with `set_option linter.unusedSectionVars fals
 warning: SRHT/SmallRowsNormalBound.lean:230:69: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-⚠ [3276/3362] Replayed SRHT.SmallRowsAssembly
+⚠ [3278/3350] Replayed SRHT.SmallRowsAssembly
 warning: SRHT/SmallRowsAssembly.lean:14:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rowCollection_gram`:
   [Fintype J]
   [DecidableEq R]
@@ -868,7 +868,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype J] [DecidableEq I] [DecidableEq J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3277/3362] Replayed SRHT.TwoSignDecomposition
+⚠ [3279/3350] Replayed SRHT.TwoSignDecomposition
 warning: SRHT/TwoSignDecomposition.lean:26:28: This simp argument is unused:
   Finset.sum_mul
 
@@ -876,7 +876,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [Finset.mul_sum, ← Finset.sum_add_distrib]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3278/3362] Replayed SRHT.GradeCompression
+⚠ [3280/3350] Replayed SRHT.GradeCompression
 warning: SRHT/GradeCompression.lean:54:0: automatically included section variable(s) unused in theorem `SRHT.GradeCompression.neighbor_energy_sum`:
   [DecidableEq J]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -928,7 +928,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3279/3362] Replayed SRHT.SmallRowsGrade
+⚠ [3281/3350] Replayed SRHT.SmallRowsGrade
 warning: SRHT/SmallRowsGrade.lean:87:23: This simp argument is unused:
   Matrix.diagonal_apply
 
@@ -957,7 +957,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [he]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3283/3362] Replayed SRHT.Parameters
+⚠ [3283/3350] Replayed SRHT.Parameters
 warning: SRHT/Parameters.lean:64:5: Variable name `hD` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
@@ -973,7 +973,7 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 warning: SRHT/Parameters.lean:159:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-⚠ [3285/3362] Replayed SRHT.SamplingCoupling
+⚠ [3285/3350] Replayed SRHT.SamplingCoupling
 warning: SRHT/SamplingCoupling.lean:17:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.exact_nonempty`:
   [DecidableEq J]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -1000,7 +1000,7 @@ The difference between `let` and `letI` is that `letI` inlines the value.
 But this is not relevant for proofs because of proof irrelevance.
 
 Note: This linter can be disabled with `set_option linter.style.haveILetI false`
-⚠ [3286/3362] Replayed SRHT.SamplingConditional
+⚠ [3286/3350] Replayed SRHT.SamplingConditional
 warning: SRHT/SamplingConditional.lean:16:4: Try this: 
   letI̵
 
@@ -1052,18 +1052,18 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-ℹ [3287/3362] Replayed SparseFockFormal.ParsevalFrame
+ℹ [3287/3350] Replayed SparseFockFormal.ParsevalFrame
 info: vendor/sparse-fock/SparseFockFormal/ParsevalFrame.lean:168:8: Try this:
   [apply] ring_nf
   
   The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
     
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
-⚠ [3289/3362] Replayed SparseFockFormal.SparseStackDistribution
+⚠ [3289/3350] Replayed SparseFockFormal.SparseStackDistribution
 warning: vendor/sparse-fock/SparseFockFormal/SparseStackDistribution.lean:83:4: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
 warning: vendor/sparse-fock/SparseFockFormal/SparseStackDistribution.lean:94:6: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
 warning: vendor/sparse-fock/SparseFockFormal/SparseStackDistribution.lean:94:6: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-⚠ [3292/3362] Replayed SparseFockFormal.TernaryJacobi
+⚠ [3292/3350] Replayed SparseFockFormal.TernaryJacobi
 warning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:79:2: try 'simp' instead of 'simpa'
 
 Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
@@ -1085,14 +1085,14 @@ Note: This linter can be disabled with `set_option linter.unusedTactic false`
 warning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:184:19: this tactic is never executed
 
 Note: This linter can be disabled with `set_option linter.unreachableTactic false`
-ℹ [3330/3362] Replayed SparseFockFormal.SparseIIDTransfer
+ℹ [3330/3350] Replayed SparseFockFormal.SparseIIDTransfer
 info: vendor/sparse-fock/SparseFockFormal/SparseIIDTransfer.lean:148:2: Try this:
   [apply] ring_nf
   
   The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
     
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
-⚠ [3336/3362] Replayed SRHT.SamplingTransfer
+⚠ [3336/3350] Replayed SRHT.SamplingTransfer
 warning: SRHT/SamplingTransfer.lean:20:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.deficit_eq_excess`:
   [DecidableEq J]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -1105,14 +1105,14 @@ Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus fa
 warning: SRHT/SamplingTransfer.lean:53:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-⚠ [3337/3362] Replayed SRHT.BernoulliVariance
+⚠ [3337/3350] Replayed SRHT.BernoulliVariance
 warning: SRHT/BernoulliVariance.lean:69:0: automatically included section variable(s) unused in theorem `SRHT.BernoulliVariance.centered_count_eq`:
   [DecidableEq I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
   omit [DecidableEq I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3338/3362] Replayed SRHT.BernoulliSupport
+⚠ [3338/3350] Replayed SRHT.BernoulliSupport
 warning: SRHT/BernoulliSupport.lean:14:8: automatically included section variable(s) unused in theorem `SRHT.BernoulliSupport.mem_support`:
   [DecidableEq I]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -1131,7 +1131,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3339/3362] Replayed SRHT.SamplingBernoulli
+⚠ [3339/3350] Replayed SRHT.SamplingBernoulli
 warning: SRHT/SamplingBernoulli.lean:17:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.rate_pos`:
   [DecidableEq J]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -1150,7 +1150,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [DecidableEq J] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3342/3362] Replayed SRHT.LimitedIndependence
+⚠ [3342/3350] Replayed SRHT.LimitedIndependence
 warning: SRHT/LimitedIndependence.lean:98:0: automatically included section variable(s) unused in theorem `SRHT.twoRound_degree_x`:
   [Fintype J]
   [DecidableEq J]
@@ -1189,7 +1189,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit [Fintype I] in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [3343/3362] Replayed SRHT.ActualMomentTransfer
+⚠ [3343/3350] Replayed SRHT.ActualMomentTransfer
 warning: SRHT/ActualMomentTransfer.lean:155:57: This simp argument is unused:
   mul_assoc
 
@@ -1197,9 +1197,9 @@ Hint: Omit it from the simp argument list.
   [apply] simp [Sampling.site, sampledGram, Finset.mul_sum, ite_mul]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3344/3362] Replayed SRHT.FixedSizeTail
+⚠ [3344/3350] Replayed SRHT.FixedSizeTail
 warning: SRHT/FixedSizeTail.lean:176:17: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-⚠ [3345/3362] Replayed SRHT.Main
+⚠ [3345/3350] Replayed SRHT.Main
 warning: SRHT/Main.lean:17:39: Variable name `hdn` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
@@ -1212,64 +1212,11 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _hdn
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [3346/3362] Replayed SRHT.LinearDimension
+⚠ [3346/3350] Replayed SRHT.LinearDimension
 warning: SRHT/LinearDimension.lean:31:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
-⚠ [3350/3362] Replayed SRHT.Alignment
-warning: SRHT/Alignment.lean:43:31: This simp argument is unused:
-  ne_of_gt (flat_pos k)
-
-Hint: Omit it from the simp argument list.
-  [apply] simp [support, horizontal, ne_of_lt (flat_pos k), eq_comm]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: SRHT/Alignment.lean:51:29: This simp argument is unused:
-  ne_of_gt (flat_pos k)
-
-Hint: Omit it from the simp argument list.
-  [apply] simp [support, vertical, ne_of_lt (flat_pos k), eq_comm]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: SRHT/Alignment.lean:69:53: This simp argument is unused:
-  Matrix.kronecker_apply
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [Matrix.mulVec, dotProduct, tensorWalsh, Fintype.sum_prod_type, horizontal]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: SRHT/Alignment.lean:89:53: This simp argument is unused:
-  Matrix.kronecker_apply
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [Matrix.mulVec, dotProduct, tensorWalsh, Fintype.sum_prod_type, vertical]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: SRHT/Alignment.lean:129:35: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-warning: SRHT/Alignment.lean:205:28: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-⚠ [3356/3362] Replayed SRHT.StrongAlignment
-warning: SRHT/StrongAlignment.lean:139:31: This simp argument is unused:
-  mul_left_comm
-
-Hint: Omit it from the simp argument list.
-  [apply] simp [mul_comm, mul_assoc]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: SRHT/StrongAlignment.lean:233:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
-If you'd rather continue using `push_neg` in your project, you can implement it as follows:
-```
-open Lean.Parser.Tactic in
-macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
-  `(tactic| push $cfg:optConfig Not $[$loc]?)
-```
-warning: SRHT/StrongAlignment.lean:254:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-warning: SRHT/StrongAlignment.lean:282:13: Variable name `hε0` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _hε0
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [3359/3362] Built Challenge (6.5s)
-warning: Challenge.lean:76:8: declaration uses `sorry`
-✔ [3361/3362] Built Solution (8.1s)
-Build completed successfully (3362 jobs).
+⚠ [3347/3350] Built Challenge (6.6s)
+warning: Challenge.lean:74:8: declaration uses `sorry`
+✔ [3349/3350] Built Solution (8.2s)
+Build completed successfully (3350 jobs).

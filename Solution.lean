@@ -24,11 +24,14 @@ abbrev Index (k : ℕ) := Fin k → ZMod 2
 abbrev Signs (k : ℕ) := Index k → ZMod 2
 
 /-- The real sign represented by a bit: zero is `+1`, one is `-1`. -/
-def sign (b : ZMod 2) : ℝ := if b = 0 then 1 else -1
+-- Name the canonical ring operations explicitly: proof-only imports may also
+-- expose a field instance on `ZMod 2`, which must not change the exported terms.
+def sign (b : ZMod 2) : ℝ := if b = (ZMod.commRing 2).zero then 1 else -1
 
 /-- The normalized Walsh matrix, with entries `n^(-1/2) (-1)^(a dot b)`. -/
 def hadamard (k : ℕ) : Matrix (Index k) (Index k) ℝ :=
-  fun a b => (Real.sqrt (Fintype.card (Index k) : ℝ))⁻¹ * ∏ i, sign (a i * b i)
+  fun a b => (Real.sqrt (Fintype.card (Index k) : ℝ))⁻¹ *
+    ∏ i, sign ((ZMod.commRing 2).mul (a i) (b i))
 
 /-- The two-round matrix `H D_y H D_x`; each diagonal entry is a real sign. -/
 def rerandomized {k : ℕ} (x y : Signs k) : Matrix (Index k) (Index k) ℝ :=
