@@ -1,14 +1,22 @@
 # Rerandomized Subsampled Trigonometric Transforms
 
-**Verified on 9 September 2026:** the clean Linux build, all 33 axiom audits,
-Comparator, NanoDa, and Lean's default kernel passed. The
+**Historical verification, 9 September 2026:** the clean Linux build, all 33
+axiom audits, Comparator, NanoDa, and Lean's default kernel passed for commit
+`f813b5c3c14ddda0cd0dc429e657b0dbe6f94079`. The
 [verification record](verification/ci/34373116757/README.md) preserves the
 reports and exact checked commit.
 
-**Challenge rendering:** the separate Palomar core-notation audit currently
-fails on a `ZMod 2` dependency. The [renderability report](verification/renderability/README.md)
-records the failure and a compatibility fix tested on a copy of Challenge.
-That fix has not been applied to Challenge or Solution.
+**Rendering compatibility update:** Challenge and Solution now name their
+existing finite-index instance `indexFintype`. This addresses the `ZMod 2`
+dependency failure documented in the
+[original renderability report](verification/renderability/README.md).
+Fresh local checks pass: the complete Lean build, all 33 axiom audits, the
+proof-source scan, the trusted Verso literate build, and the unmodified
+official core-notation audit. Their evidence is recorded
+[separately](verification/renderability/fix/). Comparator and NanoDa still
+require a fresh CI run for this change. These local checks do not establish
+a complete Palomar server rendering pass or acceptance; the earlier
+successful verification does not certify the changed snapshot.
 
 This repository contains the complete Lean proof development for two-round
 Walsh SRHT embedding bounds and a Palomar Challenge/Solution interface for
@@ -112,10 +120,13 @@ proof with NanoDa. Its report is separate from the ordinary Lean build.
 See [Palomar criteria and check status](notes/PALOMAR_CRITERIA.md) for the
 exact distinction between repository checks and registry review.
 
-This repository is prepared for Palomar. It has not been submitted to or
-registered by Palomar, and no registry acceptance or external expert review
-is claimed. A submission must identify an exact public Git commit, not a
-moving branch.
+The submitter's Palomar status page records a submission of commit
+`76867341d4fe08702921aa12b88624ebb7831b4f` on 9 September 2026 at 17:48:26 UTC,
+mechanical verification success at 18:00:19 UTC, and a Challenge-rendering
+retry at 19:14:51 UTC. Automated review completion and registration are not
+established by that status. The submission selects that exact old commit;
+pushing the compatibility update does not change its selected snapshot.
+The fixed sources require a submission selecting their new public commit.
 
 ## Sources, provenance, and process
 

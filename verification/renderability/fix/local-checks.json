@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "scope": "Local full Lean build/axiom audit and rendering-stage checks; no complete Palomar server rendering or registration claim",
+  "checkedAtUtc": "2026-09-09T19:39:29.4356608Z",
+  "sourceHashes": {
+    "Challenge.lean": "2014066db73506991b7fb4402c27ec0b92cf94f9dd28906c9157a01f0df2a690",
+    "Solution.lean": "b78dce306bd2190cc44ca6f7bb9386cac88b1759c5d6e11fa667e23851cbd163",
+    "comparator.json": "06a82bf317c5846a8f144c07d66617a3008db4e5ffae8ce8087f4e1debb7871f"
+  },
+  "sourceHashScope": "Exact native Windows files used by local checks; Git may normalize text line endings. Fresh Linux CI will record the committed source bytes.",
+  "leanBuild": {
+    "status": "passed",
+    "jobs": 3362,
+    "auditedResults": 33,
+    "record": "verification/result.json"
+  },
+  "literateBuild": {
+    "status": "passed",
+    "jobs": 2610,
+    "rendererSource": "Unmodified pinned Verso checkout"
+  },
+  "coreNotationAudit": {
+    "status": "passed",
+    "tool": "Unmodified official core_notation_audit.lean",
+    "exitCode": 0,
+    "output": "core-notation-audit.json"
+  },
+  "palomarSubmissionCommit": "ef2fa1eadcb246c2346ddba39b52eaa53d4bb763",
+  "versoCommit": "3bdedf29bada13d8103e6c979001c51dcee210c8",
+  "comparatorNanoDa": "Fresh CI pending; previous verified source snapshot is historical"
+}

@@ -1,0 +1,13 @@
+{
+  "repository": "PalomarRegistry/PalomarSubmission",
+  "run_id": 34393234056,
+  "workflow_url": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34393234056",
+  "artifact_id": 10120710497,
+  "artifact_name": "challenge-render-d8bb079a67d84e7493093f9d96745bab",
+  "artifact_digest": "sha256:87b89602a826fe4dcd0620b9ffa4af494990bfb344ddb313c7610b6c4ee3b9d8",
+  "source_repository": "DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms",
+  "source_commit": "76867341d4fe08702921aa12b88624ebb7831b4f",
+  "challenge_sha256": "648a4b4ef7dcb4fe2e9a24c699a50945273aaac19319a8d5d6bf801b7686fd1b",
+  "report_file": "server-failure-report.json",
+  "retrieval": "The complete original report.json was fetched through the GitHub REST API and extracted from its artifact in memory. The saved JSON was copied verbatim from that retained tool output after subsequent artifact-download attempts encountered connection refusal. No report fields were inferred or omitted."
+}

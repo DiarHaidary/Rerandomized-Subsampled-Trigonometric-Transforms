@@ -1,0 +1,7 @@
+⚠ [2597/2610] Replayed Challenge
+warning: Challenge.lean:80:8: declaration uses `sorry`
+✔ [2598/2610] Built VersoSearch.DomainSearch (1.8s)
+✔ [2607/2610] Built VersoSearch.DomainSearch:c.o (681ms)
+✔ [2608/2610] Built «verso-literate»:exe (605ms)
+✔ [2609/2610] Built PalomarChallengeRender/Challenge:literate (8.3s)
+Build completed successfully (2610 jobs).

@@ -20,6 +20,9 @@ open scoped BigOperators
 /-- The binary group indexing the `n = 2^k` rows and columns of the Walsh matrix. -/
 abbrev Index (k : ℕ) := Fin k → ZMod 2
 
+-- Name the existing enumeration so the rendering audit need not unfold it.
+instance indexFintype (k : ℕ) : Fintype (Index k) := inferInstance
+
 /-- One independent fair bit per diagonal entry; a bit represents a sign. -/
 abbrev Signs (k : ℕ) := Index k → ZMod 2
 
@@ -70,7 +73,8 @@ where `q = ceil(log_4(4d/δ))`. Sampling every row is allowed when this saturate
 def sampleSize (k d : ℕ) (ε δ : ℝ) : ℕ :=
   min (2 ^ k) ⌈8192 * ((d + 27 * ⌈Real.logb 4 (4 * (d : ℝ) / δ)⌉₊ ^ 3 : ℕ) : ℝ) / ε ^ 2⌉₊
 
-/-- For every fixed real orthonormal frame, two independent sign rounds followed
+/-- For every fixed real orthonormal frame in a Walsh space of order `2^k`,
+two independent sign rounds followed
 by uniform distinct-row sampling give an OSE with probability at least `1-δ`.
 The explicit row budget is at most `C(δ) d/ε²`, independent of the ambient size;
 thus any fixed `0<δ<1/2` gives the dimension dependence asked for in Problem 5.6. -/

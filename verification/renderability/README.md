@@ -1,6 +1,10 @@
 # Challenge renderability diagnostic
 
-**The current Challenge does not pass the current Palomar core-notation audit.**
+**Historical diagnosis: the Challenge at commit `7686734` failed the Palomar
+core-notation audit.** The named-instance compatibility fix has since been
+applied to Challenge and Solution; [fresh evidence is recorded here](fix/).
+
+The following records the original failing source and the investigation.
 The normal Lean build and Verso literate build succeed, but the official audit
 exits with a kernel type mismatch while copying type dependencies into its
 trusted pretty-printing environment:
@@ -67,7 +71,7 @@ same error. The source and failure output are saved as `MinimalRepro.lean.txt`
 and `MinimalRepro-official.err`; `trace-zeros.err` records the expanded mismatch.
 This finding does not invalidate the earlier proof, Comparator, or NanoDa results.
 
-## Tested compatibility fix, not applied to project sources
+## Compatibility experiment on the original source
 
 Add a name for the existing inferred finite enumeration immediately after
 `abbrev Index`:
@@ -83,11 +87,12 @@ output is in `NamedIndex-official.json`, with an empty `NamedIndex-official.err`
 The named instance keeps the existing enumeration while preventing the theorem
 signature from expanding its implementation across the audit's opaque proxies.
 
-If adopting this change, add it identically to Challenge and Solution and rerun
+The original recommendation was to add it identically to Challenge and Solution and rerun
 the proof build, Comparator, and rendering checks. The proposed change has been
 tested only on the copied Challenge; the complete proof/Comparator workflow has
-not been rerun with it. The actual Challenge, Solution, and proof sources remain
-unchanged.
+not been rerun with it at the time of this diagnostic. Those original tests
+left the project sources unchanged. See the [subsequent fix record](fix/) for
+the applied change and its verification.
 
 ## Other display checks
 
