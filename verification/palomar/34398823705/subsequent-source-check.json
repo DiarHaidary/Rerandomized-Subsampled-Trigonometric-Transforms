@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "sourceCommit": "d98e7f29472bf79e350712f710b5c19be7f8db76",
+  "comparedCiSourceCommit": "261302eb6c6d2c37f726e92801ff7f790e8dcbc1",
+  "sourceFilesChecked": 121,
+  "gitBlobHashesMatchCi": true,
+  "workingProofAndBuildInputsUnchanged": true,
+  "workingComparison": "Text bytes after CRLF-to-LF normalization; exact Git blob hashes separately match CI inventory"
+}

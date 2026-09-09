@@ -1,0 +1,624 @@
+{
+  "challenge": {
+    "bytes": 4484,
+    "canonical_olean_sha256": "7f8ab7354084abb6c97fcf5470715acaa08145ef891a2204a85c8e41830cd467",
+    "dependencies": [
+      {
+        "provenance": "allowlisted",
+        "repository": "leanprover-community/mathlib4"
+      }
+    ],
+    "direct_imports": [
+      "Mathlib.Analysis.CStarAlgebra.Matrix",
+      "Mathlib.Analysis.SpecialFunctions.Log.Base",
+      "Mathlib.Data.Fintype.BigOperators",
+      "Mathlib.Data.ZMod.Basic"
+    ],
+    "lines": 89,
+    "module": "Challenge",
+    "path": "Challenge.lean",
+    "sha256": "2014066db73506991b7fb4402c27ec0b92cf94f9dd28906c9157a01f0df2a690",
+    "transitive_source_count": 5,
+    "trust_level": "high",
+    "untrusted_sources": []
+  },
+  "checked_at": "2026-09-09T20:12:27Z",
+  "classification": {
+    "arxiv": [
+      {
+        "code": "math.NA",
+        "name": "Numerical Analysis"
+      },
+      {
+        "code": "cs.DS",
+        "name": "Data Structures and Algorithms"
+      }
+    ],
+    "msc2020": [
+      {
+        "code": "60B20",
+        "name": "Random matrices (probabilistic aspects)"
+      },
+      {
+        "code": "68W20",
+        "name": "Randomized algorithms"
+      }
+    ]
+  },
+  "comparator": {
+    "challenge_module": "Challenge",
+    "definition_names": [],
+    "path": "comparator.json",
+    "permitted_axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ],
+    "sha256": "06a82bf317c5846a8f144c07d66617a3008db4e5ffae8ce8087f4e1debb7871f",
+    "solution_module": "Solution",
+    "theorem_names": [
+      "RerandomizedSTT.problem_5_6"
+    ]
+  },
+  "comparator_commit": "575674928e239f5bc452aab72d1dd7b0f1326494",
+  "comparator_log_tail": "cobi.lean:84:63: Unused tactic linter: `nlinarith` does nothing\n\nNote: This linter can be disabled with `set_option linter.unusedTactic false`\nwarning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:84:43: this tactic is never executed\n\nNote: This linter can be disabled with `set_option linter.unreachableTactic false`\nwarning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:84:63: this tactic is never executed\n\nNote: This linter can be disabled with `set_option linter.unreachableTactic false`\nwarning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:184:19: Unused tactic linter: `nlinarith [hsq]` does nothing\n\nNote: This linter can be disabled with `set_option linter.unusedTactic false`\nwarning: vendor/sparse-fock/SparseFockFormal/TernaryJacobi.lean:184:19: this tactic is never executed\n\nNote: This linter can be disabled with `set_option linter.unreachableTactic false`\n\u26a0 [3322/3340] Built SRHT.SmallRowsGrade (5.7s)\nwarning: SRHT/SmallRowsGrade.lean:87:23: This simp argument is unused:\n  Matrix.diagonal_apply\n\nHint: Omit it from the simp argument list.\n  [apply] simp [hai, ha]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsGrade.lean:88:12: This simp argument is unused:\n  Matrix.diagonal_apply\n\nHint: Omit it from the simp argument list.\n  [apply] simp [he]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsGrade.lean:89:23: This simp argument is unused:\n  Matrix.diagonal_apply\n\nHint: Omit it from the simp argument list.\n  [apply] simp [hai]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsGrade.lean:90:12: This simp argument is unused:\n  Matrix.diagonal_apply\n\nHint: Omit it from the simp argument list.\n  [apply] simp [he]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n\u26a0 [3324/3340] Built SRHT.SmallRowsLinearBands (8.7s)\nwarning: SRHT/SmallRowsLinearBands.lean:18:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.twoGradeProjection_apply`:\n  [Fintype V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsLinearBands.lean:24:38: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nwarning: SRHT/SmallRowsLinearBands.lean:113:53: This simp argument is unused:\n  Fintype.sum_ite_eq'\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [mul_ite, mul_zero, Prod.ext_iff, ite_and, Fintype.sum_ite_eq]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsLinearBands.lean:113:73: This simp argument is unused:\n  Fintype.sum_ite_eq\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [mul_ite, mul_zero, Prod.ext_iff, ite_and, Fintype.sum_ite_eq']\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsLinearBands.lean:140:4: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\nwarning: SRHT/SmallRowsLinearBands.lean:162:4: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\nwarning: SRHT/SmallRowsLinearBands.lean:164:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rightExtraction_apply`:\n  [Fintype D]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype D] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsLinearBands.lean:215:60: This simp argument is unused:\n  Fintype.sum_ite_eq\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Matrix.mul_apply, Matrix.transpose_apply, leftExtraction_apply, rightExtraction_apply,\n    amplifyRight, Fintype.sum_prod_type, Prod.ext_iff, ite_and, ite_mul, mul_ite, mul_zero, zero_mul,\n    Fintype.sum_ite_eq', Finset.sum_ite_irrel, Finset.sum_const_zero, hg.2, if_true]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsLinearBands.lean:283:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rawRaising_card`:\n  [Fintype D]\n  [DecidableEq D]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype D] [DecidableEq D] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsLinearBands.lean:296:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rawMixedPM_card`:\n  [Fintype D]\n  [DecidableEq D]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype D] [DecidableEq D] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsLinearBands.lean:309:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rawMixedMP_card`:\n  [Fintype D]\n  [DecidableEq D]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype D] [DecidableEq D] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsLinearBands.lean:367:26: This simp argument is unused:\n  Equiv.refl_apply\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Matrix.submatrix_apply, mul_rowGradeProjection_apply, Equiv.prodComm_apply, Equiv.prodCongr_apply]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n\u2714 [3326/3348] Built SparseFockFormal.MatrixTail (6.8s)\n\u26a0 [3327/3348] Built SRHT.SmallRowsY (8.9s)\nwarning: SRHT/SmallRowsY.lean:50:33: This simp argument is unused:\n  Fintype.sum_ite_eq\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Fintype.sum_ite_eq', Finset.sum_ite_irrel, Finset.sum_const_zero]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsY.lean:55:57: This simp argument is unused:\n  Fintype.card_coe\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [shift_inner, Finset.sum_const, nsmul_eq_mul]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsY.lean:85:55: This simp argument is unused:\n  Fintype.sum_ite_eq\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Prod.mk.injEq, ite_and, Fintype.sum_ite_eq', Finset.sum_ite_irrel, Finset.sum_const_zero]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: SRHT/SmallRowsY.lean:99:2: Try this: \n  letI\u0335\n\nThe goal is a proposition, so `let` is preferred over `letI`.\nThe difference between `let` and `letI` is that `letI` inlines the value.\nBut this is not relevant for proofs because of proof irrelevance.\n\nNote: This linter can be disabled with `set_option linter.style.haveILetI false`\nwarning: SRHT/SmallRowsY.lean:100:2: Try this: \n  letI\u0335\n\nThe goal is a proposition, so `let` is preferred over `letI`.\nThe difference between `let` and `letI` is that `letI` inlines the value.\nBut this is not relevant for proofs because of proof irrelevance.\n\nNote: This linter can be disabled with `set_option linter.style.haveILetI false`\nwarning: SRHT/SmallRowsY.lean:141:43: This simp argument is unused:\n  walshModes\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Matrix.submatrix_apply, rawSingleLift_apply, signExchange, Equiv.coe_fn_mk, yTransfer, tensor,\n    localCorrection_entry, kernel]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n\u2714 [3328/3348] Built SparseFockFormal.PaperParameters (8.9s)\n\u2714 [3329/3348] Built SparseFockFormal.FiniteLocalMoments (3.3s)\n\u26a0 [3330/3348] Built SRHT.BernoulliVariance (5.5s)\nwarning: SRHT/BernoulliVariance.lean:69:0: automatically included section variable(s) unused in theorem `SRHT.BernoulliVariance.centered_count_eq`:\n  [DecidableEq I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u26a0 [3331/3348] Built SRHT.LinearDimension (4.2s)\nwarning: SRHT/LinearDimension.lean:31:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\n\u26a0 [3332/3348] Built SRHT.LimitedIndependence (3.6s)\nwarning: SRHT/LimitedIndependence.lean:98:0: automatically included section variable(s) unused in theorem `SRHT.twoRound_degree_x`:\n  [Fintype J]\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/LimitedIndependence.lean:106:0: automatically included section variable(s) unused in theorem `SRHT.twoRound_degree_y`:\n  [Fintype J]\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/LimitedIndependence.lean:117:0: automatically included section variable(s) unused in theorem `SRHT.weightedGram_degree`:\n  [Fintype J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/LimitedIndependence.lean:128:0: automatically included section variable(s) unused in theorem `SRHT.weightedGram_degree_selector`:\n  [Fintype J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/LimitedIndependence.lean:141:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nwarning: SRHT/LimitedIndependence.lean:148:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nwarning: SRHT/LimitedIndependence.lean:169:0: automatically included section variable(s) unused in theorem `SRHT.localDegree_expect`:\n  [Fintype I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u26a0 [3333/3348] Built SRHT.SmallRowsNormalBound (6.7s)\nwarning: SRHT/SmallRowsNormalBound.lean:84:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.collectedDouble_card`:\n  [Fintype R]\n  [DecidableEq R]\n  [DecidableEq D]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype R] [DecidableEq R] [DecidableEq D] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsNormalBound.lean:230:69: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\n\u26a0 [3334/3348] Built SRHT.BernoulliSupport (3.6s)\nwarning: SRHT/BernoulliSupport.lean:14:8: automatically included section variable(s) unused in theorem `SRHT.BernoulliSupport.mem_support`:\n  [DecidableEq I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/BernoulliSupport.lean:48:0: automatically included section variable(s) unused in theorem `SRHT.BernoulliSupport.bitsOf_map`:\n  [Fintype I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/BernoulliSupport.lean:60:0: automatically included section variable(s) unused in theorem `SRHT.BernoulliSupport.count_eq_card_support`:\n  [DecidableEq I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2714 [3335/3348] Built SparseFockFormal.SparseIIDCoupling (5.0s)\n\u26a0 [3336/3348] Built SRHT.SmallRowsAssembly (2.2s)\nwarning: SRHT/SmallRowsAssembly.lean:14:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rowCollection_gram`:\n  [Fintype J]\n  [DecidableEq R]\n  [DecidableEq I]\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] [DecidableEq R] [DecidableEq I] [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsAssembly.lean:19:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.rowCollection_mul`:\n  [Fintype R]\n  [Fintype I]\n  [Fintype K]\n  [DecidableEq R]\n  [DecidableEq I]\n  [DecidableEq J]\n  [DecidableEq K]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype\n  R] [Fintype I] [Fintype K] [DecidableEq R] [DecidableEq I] [DecidableEq J] [DecidableEq K] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsAssembly.lean:24:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.norm_sq_eq_columnGram`:\n  [DecidableEq I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq I] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SmallRowsAssembly.lean:38:0: automatically included section variable(s) unused in theorem `SRHT.SmallRows.transpose_product_zero`:\n  [Fintype J]\n  [DecidableEq I]\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype J] [DecidableEq I] [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2139 [3337/3348] Built SparseFockFormal.SparseIIDTransfer (2.3s)\ninfo: vendor/sparse-fock/SparseFockFormal/SparseIIDTransfer.lean:148:2: Try this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\n\u26a0 [3338/3348] Built SRHT.TwoSignDecomposition (2.4s)\nwarning: SRHT/TwoSignDecomposition.lean:26:28: This simp argument is unused:\n  Finset.sum_mul\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Finset.mul_sum, \u2190 Finset.sum_add_distrib]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n\u2714 [3339/3348] Built SparseFockFormal.TracePowerConvexity (2.8s)\n\u26a0 [3340/3348] Built SRHT.SamplingTransfer (2.5s)\nwarning: SRHT/SamplingTransfer.lean:20:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.deficit_eq_excess`:\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SamplingTransfer.lean:49:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nwarning: SRHT/SamplingTransfer.lean:53:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\n\u2714 [3341/3348] Built SRHT.SmallRowsFinal (3.0s)\n\u26a0 [3342/3348] Built SRHT.SamplingBernoulli (1.8s)\nwarning: SRHT/SamplingBernoulli.lean:17:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.rate_pos`:\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SamplingBernoulli.lean:22:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.rate_lt_one`:\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: SRHT/SamplingBernoulli.lean:34:0: automatically included section variable(s) unused in theorem `SRHT.Sampling.card_mul_rate`:\n  [DecidableEq J]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq J] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u26a0 [3343/3348] Built SRHT.ActualMomentTransfer (2.0s)\nwarning: SRHT/ActualMomentTransfer.lean:155:57: This simp argument is unused:\n  mul_assoc\n\nHint: Omit it from the simp argument list.\n  [apply] simp [Sampling.site, sampledGram, Finset.mul_sum, ite_mul]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n\u2714 [3344/3348] Built SRHT.BernoulliMoment (4.6s)\n\u26a0 [3345/3348] Built SRHT.FixedSizeTail (2.4s)\nwarning: SRHT/FixedSizeTail.lean:176:17: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead\n\u26a0 [3346/3348] Built SRHT.Main (1.7s)\nwarning: SRHT/Main.lean:17:39: Variable name `hdn` is not explicitly referenced.\n\nHint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:\n  [apply] _hdn\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nwarning: SRHT/Main.lean:32:39: Variable name `hdn` is not explicitly referenced.\n\nHint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:\n  [apply] _hdn\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\n\u2714 [3347/3348] Built Solution (2.3s)\nBuild completed successfully (3348 jobs).\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, RerandomizedSTT.problem_5_6, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from Solution\nRunning nanoda kernel on solution\nnanoda kernel accepts the solution\nRunning Lean default kernel on solution.\nLean default kernel accepts the solution\nYour solution is okay!",
+  "errors": [],
+  "existing_id": null,
+  "formalization": {
+    "automation_method_count": 2,
+    "path": "formalization.yaml",
+    "project_name": "Rerandomized Subsampled Trigonometric Transforms",
+    "review_status": "agent-reviewed",
+    "sha256": "0e262db5eb093d99aed94a0100b2f9c09d71a523f0406c6274e1e66edcc3582a",
+    "source_count": 3
+  },
+  "lake_manifest": {
+    "path": "lake-manifest.json",
+    "sha256": "119debaf9cf4acfb1cf27f8fc249fa4537a6d8da8788efba2cb51acf20035af2"
+  },
+  "lakefile": {
+    "format": "lean",
+    "path": "lakefile.lean",
+    "sha256": "0cf9de554b316cefcd766ea1541205d8318ba60af2cb890e83d31a6142120b15"
+  },
+  "landrun_commit": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+  "lean4export_commit": "15f6055e299ad5b89345e533cc2192f4cc00f659",
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "lean_toolchain_path": "lean-toolchain",
+  "license": {
+    "declared_identifier": "MIT",
+    "detected_identifier": "MIT",
+    "path": "LICENSE",
+    "sha256": "a01c70e99b619c289a6d59bb4e61deb9b49806f9c2738daf3ad354f3f3d6641a"
+  },
+  "mathlib_cache": {
+    "available": true,
+    "required": true
+  },
+  "nanoda_commit": "68d5ca9db226849b41a6fff59d796ff19d0a8840",
+  "orcid_validation": {
+    "checked_at": "2026-09-09T20:04:47Z",
+    "records": [],
+    "registry": "https://orcid.org",
+    "schema_version": 1
+  },
+  "phase": "verification",
+  "project_dependencies": [
+    {
+      "name": "mathlib",
+      "repository": "leanprover-community/mathlib4",
+      "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+      "url": "https://github.com/leanprover-community/mathlib4.git"
+    },
+    {
+      "name": "plausible",
+      "repository": "leanprover-community/plausible",
+      "revision": "b7eb3304aeae834b12dda98993a37f6a41f6f0bb",
+      "url": "https://github.com/leanprover-community/plausible"
+    },
+    {
+      "name": "LeanSearchClient",
+      "repository": "leanprover-community/LeanSearchClient",
+      "revision": "5f4d51b81cbd3f6b32b156bfad9056621a040404",
+      "url": "https://github.com/leanprover-community/LeanSearchClient"
+    },
+    {
+      "name": "importGraph",
+      "repository": "leanprover-community/import-graph",
+      "revision": "16f02aa7642864af59f1ff0e384a015994db9118",
+      "url": "https://github.com/leanprover-community/import-graph"
+    },
+    {
+      "name": "proofwidgets",
+      "repository": "leanprover-community/ProofWidgets4",
+      "revision": "4be2e3d5087eeb272cf5a8853b8f9dd025ef5957",
+      "url": "https://github.com/leanprover-community/ProofWidgets4"
+    },
+    {
+      "name": "aesop",
+      "repository": "leanprover-community/aesop",
+      "revision": "3448c0bcc5ce01b2d1546e483ec3620e32df3d0e",
+      "url": "https://github.com/leanprover-community/aesop"
+    },
+    {
+      "name": "Qq",
+      "repository": "leanprover-community/quote4",
+      "revision": "92c15be17b7caf78c2ad767ec40f89052d908d81",
+      "url": "https://github.com/leanprover-community/quote4"
+    },
+    {
+      "name": "batteries",
+      "repository": "leanprover-community/batteries",
+      "revision": "4488d40d070b9700d4d5a6aa342f0d40c31b2a2d",
+      "url": "https://github.com/leanprover-community/batteries"
+    },
+    {
+      "name": "Cli",
+      "repository": "leanprover/lean4-cli",
+      "revision": "6130a47896ce867c6a4a55373441e59e565bad0f",
+      "url": "https://github.com/leanprover/lean4-cli"
+    }
+  ],
+  "provenance": {
+    "mathematical_sources": [
+      {
+        "author_endorsement": "participated",
+        "authors": [
+          {
+            "name": "Diar Heidary"
+          }
+        ],
+        "license": "MIT",
+        "location": "docs/SRHT_Technical_Report.md",
+        "note": "Project technical report revised 7 September 2026. The informal research development preceded this Palomar layout. The report was subsequently aligned with the verified operator estimates and finite conditional-Jensen sampling argument. It is included with LaTeX and PDF companions. Research direction and responsibility belong to the human author; substantive automated mathematical and Lean work is disclosed below.",
+        "relationship": "formalizes",
+        "title": "Two-round Walsh SRHT: a self-contained moment and embedding proof",
+        "type": "paper"
+      },
+      {
+        "author_endorsement": "not-contacted",
+        "authors": [
+          {
+            "name": "Noah Amsel"
+          },
+          {
+            "name": "Yves Baumann"
+          },
+          {
+            "name": "Paul Beckman"
+          },
+          {
+            "name": "Peter B\u00fcrgisser"
+          },
+          {
+            "name": "Chris Cama\u00f1o"
+          },
+          {
+            "name": "Tyler Chen"
+          },
+          {
+            "name": "Edmond Chow"
+          },
+          {
+            "name": "Anil Damle"
+          },
+          {
+            "name": "Michal Derezinski"
+          },
+          {
+            "name": "Mark Embree"
+          },
+          {
+            "name": "Ethan N. Epperly"
+          },
+          {
+            "name": "Robert Falgout"
+          },
+          {
+            "name": "Mark Fornace"
+          },
+          {
+            "name": "Anne Greenbaum"
+          },
+          {
+            "name": "Chen Greif"
+          },
+          {
+            "name": "Diana Halikias"
+          },
+          {
+            "name": "Zhen Huang"
+          },
+          {
+            "name": "Elias Jarlebring"
+          },
+          {
+            "name": "Yiannis Koutis"
+          },
+          {
+            "name": "Daniel Kressner"
+          },
+          {
+            "name": "Rasmus Kyng"
+          },
+          {
+            "name": "J\u00f6rg Liesen"
+          },
+          {
+            "name": "Jackie Lok"
+          },
+          {
+            "name": "Raphael A. Meyer"
+          },
+          {
+            "name": "Yuji Nakatsukasa"
+          },
+          {
+            "name": "Kate Pearce"
+          },
+          {
+            "name": "Richard Peng"
+          },
+          {
+            "name": "David Persson"
+          },
+          {
+            "name": "Eliza Rebrova"
+          },
+          {
+            "name": "Ryan Schneider"
+          },
+          {
+            "name": "Rikhav Shah"
+          },
+          {
+            "name": "Edgar Solomonik"
+          },
+          {
+            "name": "Nikhil Srivastava"
+          },
+          {
+            "name": "Alex Townsend"
+          },
+          {
+            "name": "Robert J. Webber"
+          },
+          {
+            "name": "Jess Williams"
+          }
+        ],
+        "contributors": [
+          {
+            "name": "Ethan N. Epperly",
+            "role": "Scribe of Section 5.3, which contains Problem 5.6"
+          }
+        ],
+        "identifier": "arXiv:2602.05394v3",
+        "license": "arXiv non-exclusive distribution license; not relicensed by this repository",
+        "location": "https://arxiv.org/pdf/2602.05394v3",
+        "note": "Problem source, not a supplied proof: Definition 5.3 specifies the rerandomized Walsh transform; Problem 5.6 asks for dimension O(r/epsilon^2). Definition 5.1 uses squared Euclidean norms. See notes/SOURCE_FIDELITY.md for the exact transpose and parameter mapping.",
+        "relationship": "other",
+        "title": "Linear Systems and Eigenvalue Problems: Open Questions from a Simons Workshop",
+        "type": "paper"
+      },
+      {
+        "author_endorsement": "participated",
+        "authors": [
+          {
+            "name": "Diar Heidary"
+          }
+        ],
+        "license": "MIT",
+        "location": "https://github.com/DiarHaidary/nelson-nguyen-sparse-fock/tree/3a8969bfa135b7b5042d7090df992780b8ac567b/paper",
+        "note": "Background for the finite occupation-space and operator method. The SRHT bounds are proved in this development; they are not hypotheses imported from a SparseStack theorem. Reused Lean infrastructure is separately recorded under related_formalizations.",
+        "relationship": "background",
+        "title": "A Sparse-Fock Proof of the Upper Edge for Fully Independent SparseStack",
+        "type": "paper"
+      }
+    ],
+    "related_formalizations": [
+      {
+        "identifier": "https://github.com/DiarHaidary/nelson-nguyen-sparse-fock/tree/3a8969bfa135b7b5042d7090df992780b8ac567b",
+        "note": "The vendored SparseFockFormal library originated in this project, including finite probability, finite L2 spaces, matrix tails, and the limited-independence extension. Original namespaces and MIT attribution are retained. The present repository includes the consumed sources and any SRHT-specific adaptations, so it is a substantive development rather than a thin external Comparator wrapper.",
+        "relationship": "builds-on"
+      }
+    ],
+    "repository_role": "substantive-development",
+    "responsible_maintainers": [
+      {
+        "name": "Diar Heidary"
+      }
+    ],
+    "result_origin": "source-based"
+  },
+  "resource_usage": [
+    {
+      "elapsed_seconds": 0.003,
+      "max_rss_kib": 13264,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 0,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.0,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.005,
+      "max_rss_kib": 13432,
+      "peak_tasks_observed": 1,
+      "phase": "landrun",
+      "returncode": 0,
+      "system_cpu_seconds": 0.004,
+      "user_cpu_seconds": 0.001,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.003,
+      "max_rss_kib": 13136,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 1,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.0,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13432,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.006,
+      "user_cpu_seconds": 0.014,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13248,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.018,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13140,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.004,
+      "user_cpu_seconds": 0.016,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.018,
+      "max_rss_kib": 13428,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.005,
+      "user_cpu_seconds": 0.013,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 1.909,
+      "max_rss_kib": 891532,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.321,
+      "user_cpu_seconds": 1.631,
+      "workspace_disk_peak_bytes": 172032
+    },
+    {
+      "elapsed_seconds": 0.065,
+      "max_rss_kib": 92132,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.031,
+      "user_cpu_seconds": 0.052,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 53.158,
+      "max_rss_kib": 1026232,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 20.727,
+      "user_cpu_seconds": 67.997,
+      "workspace_disk_peak_bytes": 7787835392
+    },
+    {
+      "elapsed_seconds": 6.909,
+      "max_rss_kib": 1021876,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 1.66,
+      "user_cpu_seconds": 6.201,
+      "workspace_disk_peak_bytes": 1466368
+    },
+    {
+      "elapsed_seconds": 2.121,
+      "max_rss_kib": 894844,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.366,
+      "user_cpu_seconds": 1.696,
+      "workspace_disk_peak_bytes": 1462272
+    },
+    {
+      "elapsed_seconds": 1.862,
+      "max_rss_kib": 2884152,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.43,
+      "user_cpu_seconds": 1.117,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.072,
+      "max_rss_kib": 92080,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.035,
+      "user_cpu_seconds": 0.053,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.064,
+      "max_rss_kib": 92132,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.023,
+      "user_cpu_seconds": 0.057,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.003,
+      "max_rss_kib": 13140,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 0,
+      "system_cpu_seconds": 0.0,
+      "user_cpu_seconds": 0.003,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.005,
+      "max_rss_kib": 13296,
+      "peak_tasks_observed": 1,
+      "phase": "landrun",
+      "returncode": 0,
+      "system_cpu_seconds": 0.004,
+      "user_cpu_seconds": 0.001,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.003,
+      "max_rss_kib": 13432,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 1,
+      "system_cpu_seconds": 0.001,
+      "user_cpu_seconds": 0.003,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.021,
+      "max_rss_kib": 13252,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.005,
+      "user_cpu_seconds": 0.016,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13168,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.017,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13260,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.017,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.02,
+      "max_rss_kib": 13132,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.005,
+      "user_cpu_seconds": 0.016,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.018,
+      "max_rss_kib": 13304,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.002,
+      "user_cpu_seconds": 0.016,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 1.004,
+      "max_rss_kib": 844856,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.345,
+      "user_cpu_seconds": 0.683,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 1.0,
+      "max_rss_kib": 846096,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.32,
+      "user_cpu_seconds": 0.707,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 166.449,
+      "max_rss_kib": 3659552,
+      "peak_tasks_observed": 1,
+      "phase": "comparator",
+      "returncode": 0,
+      "system_cpu_seconds": 42.093,
+      "user_cpu_seconds": 344.01,
+      "workspace_disk_peak_bytes": 411172864
+    }
+  ],
+  "schema_version": 1,
+  "solution": {
+    "module": "Solution",
+    "path": "Solution.lean",
+    "sha256": "d6efeb9ce47ce1cb6fefffcd59955fe7a3f3ee003aa2ebf6b7075b05e6417d87"
+  },
+  "source": {
+    "bytes": 5374399,
+    "commit": "d98e7f29472bf79e350712f710b5c19be7f8db76",
+    "repository": "DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms",
+    "repository_url": "https://github.com/DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms",
+    "tree_url": "https://github.com/DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms/tree/d98e7f29472bf79e350712f710b5c19be7f8db76"
+  },
+  "stage": "complete",
+  "status": "pass",
+  "submission": {
+    "authorization": {
+      "relationship": "maintainer"
+    },
+    "requested_paths": {
+      "comparator_config_path": "comparator.json",
+      "formalization_metadata_path": "",
+      "project_path": ""
+    },
+    "submission_id": "90u5w6awbsp2"
+  },
+  "warnings": [],
+  "workflow_url": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34398823705"
+}

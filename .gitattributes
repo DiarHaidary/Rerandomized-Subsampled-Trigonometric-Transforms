@@ -10,3 +10,5 @@
 *.tex text eol=lf
 lean-toolchain text eol=lf
 *.pdf binary
+# Preserve the official rendering artifact bytes for its SHA-256 manifest.
+verification/renderability/server/**/bundle/** -text

@@ -136,7 +136,8 @@ status:
   # These counts concern Solution and the substantive proof sources only.
   sorry_count: 0
   sorry_in_definitions: 0
-  axioms: []
+  # Standard Lean axioms used by the audited results; no additional axioms.
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
 
 automation:
   methods:

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; navigate-to 'self'">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script defer src="../palomar-sanitize.js"></script>
+    <script defer src="../palomar-verso.js"></script>
+    
+    
+    <title>Challenge</title><link rel="icon" href="#">
+    
+    
+    
+    <style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><link rel="stylesheet" href="../tippy-border.css">
+    <link rel="stylesheet" href="../code.css">
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="../-verso-search/search-box.css">
+    <link rel="stylesheet" href="../-verso-search/search-page.css">
+    <link rel="stylesheet" href="../-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="../-verso-search/domain-display.css">
+    
+        <style id="palomar-declaration-style">
+      /* The registry page that frames this document follows the browser's
+         light and dark preference, so this document has to follow with it.
+         Nothing is passed across the origin boundary to make that happen: the
+         frame is laid out by the same browser, so the query below answers the
+         same way the page's does.
+
+         Verso's stylesheets name light colours directly, and a published
+         bundle is immutable, so the answers are frozen here as a palette
+         rather than read from the page. The dark values are the page's own, so
+         the frame sits on the paper it is drawn on. Every rule below this block
+         spends a token, never a literal.
+
+         The light values are Verso's own wherever a reader meets them: the
+         code surface, the docstring frames, the signature popup and the tactic
+         marks all render exactly as before. Where Verso reached for a colour
+         off its own scale — `black` popup borders, a `red` error underline,
+         `#e5e5e5` message panels, Bootstrap greys in the page shell — the
+         token takes over and light shifts a shade. Those are the diagnostic
+         panels and the shell a reader sees only with scripts disabled.
+         Carrying a second light value for each of them would have doubled a
+         palette that every future bundle is stuck with, to preserve choices
+         that were incidental. */
+      :root {
+        color-scheme: light dark;
+        --palomar-paper: #ffffff;
+        --palomar-ink: #24292e;
+        --palomar-line: #dddddd;
+        --palomar-edge: #888888;
+        --palomar-raise: #eeeeee;
+        --palomar-panel: #ffffff;
+        --palomar-rule: #e1e4e8;
+        --palomar-link: #0066cc;
+        --palomar-alarm: #b42318;
+        --palomar-alarm-paper: #ffb3b3;
+        --palomar-info: #4777ff;
+        --palomar-info-paper: #4777ff;
+        --palomar-mark: #bbbbbb;
+        --palomar-mark-on: #999999;
+        --palomar-shadow: rgb(0 0 0 / 22%);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --palomar-paper: #101216;
+          --palomar-ink: #e8eaee;
+          --palomar-line: #686f7c;
+          --palomar-edge: #8e96a3;
+          --palomar-raise: #242933;
+          --palomar-panel: #1c2027;
+          --palomar-rule: #3a404b;
+          --palomar-link: #8ab4f8;
+          --palomar-alarm: #ff9e91;
+          --palomar-alarm-paper: #3a1c1a;
+          --palomar-info: #8ab4f8;
+          --palomar-info-paper: #1c3a6b;
+          --palomar-mark: #686f7c;
+          --palomar-mark-on: #8e96a3;
+          --palomar-shadow: rgb(0 0 0 / 55%);
+        }
+      }
+      html { height: auto !important; min-height: 100%; overflow: auto !important;
+        overscroll-behavior: contain; }
+      body { height: auto !important; min-height: 100%; margin: 0;
+        overflow: visible !important; }
+      html, body { background: var(--palomar-paper); color: var(--palomar-ink); }
+      .palomar-declaration-surface { box-sizing: border-box; padding: 1rem; }
+      .palomar-declaration-surface .code-content { margin: 0; max-width: none; padding: 0; }
+      .palomar-declaration-surface .md-text::before,
+      .palomar-declaration-surface .md-text::after { width: max-content; white-space: nowrap; }
+      /* code.css paints the code surface and its docstring frames outright,
+         and this stylesheet is the last one in the head, so restating them at
+         equal specificity is enough to take them over. */
+      .code-content { background: var(--palomar-paper); color: var(--palomar-ink); }
+      .code-content .verso-text,
+      .code-content .md-text { border-color: var(--palomar-line); }
+      /* Each of these repeats a Verso selector exactly rather than writing a
+         shorter one that happens to reach the same elements. `:has()` and
+         `:not()` take the specificity of their argument, so a hand-shortened
+         selector loses to the original and the rule silently does nothing;
+         repeating it makes source order the only thing that decides, and this
+         stylesheet is last. */
+      @media (hover: hover) {
+        .hl.lean .token.binding-hl,
+        .hl.lean .literal:hover,
+        .hl.lean .token.typed:hover { background-color: var(--palomar-raise); }
+        .hl.lean .has-info.error:hover { background-color: var(--palomar-alarm-paper); }
+        .hl.lean .has-info.information:hover { background-color: var(--palomar-info-paper); }
+        .hl.lean .tactic:has(> .tactic-toggle:not(:checked))
+          > label:hover:not(:has(.tactic > label:hover)) {
+          background-color: var(--palomar-raise); }
+      }
+      .hl.lean .token .hover-info,
+      .hl.lean .has-info .hover-info { background-color: var(--palomar-panel);
+        border-color: var(--palomar-edge); }
+      .hl.lean .hover-info code { color: inherit; }
+      .hl.lean .hover-info .sep { border-top-color: var(--palomar-rule); }
+      .hl.lean .hover-info.messages > code.error { background-color: var(--palomar-panel);
+        border-left-color: var(--palomar-alarm); }
+      .hl.lean .hover-info.messages > code.information { background-color: var(--palomar-panel);
+        border-left-color: var(--palomar-info); }
+      .hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *) {
+        text-decoration-color: var(--palomar-alarm); }
+      /* Verso's own fallback here is the keyword `blue`, which on dark paper is
+         an underline nobody can see. */
+      .hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+        text-decoration-color: var(--palomar-info); }
+      .hl.lean .tactic-state { background-color: var(--palomar-panel);
+        border-color: var(--palomar-edge); }
+      .hl.lean.popup .tactic-state { background-color: var(--palomar-panel); }
+      /* The pill that says a tactic block can be opened, and the triangle that
+         says a case can. Verso draws the pill faintly on purpose, so the two
+         marks keep their own tokens rather than borrowing the border ones; the
+         triangle it draws in `black`, which is text, so it spends the ink. */
+      .hl.lean .tactic > label::after { border-color: var(--palomar-mark); }
+      .hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+        border-color: var(--palomar-mark-on); background-color: var(--palomar-mark-on); }
+      .hl.lean .case-label:has(input[type="checkbox"])::before {
+        background-color: var(--palomar-ink); }
+      .palomar-hover {
+        padding: .65rem !important; border: 1px solid var(--palomar-edge) !important;
+        border-radius: .35rem; background: var(--palomar-panel) !important;
+        color: var(--palomar-ink) !important;
+        box-shadow: 0 .25rem 1rem var(--palomar-shadow);
+        /* The pointer must never land on the popup. If it does, it has left
+           the token, so the popup hides, so the pointer is over the token
+           again, so it shows: a flicker that sustains itself. */
+        pointer-events: none;
+        /* Lean signatures are long and were being cut off inside a 400px box.
+           Wrap them instead, and only where they can be broken. */
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+      .palomar-hover .hl.lean, .palomar-hover .popup,
+      .palomar-hover .hover-info { white-space: pre-wrap; }
+      .palomar-hover .popup,
+      .palomar-hover .hover-info,
+      .palomar-hover .docstring { background: var(--palomar-panel) !important;
+        color: var(--palomar-ink) !important; }
+      /* Verso separates a signature from its docstring with an empty span and
+         leaves the spacing to a stylesheet we do not ship, so the two ran
+         together: "... : Type (max u_7 u_8)The standard real/complex Euclidean
+         space ...". The docstring is also still an inline <code>, because the
+         Markdown renderer that would have made it a block is not loaded here. */
+      .palomar-hover .sep { display: block; height: 0; }
+      .palomar-hover .docstring {
+        display: block;
+        margin-top: .55rem;
+        padding-top: .55rem;
+        border-top: 1px solid var(--palomar-rule);
+      }
+      .palomar-render-error { margin: 1rem; font-family: sans-serif; }
+      /* Verso's page shell, which a reader sees only where this document's
+         scripts do not run: the runtime replaces the whole body on both its
+         success and its failure path. It is answered broadly rather than rule
+         by rule, because normalising a shell nobody reaches is not worth
+         freezing a dozen more declarations into every published bundle. */
+      .sidebar { background: var(--palomar-raise); }
+      .title-bar, .hamburger { background: var(--palomar-paper); }
+      .sidebar, .title-bar, .hamburger { border-color: var(--palomar-line); }
+      .hamburger span { background: var(--palomar-ink); }
+      .module-tree summary a, .module-tree .leaf a,
+      .breadcrumbs a { color: var(--palomar-link); }
+      .module-tree summary:hover,
+      .breadcrumbs a:hover { background-color: var(--palomar-raise); }
+      .module-tree summary::before { color: var(--palomar-ink); }
+      .module-tree summary.current,
+      .module-tree .current { background-color: var(--palomar-link);
+        color: var(--palomar-paper); }
+      .module-tree summary.current a,
+      .module-tree .current a { color: var(--palomar-paper); }
+      .breadcrumbs .current,
+      .breadcrumbs li:not(:last-child)::after { color: var(--palomar-ink); }
+    </style>
+  </head>
+  <body data-palomar-declarations="[&quot;RerandomizedSTT.problem_5_6&quot;]">
+    <a href="#main-content" class="skip-link">Skip to content</a><input type="checkbox" id="menu-toggle" class="menu-toggle" role="button" aria-label="Menu"><label for="menu-toggle" class="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></label><div class="layout">
+      <aside class="sidebar"><div class="sidebar-content">
+          <nav class="module-tree" aria-label="Module navigation">
+            <div class="nav-title current">
+              <a href="../Challenge/" title="Challenge" class="">Challenge</a></div>
+            </nav>
+          </div>
+        </aside><main class="main-area" id="main-content"><header class="title-bar">
+          <ol class="breadcrumbs" aria-label="Breadcrumb">
+            <li>
+              <span class="current"><code>Challenge</code></span></li>
+            </ol>
+          </header>
+        <div class="content-wrapper">
+          <section class="code-content" id="Challenge">
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Module.import-0">import</span><span class="inter-text"> </span><span class="module-name token" data-binding="module-name-Mathlib.Analysis.CStarAlgebra.Matrix">Mathlib.Analysis.CStarAlgebra.Matrix</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Module.import-44">import</span><span class="inter-text"> </span><span class="module-name token" data-binding="module-name-Mathlib.Analysis.SpecialFunctions.Log.Base">Mathlib.Analysis.SpecialFunctions.Log.Base</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Module.import-94">import</span><span class="inter-text"> </span><span class="module-name token" data-binding="module-name-Mathlib.Data.ZMod.Basic">Mathlib.Data.ZMod.Basic</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Module.import-125">import</span><span class="inter-text"> </span><span class="module-name token" data-binding="module-name-Mathlib.Data.Fintype.BigOperators">Mathlib.Data.Fintype.BigOperators</span></code><div class="md-text mod-doc" id="mod-doc-Challenge-1-0">
+              <h2 id="Rerandomized-subsampled-trigonometric-transforms___-the-Walsh-case">
+                Rerandomized subsampled trigonometric transforms: the Walsh case</h2>
+              <p>
+                This statement answers the two-round real Walsh case of Problem 5.6 in
+https://arxiv.org/abs/2602.05394v3. Its probability is a literal uniform finite
+average over two independent sign assignments and a set of distinct rows.
+The one intentional proof hole is the declaration that Comparator checks
+against the complete proof in <code>Solution.lean</code>.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.namespace-588" data-verso-hover="0">namespace</span><span class="inter-text"> </span><span class="unknown token" data-binding="">RerandomizedSTT</span></code><code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.sectionHeader-614">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.section-614" data-verso-hover="1">section</span></code><code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.open-636" data-verso-hover="2">open</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.openScoped-641">scoped</span><span class="inter-text"> </span><span class="unknown token" data-binding="">BigOperators</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The binary group indexing the <code>n = 2^k</code> rows and columns of the Walsh matrix.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.abbrev-747">abbrev</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3" id="RerandomizedSTT___Index">Index</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-760">(</span><span class="var token" data-binding="var-_uniq.6" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-760">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-760">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-770">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-773">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-ZMod" data-verso-hover="7">ZMod</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span></code><code class="hl lean block" data-lean-context="lean"><span class="comment delimiter token" data-binding="">--</span><span class="comment line token" data-binding=""> Name the existing enumeration so the rendering audit need not unfold it.</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.instance-867">instance</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.indexFintype" data-verso-hover="8" id="RerandomizedSTT___indexFintype">indexFintype</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-889">(</span><span class="var token" data-binding="var-_uniq.30" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-889">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-889">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-899">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fintype" data-verso-hover="9">Fintype</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-909">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.30" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-909">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-919">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-inferInstance" data-verso-hover="10">inferInstance</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                One independent fair bit per diagonal entry; a bit represents a sign.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.abbrev-1014">abbrev</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11" id="RerandomizedSTT___Signs">Signs</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1027">(</span><span class="var token" data-binding="var-_uniq.101" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1027">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1027">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1037">:=</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.101" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1040">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-ZMod" data-verso-hover="7">ZMod</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The real sign represented by a bit: zero is <code>+1</code>, one is <code>-1</code>.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="comment delimiter token" data-binding="">--</span><span class="comment line token" data-binding=""> Name the canonical ring operations explicitly: proof-only imports may also</span><span class="inter-text">
+</span><span class="comment delimiter token" data-binding="">--</span><span class="comment line token" data-binding=""> expose a field instance on `ZMod 2`, which must not change the exported terms.</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1290">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.sign" data-verso-hover="12" id="RerandomizedSTT___sign">sign</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1299">(</span><span class="var token" data-binding="var-_uniq.134" data-verso-hover="13">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1299">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-ZMod" data-verso-hover="7">ZMod</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1299">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1312">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1318">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-1321" data-verso-hover="15">if</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.134" data-verso-hover="13">b</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1324">=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1328">(</span><span class="const token" data-binding="const-ZMod.commRing" data-verso-hover="16">ZMod.commRing</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1328">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Zero.zero" data-verso-hover="17">zero</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-1321" data-verso-hover="15">then</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-1321" data-verso-hover="15">else</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-1363">-</span><span class="literal number token" data-binding="" data-verso-hover="18">1</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The normalized Walsh matrix, with entries <code>n^(-1/2) (-1)^(a dot b)</code>.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1443">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.hadamard" data-verso-hover="19" id="RerandomizedSTT___hadamard">hadamard</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1456">(</span><span class="var token" data-binding="var-_uniq.223" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1456">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1456">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1466">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1475">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.223" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1475">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1485">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.223" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1485">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1499">:=</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-1504">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.233" data-verso-hover="21">a</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.237" data-verso-hover="21">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-1508">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1515">(</span><span class="const token" data-binding="const-Real.sqrt" data-verso-hover="22">Real.sqrt</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1526">(</span><span class="const token" data-binding="const-Fintype.card" data-verso-hover="23">Fintype.card</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1540">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.223" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1540">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1526">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1526">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1515">)</span><span class="punctuation operator token" data-binding="kw-occ-«term_⁻¹»-1515">⁻¹</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1515">*</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∏</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.624" data-verso-hover="24">i</span><span class="punctuation separator token" data-binding="kw-occ-BigOperators.bigprod-1569">,</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sign" title="Definition of `RerandomizedSTT.sign`"><span class="const token" data-binding="const-RerandomizedSTT.sign" data-verso-hover="12">sign</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1581">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1582">(</span><span class="const token" data-binding="const-ZMod.commRing" data-verso-hover="16">ZMod.commRing</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1582">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Mul.mul" data-verso-hover="25">mul</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1604">(</span><span class="var token" data-binding="var-_uniq.233" data-verso-hover="21">a</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.624" data-verso-hover="24">i</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1604">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1610">(</span><span class="var token" data-binding="var-_uniq.237" data-verso-hover="21">b</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.624" data-verso-hover="24">i</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1610">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1581">)</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The two-round matrix <code>H D_y H D_x</code>; each diagonal entry is a real sign.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1697">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.rerandomized" data-verso-hover="26" id="RerandomizedSTT___rerandomized">rerandomized</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1714">{</span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1714">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1714">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1724">(</span><span class="var token" data-binding="var-_uniq.710" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.714" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1724">:</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1724">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1740">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1749">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1749">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1759">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1759">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1773">:=</span><span class="inter-text">
+  </span><a href="../Challenge/#RerandomizedSTT___hadamard" title="Definition of `RerandomizedSTT.hadamard`"><span class="const token" data-binding="const-RerandomizedSTT.hadamard" data-verso-hover="19">hadamard</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1778">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix.diagonal" data-verso-hover="28">Matrix.diagonal</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1807">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-1808">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.757" data-verso-hover="21">i</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-1812">=&gt;</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sign" title="Definition of `RerandomizedSTT.sign`"><span class="const token" data-binding="const-RerandomizedSTT.sign" data-verso-hover="12">sign</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1822">(</span><span class="var token" data-binding="var-_uniq.714" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.757" data-verso-hover="21">i</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1822">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1807">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1778">*</span><span class="inter-text">
+    </span><a href="../Challenge/#RerandomizedSTT___hadamard" title="Definition of `RerandomizedSTT.hadamard`"><span class="const token" data-binding="const-RerandomizedSTT.hadamard" data-verso-hover="19">hadamard</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.708" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1778">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix.diagonal" data-verso-hover="28">Matrix.diagonal</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1864">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-1865">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.942" data-verso-hover="21">i</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-1869">=&gt;</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sign" title="Definition of `RerandomizedSTT.sign`"><span class="const token" data-binding="const-RerandomizedSTT.sign" data-verso-hover="12">sign</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1879">(</span><span class="var token" data-binding="var-_uniq.710" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.942" data-verso-hover="21">i</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1879">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1864">)</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                All sets of exactly <code>M</code> distinct row labels, sampled uniformly below.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1964">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29" id="RerandomizedSTT___Rows">Rows</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1973">(</span><span class="var token" data-binding="var-_uniq.1101" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1103" data-verso-hover="4">M</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1973">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1973">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1985">:=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-1988">{</span><span class="var token" data-binding="var-_uniq.1118" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-«term{_:_//_}»-1988">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Finset" data-verso-hover="31">Finset</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2000">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1101" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2000">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term{_:_//_}»-1988">//</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1118" data-verso-hover="30">T</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Finset.card" data-verso-hover="32">card</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2013">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1103" data-verso-hover="4">M</span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-1988">}</span></code><code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.instance-2026">instance</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2035">(</span><span class="var token" data-binding="var-_uniq.1136" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2035">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2035">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2047">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fintype" data-verso-hover="9">Fintype</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2057">(</span><a href="../Challenge/#RerandomizedSTT___Rows" title="Definition of `RerandomizedSTT.Rows`"><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29">Rows</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1136" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2057">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2068">:=</span><span class="inter-text"> </span><span class="tactic"><label for="tactic-state-12246502936583867568-2071-2073-0"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-2071" data-verso-hover="33">by</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-12246502936583867568-2071-2073-0"><span class="tactic-state"><span class="goal"><span class="hypotheses"><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.1136" data-verso-hover="4">k</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span></span><span class="conclusion"><span class="prefix">⊢ </span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Fintype" data-verso-hover="9">Fintype</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><a href="../Challenge/#RerandomizedSTT___Rows" title="Definition of `RerandomizedSTT.Rows`"><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29">Rows</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1136" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span><span class="unknown token" data-binding="">)</span></span></span></span></span></span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.classical-2074" data-verso-hover="34">classical</span><span class="inter-text"> </span><span class="tactic"><label for="tactic-state-4828416345268935754-2084-2095-2"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.unfold-2084" data-verso-hover="35">unfold</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Rows" title="Definition of `RerandomizedSTT.Rows`"><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29">Rows</span></a></label><input type="checkbox" class="tactic-toggle" id="tactic-state-4828416345268935754-2084-2095-2"><span class="tactic-state"><span class="goal"><span class="hypotheses"><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.1136" data-verso-hover="4">k</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span></span><span class="conclusion"><span class="prefix">⊢ </span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Fintype" data-verso-hover="9">Fintype</span><span class="inter-text"> </span><span class="const token" data-binding="const-Subtype" data-verso-hover="36">{</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1187" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="const token" data-binding="const-Subtype" data-verso-hover="36">//</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1187" data-verso-hover="30">T</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Finset.card" data-verso-hover="32">card</span><span class="inter-text"> </span><span class="const token" data-binding="const-Eq" data-verso-hover="37">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1138" data-verso-hover="4">M</span><span class="inter-text"> </span><span class="const token" data-binding="const-Subtype" data-verso-hover="36">}</span></span></span></span></span></span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Tactic.tacticSeq1Indented-2084">;</span><span class="inter-text"> </span><span class="tactic"><label for="tactic-state-7-2097-2111-4"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticInfer_instance-2097" data-verso-hover="38">infer_instance</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-7-2097-2111-4"><span class="tactic-state">All goals completed! 🐙</span></span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The literal matrix <code>sqrt(n/M) R H D_y H D_x U</code>, indexed by its selected rows.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2198">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.selectedFrame" data-verso-hover="39" id="RerandomizedSTT___selectedFrame">selectedFrame</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2216">{</span><span class="var token" data-binding="var-_uniq.1205" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1207" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2216">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2216">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2228">(</span><span class="var token" data-binding="var-_uniq.1212" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2228">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2240">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1205" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2240">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2250">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1207" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2250">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2228">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2267">(</span><span class="var token" data-binding="var-_uniq.1214" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1218" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2267">:</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1205" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2267">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2283">(</span><span class="var token" data-binding="var-_uniq.1223" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2283">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Finset" data-verso-hover="31">Finset</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2295">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1205" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2295">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2283">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2306">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1223" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2317">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1207" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2317">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2329">:=</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-2334">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1451" data-verso-hover="41">j</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1454" data-verso-hover="42">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-2338">=&gt;</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.sqrt" data-verso-hover="22">Real.sqrt</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2355">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2356">(</span><span class="const token" data-binding="const-Fintype.card" data-verso-hover="23">Fintype.card</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2370">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1205" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2370">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2356">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2356">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2356">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1223" data-verso-hover="30">T</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Finset.card" data-verso-hover="32">card</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2355">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2345">*</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2403">(</span><a href="../Challenge/#RerandomizedSTT___rerandomized" title="Definition of `RerandomizedSTT.rerandomized`"><span class="const token" data-binding="const-RerandomizedSTT.rerandomized" data-verso-hover="26">rerandomized</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1214" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1218" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2404">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1212" data-verso-hover="40">U</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2403">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1451" data-verso-hover="41">j</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-2426">.</span><span class="const token" data-binding="const-Subtype.val" data-verso-hover="43">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1454" data-verso-hover="42">b</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                Simultaneous squared Euclidean norm preservation of every vector in the frame.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2519">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.Embeds" data-verso-hover="44" id="RerandomizedSTT___Embeds">Embeds</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">{</span><span class="var token" data-binding="var-_uniq.3076" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3078" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">(</span><span class="var token" data-binding="var-_uniq.3083" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2554">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3076" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2554">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2564">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3078" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2564">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2581">(</span><span class="var token" data-binding="var-_uniq.3085" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3089" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2581">:</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3076" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2581">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2597">(</span><span class="var token" data-binding="var-_uniq.3094" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2597">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Finset" data-verso-hover="31">Finset</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2609">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3076" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2609">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2597">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2620">(</span><span class="var token" data-binding="var-_uniq.3096" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2620">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2620">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2631">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="45">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2638">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3113" data-verso-hover="46">v</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2649">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-EuclideanSpace" data-verso-hover="47">EuclideanSpace</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2670">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3078" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2670">)</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2643">,</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.let-2683" data-verso-hover="48">let</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3522" data-verso-hover="49">w</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2689">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-EuclideanSpace" data-verso-hover="47">EuclideanSpace</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3094" data-verso-hover="30">T</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.letIdDecl-2687">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-WithLp.toLp" data-verso-hover="50">WithLp.toLp</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="51">2</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2729">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2730">(</span><a href="../Challenge/#RerandomizedSTT___selectedFrame" title="Definition of `RerandomizedSTT.selectedFrame`"><span class="const token" data-binding="const-RerandomizedSTT.selectedFrame" data-verso-hover="39">selectedFrame</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3083" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3085" data-verso-hover="27">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3089" data-verso-hover="27">y</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3094" data-verso-hover="30">T</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2730">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Matrix.mulVec" data-verso-hover="52">mulVec</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2761">(</span><span class="const token" data-binding="const-WithLp.ofLp" data-verso-hover="53">WithLp.ofLp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3113" data-verso-hover="46">v</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2761">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2729">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2782">(</span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2783">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3096" data-verso-hover="18">ε</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2782">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2782">*</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.3113" data-verso-hover="46">v</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2793">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-2782">≤</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.3522" data-verso-hover="49">w</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2809">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-2782">∧</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.3522" data-verso-hover="49">w</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2825">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-2825">≤</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2841">(</span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2842">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3096" data-verso-hover="18">ε</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2841">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2841">*</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.3113" data-verso-hover="46">v</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2852">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The fraction of all triples <code>(x,y,T)</code> satisfying <code>Embeds</code>: independent uniform
+signs and uniform sampling without replacement, with no unspecified probability law.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3036">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.successProbability" data-verso-hover="54" id="RerandomizedSTT___successProbability">successProbability</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3059">{</span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6849" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3059">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3059">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3071">(</span><span class="var token" data-binding="var-_uniq.6854" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3071">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3083">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3083">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3093">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6849" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3093">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3071">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3110">(</span><span class="var token" data-binding="var-_uniq.6856" data-verso-hover="4">M</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3110">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3110">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3120">(</span><span class="var token" data-binding="var-_uniq.6858" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3120">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3120">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3131">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3137">:=</span><span class="inter-text"> </span><span class="tactic"><label for="tactic-state-8023924848213058345-3140-3142-5"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-3140" data-verso-hover="33">by</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-8023924848213058345-3140-3142-5"><span class="tactic-state"><span class="goal"><span class="hypotheses"><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.6849" data-verso-hover="4">d</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.6854" data-verso-hover="40">U</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6849" data-verso-hover="4">d</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.6856" data-verso-hover="4">M</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.6858" data-verso-hover="18">ε</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"></span></span></span></span><span class="conclusion"><span class="prefix">⊢ </span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"></span></span></span></span></span></span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.classical-3145" data-verso-hover="34">classical</span><span class="inter-text">
+  </span><span class="tactic"><label for="tactic-state-7-3157-3323-7"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-3157" data-verso-hover="55">exact</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3163">(</span><span class="unknown token" data-binding="">∑</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="56">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-3170">:</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_×_»-3172">×</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3183">(</span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_×_»-3184">×</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Rows" title="Definition of `RerandomizedSTT.Rows`"><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29">Rows</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6856" data-verso-hover="4">M</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3183">)</span><span class="punctuation separator token" data-binding="kw-occ-BigOperators.bigsum-3164">,</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-3210" data-verso-hover="15">if</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Embeds" title="Definition of `RerandomizedSTT.Embeds`"><span class="const token" data-binding="const-RerandomizedSTT.Embeds" data-verso-hover="44">Embeds</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6854" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="56">z</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-3222">.</span><span class="const token" data-binding="const-Prod.fst" data-verso-hover="57">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="56">z</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-3226">.</span><span class="const token" data-binding="const-Prod.snd" data-verso-hover="58">2</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-3226">.</span><span class="const token" data-binding="const-Prod.fst" data-verso-hover="57">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="56">z</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-3232">.</span><span class="const token" data-binding="const-Prod.snd" data-verso-hover="58">2</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-3232">.</span><span class="const token" data-binding="const-Prod.snd" data-verso-hover="58">2</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Subtype.val" data-verso-hover="43">val</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6858" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-3210" data-verso-hover="15">then</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3250">(</span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3250">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3250">)</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-3210" data-verso-hover="15">else</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">0</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3163">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3163">/</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Fintype.card" data-verso-hover="23">Fintype.card</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3289">(</span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_×_»-3290">×</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3301">(</span><a href="../Challenge/#RerandomizedSTT___Signs" title="Definition of `RerandomizedSTT.Signs`"><span class="const token" data-binding="const-RerandomizedSTT.Signs" data-verso-hover="11">Signs</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_×_»-3302">×</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___Rows" title="Definition of `RerandomizedSTT.Rows`"><span class="const token" data-binding="const-RerandomizedSTT.Rows" data-verso-hover="29">Rows</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6847" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6856" data-verso-hover="4">M</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3301">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3289">)</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-7-3157-3323-7"><span class="tactic-state">All goals completed! 🐙</span></span></code><div class="md-text " style="--indent: 0">
+              <p>
+                The explicit row count: <code>min(n, ceil(8192 (d + 27 q^3) / ε^2))</code>,
+where <code>q = ceil(log_4(4d/δ))</code>. Sampling every row is allowed when this saturates.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3481">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59" id="RerandomizedSTT___sampleSize">sampleSize</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3496">(</span><span class="var token" data-binding="var-_uniq.7477" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7479" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3496">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3496">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3508">(</span><span class="var token" data-binding="var-_uniq.7481" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7483" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3508">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3508">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3522">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3528">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Min.min" data-verso-hover="60">min</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3537">(</span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3538">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7477" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3537">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Nat.«term⌈_⌉₊»-3545">⌈</span><span class="literal number token" data-binding="" data-verso-hover="18">8192</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3548">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3555">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3556">(</span><span class="var token" data-binding="var-_uniq.7479" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3557">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">27</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3561">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Nat.«term⌈_⌉₊»-3566">⌈</span><span class="const token" data-binding="const-Real.logb" data-verso-hover="61">Real.logb</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">4</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3581">(</span><span class="literal number token" data-binding="" data-verso-hover="18">4</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3582">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3586">(</span><span class="var token" data-binding="var-_uniq.7479" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3586">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3586">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3582">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7483" data-verso-hover="18">δ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3581">)</span><span class="unknown token" data-binding="">⌉₊</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3566">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">3</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3556">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3556">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3555">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3555">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3548">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7481" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3628">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="unknown token" data-binding="">⌉₊</span></code><div class="md-text " style="--indent: 0">
+              <p>
+                For every fixed real orthonormal frame in a Walsh space of order <code>2^k</code>,
+two independent sign rounds followed
+by uniform distinct-row sampling give an OSE with probability at least <code>1-δ</code>.
+The explicit row budget is at most <code>C(δ) d/ε²</code>, independent of the ambient size;
+thus any fixed <code>0&lt;δ&lt;1/2</code> gives the dimension dependence asked for in Problem 5.6.</p>
+              </div>
+            <code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4004">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-RerandomizedSTT.problem_5_6" data-verso-hover="62" id="RerandomizedSTT___problem_5_6">problem_5_6</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4024">{</span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4024">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4024">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4036">(</span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4036">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4048">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4048">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4058">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4058">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4036">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4075">(</span><span class="var token" data-binding="var-_uniq.12163" data-verso-hover="63">hU</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4075">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Matrix.transpose" data-verso-hover="64">transpose</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4081">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4081">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="65">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4075">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4102">(</span><span class="var token" data-binding="var-_uniq.12218" data-verso-hover="66">hd</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4102">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4108">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4102">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4117">(</span><span class="var token" data-binding="var-_uniq.12293" data-verso-hover="67">hdn</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4117">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4124">≤</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4130">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4117">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4141">(</span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4141">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4141">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4155">(</span><span class="var token" data-binding="var-_uniq.12358" data-verso-hover="68">hε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4155">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_&lt;_»-4162">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4155">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4170">(</span><span class="var token" data-binding="var-_uniq.12403" data-verso-hover="69">hε1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4170">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_&lt;_»-4178">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4170">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4186">(</span><span class="var token" data-binding="var-_uniq.12450" data-verso-hover="70">hδ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4186">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_&lt;_»-4193">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4186">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4201">(</span><span class="var token" data-binding="var-_uniq.12579" data-verso-hover="71">hδ1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4201">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_&lt;_»-4209">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4214">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4201">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4221">:</span><span class="inter-text">
+    </span><span class="literal number token" data-binding="" data-verso-hover="4">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4227">≤</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4227">∧</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4258">≤</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4283">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4258">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4297">(</span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4297">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4297">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4297">≤</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4330">(</span><span class="literal number token" data-binding="" data-verso-hover="18">8192</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4331">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4338">(</span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4339">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">432</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4343">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4338">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4331">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4330">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4330">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4360">(</span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4360">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4360">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4330">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4372">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="4">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4297">∧</span><span class="inter-text">
+    </span><span class="literal number token" data-binding="" data-verso-hover="18">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4387">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4387">≤</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___successProbability" title="Definition of `RerandomizedSTT.successProbability`"><span class="const token" data-binding="const-RerandomizedSTT.successProbability" data-verso-hover="54">successProbability</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4419">(</span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4419">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-4445">:=</span><span class="inter-text"> </span><span class="tactic"><label for="tactic-state-9892548221723187870-4448-4450-8"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-4448" data-verso-hover="33">by</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-9892548221723187870-4448-4450-8"><span class="tactic-state"><span class="goal"><span class="hypotheses"><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Nat" data-verso-hover="5">ℕ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Matrix" data-verso-hover="20">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><a href="../Challenge/#RerandomizedSTT___Index" title="Definition of `RerandomizedSTT.Index`"><span class="const token" data-binding="const-RerandomizedSTT.Index" data-verso-hover="3">Index</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12163" data-verso-hover="63">hU</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"></span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Matrix.transpose" data-verso-hover="64">transpose</span><span class="inter-text"> </span><span class="const token" data-binding="const-HMul.hMul" data-verso-hover="72">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="const token" data-binding="const-Eq" data-verso-hover="37">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12218" data-verso-hover="66">hd</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12293" data-verso-hover="67">hdn</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="inter-text"> </span><span class="const token" data-binding="const-HPow.hPow" data-verso-hover="74">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="const token" data-binding="const-Real" data-verso-hover="14">ℝ</span><span class="inter-text"></span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12358" data-verso-hover="68">hε</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="const token" data-binding="const-LT.lt" data-verso-hover="75">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12403" data-verso-hover="69">hε1</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="const token" data-binding="const-LT.lt" data-verso-hover="75">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12450" data-verso-hover="70">hδ</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="const token" data-binding="const-LT.lt" data-verso-hover="75">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span></span></span><span class="hypothesis"><span class="name"><span class="var token" data-binding="var-_uniq.12579" data-verso-hover="71">hδ1</span></span><span class="colon">:</span><span class="type"><span class="inter-text"></span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="const token" data-binding="const-LT.lt" data-verso-hover="75">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">/</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span></span></span></span><span class="conclusion"><span class="prefix">⊢ </span><span class="type"><span class="inter-text"></span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="const token" data-binding="const-And" data-verso-hover="76">∧</span><span class="inter-text">
+  </span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="inter-text"> </span><span class="const token" data-binding="const-HPow.hPow" data-verso-hover="74">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="const token" data-binding="const-And" data-verso-hover="76">∧</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">↑</span><span class="unknown token" data-binding="">(</span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">(</span><span class="unknown token" data-binding="">8192</span><span class="inter-text"> </span><span class="const token" data-binding="const-HMul.hMul" data-verso-hover="72">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">(</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">432</span><span class="inter-text"> </span><span class="const token" data-binding="const-HDiv.hDiv" data-verso-hover="78">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="const token" data-binding="const-HAdd.hAdd" data-verso-hover="77">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-HMul.hMul" data-verso-hover="72">*</span><span class="inter-text"> </span><span class="unknown token" data-binding="">↑</span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="const token" data-binding="const-HDiv.hDiv" data-verso-hover="78">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="const token" data-binding="const-HPow.hPow" data-verso-hover="74">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="inter-text"> </span><span class="const token" data-binding="const-And" data-verso-hover="76">∧</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="const token" data-binding="const-HSub.hSub" data-verso-hover="79">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="inter-text"> </span><span class="const token" data-binding="const-LE.le" data-verso-hover="73">≤</span><span class="inter-text"> </span><a href="../Challenge/#RerandomizedSTT___successProbability" title="Definition of `RerandomizedSTT.successProbability`"><span class="const token" data-binding="const-RerandomizedSTT.successProbability" data-verso-hover="54">successProbability</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10874" data-verso-hover="40">U</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><a href="../Challenge/#RerandomizedSTT___sampleSize" title="Definition of `RerandomizedSTT.sampleSize`"><span class="const token" data-binding="const-RerandomizedSTT.sampleSize" data-verso-hover="59">sampleSize</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10867" data-verso-hover="4">k</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10869" data-verso-hover="4">d</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12297" data-verso-hover="18">δ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12295" data-verso-hover="18">ε</span></span></span></span></span></span><span class="inter-text">
+  </span><span class="tactic"><label for="tactic-state-7-4453-4458-10"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticSorry-4453" data-verso-hover="80">sorry</span></label><input type="checkbox" class="tactic-toggle" id="tactic-state-7-4453-4458-10"><span class="tactic-state">All goals completed! 🐙</span></span></code><code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.end-4460" data-verso-hover="81">end</span></code><code class="hl lean block" data-lean-context="lean"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.end-4464" data-verso-hover="81">end</span><span class="inter-text"> </span><span class="unknown token" data-binding="">RerandomizedSTT</span></code></section>
+          </div>
+        </main></div>
+    </body>
+  </html>

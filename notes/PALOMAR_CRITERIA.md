@@ -6,6 +6,34 @@ inspected on 9 September 2026. Each Palomar submission uses the policy and
 verifier active when submitted; this document records the preparation basis
 and observed status, not an acceptance decision.
 
+## Latest submission status
+
+**Official mechanical verification and full Challenge rendering passed** for
+the latest submitted snapshot `d98e7f29472bf79e350712f710b5c19be7f8db76`.
+It was submitted on 9 September 2026 at 20:04:13 UTC. Palomar's official
+mechanical run `34398823705` succeeded at 20:13:04 UTC: its artifact reports
+`pass`, empty errors and warnings, and acceptance by both NanoDa and Lean
+replay. The
+[official verification record](../verification/palomar/34398823705/README.md)
+preserves that evidence for this exact commit.
+
+The rendering request was recorded at 20:29:35 UTC;
+[workflow 34401370525](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34401370525)
+started at 20:29:44 UTC. The submitter withdrew the submission at 20:30:38 UTC
+during environment setup. The build, sanitation, and hashing stage began at
+20:32:49 UTC, and the workflow completed successfully with its artifact
+uploaded by 20:36:43 UTC. The
+[official rendering record](../verification/renderability/server/34401370525/README.md)
+confirms the full Linux pipeline, including the core-notation audit, HTML
+generation, and sanitation. The submission remains withdrawn; completed
+automated review and registration are not established. The earlier `7686734`
+rendering failure concerns the historical source without the fix.
+
+The status page's estimate of about four minutes refers to recent automated
+reviews. It is not an end-to-end deadline: queueing, clean tool and dependency
+setup, Challenge rendering, and review occur separately. A rendering-in-progress
+message alone does not report a failure.
+
 The structured metadata passed the official PalomarSubmission metadata
 contract at revision `ef2fa1eadcb246c2346ddba39b52eaa53d4bb763`.
 [`verification/metadata-check.json`](../verification/metadata-check.json)
@@ -80,19 +108,25 @@ not repository dependencies and are discarded by Palomar verification.
    The [earlier successful run](../verification/ci/34373116757/README.md) checked
    commit `f813b5c3c14ddda0cd0dc429e657b0dbe6f94079` on 9 September 2026.
    The logs and tool revisions are preserved with each verification record.
-3. **Palomar mechanical verification and editorial review:** are server-side
+3. **Palomar mechanical verification and Challenge rendering:** are server-side
    outcomes tied to a public repository, exact commit, and selected
    configuration. Local checks do not constitute either outcome. The
-   submitter's status-page screenshot records mechanical verification success
-   for commit `76867341d4fe08702921aa12b88624ebb7831b4f` at 18:00:19 UTC on
-   9 September 2026. It subsequently records a Challenge-rendering retry at
-   19:14:51 UTC; it does not establish completion of automated review.
-4. **Registration:** follows the submitter's separate decision after review.
+   [latest official mechanical record](../verification/palomar/34398823705/README.md)
+   confirms success for `d98e7f29472bf79e350712f710b5c19be7f8db76`, including
+   NanoDa and Lean replay with no errors or warnings. The
+   [separate official rendering record](../verification/renderability/server/34401370525/README.md)
+   confirms full rendering success for that same commit. The earlier
+   rendering failure for `7686734` concerns the historical source without the
+   compatibility fix.
+4. **Automated review:** follows mechanical and rendering checks and is a
+   separate judgment. Its completion is not established for the withdrawn
+   submission by the successful records above.
+5. **Registration:** follows the submitter's separate decision after review.
    The observed submission status does not establish registration.
 
 ## Rendering compatibility update and submission snapshot
 
-The submitted snapshot `76867341d4fe08702921aa12b88624ebb7831b4f` contains the
+The historical snapshot `76867341d4fe08702921aa12b88624ebb7831b4f` contains the
 original Challenge. The [original rendering diagnosis](../verification/renderability/README.md)
 reproduced a failure in Palomar's core-notation audit: copying dependencies
 as opaque type proxies loses a definitional equality used by the inferred
@@ -118,13 +152,17 @@ keeps their evidence separate from the historical passing proof checks and
 the original failing rendering diagnostic. The fresh
 [Linux CI run](../verification/ci/34396410088/README.md) also passed Comparator,
 NanoDa, and Lean replay for source commit
-`261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. These successes do not establish a
-complete Palomar server rendering-gate pass or Palomar acceptance.
+`261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. The subsequent official
+Palomar run on `d98e7f29472bf79e350712f710b5c19be7f8db76` supplies the complete
+server rendering result separately. Neither proof checking nor rendering
+success establishes automated-review acceptance or registration.
 
-The status page records submission at 17:48:26 UTC on 9 September 2026 and
-selects the old exact commit. A push does not update that selected snapshot.
-To check the compatibility change, a submission must select the new public
-commit containing it. No automated-review acceptance or registration of the
+The corrected snapshot `d98e7f29472bf79e350712f710b5c19be7f8db76` has now been
+submitted and passed official mechanical verification and full rendering,
+as recorded above. That submission was withdrawn during rendering setup,
+before the successful rendering result arrived. Each
+submission selects an exact commit; a push does not replace the source of an
+existing submission. No automated-review acceptance or registration of the
 changed source is claimed.
 
 The metadata identifies the human author and maintainer, discloses substantive

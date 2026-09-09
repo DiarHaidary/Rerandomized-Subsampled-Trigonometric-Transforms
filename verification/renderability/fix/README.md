@@ -1,12 +1,40 @@
 # Applied Challenge rendering compatibility fix
 
+## Latest official submission
+
+**Official mechanical verification and full Challenge rendering passed** for
+corrected commit `d98e7f29472bf79e350712f710b5c19be7f8db76`. It was submitted
+on 9 September 2026 at 20:04:13 UTC. Palomar's mechanical run `34398823705`
+succeeded at 20:13:04 UTC. Its artifact reports `pass`, empty errors and
+warnings, and acceptance by NanoDa and Lean replay; the
+[official evidence](../../palomar/34398823705/README.md) is preserved separately
+from the local checks and repository CI below.
+
+The rendering request was recorded at 20:29:35 UTC;
+[workflow 34401370525](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34401370525)
+started at 20:29:44 UTC. The submitter withdrew this submission at
+20:30:38 UTC during environment setup. The build, sanitation, and hashing
+stage began at 20:32:49 UTC. The workflow completed successfully and uploaded
+its artifact by 20:36:43 UTC. The
+[official rendering evidence](../server/34401370525/README.md) records the
+full Linux rendering pipeline, including the core-notation audit, HTML
+generation, and sanitation. The submission remains withdrawn. No completed
+automated review or registration is claimed.
+
+The displayed estimate of about four minutes concerns recent automated
+reviews, not the combined time for queueing, setup, rendering, and review.
+The earlier rendering failure on `7686734` concerns the historical Challenge
+and must not be attributed to this corrected submission.
+
+## Applied source change
+
 Challenge and Solution now give the existing finite enumeration of `Index k`
 the name `indexFintype`. The instance is defined by `inferInstance`; it does not
 replace the enumeration, change the transform, or weaken the theorem.
 The selected theorem's documentation also explicitly identifies real Walsh
 space of order `2^k`, making its scope visible in Palomar's isolated display.
 
-## Confirmed server failure on the previous commit
+## Historical server failure on the original commit
 
 Palomar's [render run 34393234056](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34393234056)
 failed for commit `76867341d4fe08702921aa12b88624ebb7831b4f` with the same
@@ -45,12 +73,17 @@ for source commit `261302eb6c6d2c37f726e92801ff7f790e8dcbc1`.
 The [archived CI evidence](../../ci/34396410088/README.md) includes the exact
 committed source hashes. `local-checks.json` preserves the earlier local
 check's timing and the fact that CI was still pending when it was recorded.
-Neither record claims a complete Palomar server rendering pass, automated
-review, or registration.
+Those earlier records establish local and repository-CI results. The later
+official rendering record above establishes the complete Palomar server
+rendering pass for `d98e7f29472bf79e350712f710b5c19be7f8db76`; automated
+review and registration remain separate outcomes.
 
-## Existing Palomar submission
+## Submission snapshots
 
-The submission shown by the user is pinned to commit `7686734` and that
-commit's Challenge hash. A GitHub push cannot replace its source. A new
-submission must select the corrected full commit SHA and `comparator.json`.
-No submission was created, withdrawn, or registered by this change.
+The latest screenshot and official mechanical artifact concern corrected
+commit `d98e7f29472bf79e350712f710b5c19be7f8db76`, not the historical
+`7686734` submission. The latest submission was withdrawn by the submitter
+during rendering setup. A GitHub push cannot replace any submission's selected
+commit; any subsequent submission selects its own full public commit SHA and
+`comparator.json`. The source-code fix itself did not create, withdraw, or
+register a submission.

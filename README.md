@@ -1,5 +1,16 @@
 # Rerandomized Subsampled Trigonometric Transforms
 
+**Palomar mechanical verification and full Challenge rendering passed** for
+commit `d98e7f29472bf79e350712f710b5c19be7f8db76` on 9 September 2026.
+The [official mechanical record](verification/palomar/34398823705/README.md)
+reports no errors or warnings, with NanoDa and Lean replay accepted. The
+[official rendering record](verification/renderability/server/34401370525/README.md)
+confirms the complete Linux rendering pipeline, including the audit, HTML
+generation, and sanitation. The submitter withdrew this submission during
+rendering setup, before the successful rendering result arrived. The
+submission remains withdrawn; automated review completion and registration
+are not claimed.
+
 **Verified compatibility fix:** the complete Linux build, all 33 axiom
 audits, Comparator, NanoDa, and Lean's default kernel passed for source commit
 `261302eb6c6d2c37f726e92801ff7f790e8dcbc1`. The
@@ -15,9 +26,10 @@ dependency failure documented in the
 Fresh local checks pass: the complete Lean build, all 33 axiom audits, the
 proof-source scan, the trusted Verso literate build, and the unmodified
 official core-notation audit. Their evidence is recorded
-[separately](verification/renderability/fix/); the new Linux CI record above
-confirms Comparator and NanoDa for the changed sources. These checks do not
-establish a complete Palomar server rendering pass or acceptance.
+[separately](verification/renderability/fix/); the Linux CI record above
+confirms Comparator and NanoDa for the changed sources. The subsequent
+official Palomar run independently confirms full rendering. Automated review
+and registry acceptance remain separate outcomes.
 
 This repository contains the complete Lean proof development for two-round
 Walsh SRHT embedding bounds and a Palomar Challenge/Solution interface for
@@ -121,13 +133,17 @@ proof with NanoDa. Its report is separate from the ordinary Lean build.
 See [Palomar criteria and check status](notes/PALOMAR_CRITERIA.md) for the
 exact distinction between repository checks and registry review.
 
-The submitter's Palomar status page records a submission of commit
-`76867341d4fe08702921aa12b88624ebb7831b4f` on 9 September 2026 at 17:48:26 UTC,
-mechanical verification success at 18:00:19 UTC, and a Challenge-rendering
-retry at 19:14:51 UTC. Automated review completion and registration are not
-established by that status. The submission selects that exact old commit;
-pushing the compatibility update does not change its selected snapshot.
-The fixed sources require a submission selecting their new public commit.
+The latest submitted snapshot is the corrected commit `d98e7f2` described
+above. The earlier submission of `7686734` and its rendering retries are
+historical; that snapshot lacked the named-instance fix. Each submission
+selects an exact public commit, so a push alone never changes an existing
+submission's source.
+
+Palomar's displayed estimate of about four minutes concerns recent automated
+reviews, not the entire submission process. Queueing, clean tool and dependency
+setup, Challenge rendering, and automated review are separate stages. A status
+page that says rendering is being checked is not itself a rendering failure;
+the workflow's result and artifact determine that outcome.
 
 ## Sources, provenance, and process
 

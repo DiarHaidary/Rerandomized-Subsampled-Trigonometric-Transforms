@@ -1,0 +1,27 @@
+{
+  "audit_declarations": [
+    {
+      "declaration": "theorem RerandomizedSTT.problem_5_6 {k d : Nat} (U : Matrix (RerandomizedSTT.Index k) (Fin d) Real)\n  (hU : Eq (HMul.hMul (Matrix.transpose U) U) 1) (hd : LE.le 1 d) (hdn : LE.le d (HPow.hPow 2 k)) (\u03b5 \u03b4 : Real)\n  (h\u03b5 : LT.lt 0 \u03b5) (h\u03b51 : LT.lt \u03b5 1) (h\u03b4 : LT.lt 0 \u03b4) (h\u03b41 : LT.lt \u03b4 (1 / 2)) :\n  And (LE.le 1 (RerandomizedSTT.sampleSize k d \u03b5 \u03b4))\n    (And (LE.le (RerandomizedSTT.sampleSize k d \u03b5 \u03b4) (HPow.hPow 2 k))\n      (And\n        (LE.le (\u2191(RerandomizedSTT.sampleSize k d \u03b5 \u03b4))\n          (HDiv.hDiv (HMul.hMul (HAdd.hAdd (HMul.hMul 8192 (HAdd.hAdd 1 (HDiv.hDiv 432 \u03b4))) 1) \u2191d) (HPow.hPow \u03b5 2)))\n        (LE.le (HSub.hSub 1 \u03b4) (RerandomizedSTT.successProbability U (RerandomizedSTT.sampleSize k d \u03b5 \u03b4) \u03b5))))",
+      "name": "RerandomizedSTT.problem_5_6"
+    }
+  ],
+  "declarations": [
+    "RerandomizedSTT.problem_5_6"
+  ],
+  "imports": [
+    "Mathlib.Analysis.CStarAlgebra.Matrix",
+    "Mathlib.Analysis.SpecialFunctions.Log.Base",
+    "Mathlib.Data.Fintype.BigOperators",
+    "Mathlib.Data.ZMod.Basic"
+  ],
+  "module_doc": "# Rerandomized subsampled trigonometric transforms: the Walsh case\n\nThis statement answers the two-round real Walsh case of Problem 5.6 in\nhttps://arxiv.org/abs/2602.05394v3. Its probability is a literal uniform finite\naverage over two independent sign assignments and a set of distinct rows.\nThe one intentional proof hole is the declaration that Comparator checks\nagainst the complete proof in `Solution.lean`.",
+  "schema_version": 3,
+  "solution_imports": [
+    "Mathlib.Analysis.CStarAlgebra.Matrix",
+    "Mathlib.Analysis.SpecialFunctions.Log.Base",
+    "Mathlib.Data.Fintype.BigOperators",
+    "Mathlib.Data.ZMod.Basic",
+    "SRHT.LinearDimension",
+    "SRHT.Main"
+  ]
+}

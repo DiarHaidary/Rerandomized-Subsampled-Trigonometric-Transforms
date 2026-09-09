@@ -1,0 +1,72 @@
+{
+  "artifact_tree_sha256": "441aa89bf85db0c572bbe0b26ceeeea9b7f3d8811f3f8c7cbe918ce19700a22e",
+  "entrypoint": "Challenge/index.html",
+  "errors": [],
+  "format": "verso-html",
+  "landrun_commit": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "limits": {
+    "artifact_bytes": 26214400,
+    "artifact_files": 2000,
+    "artifact_nodes": 4000,
+    "build_file_bytes": 2147483648,
+    "memory_bytes": 12884901888,
+    "open_files": 4096,
+    "per_file_bytes": 8388608,
+    "tasks": 512,
+    "wall_seconds": 21600,
+    "workspace_bytes": 12884901888
+  },
+  "mathlib_cache": {
+    "bytes": 443422398,
+    "downloaded": 8690,
+    "requested": 8690
+  },
+  "prepared_at": "2026-09-09T20:32:05Z",
+  "rendered_at": "2026-09-09T20:36:40Z",
+  "renderer_commit": "ef2fa1eadcb246c2346ddba39b52eaa53d4bb763",
+  "schema_version": 2,
+  "source": {
+    "challenge_path": "Challenge.lean",
+    "challenge_sha256": "2014066db73506991b7fb4402c27ec0b92cf94f9dd28906c9157a01f0df2a690",
+    "commit": "d98e7f29472bf79e350712f710b5c19be7f8db76",
+    "comparator_config_path": "comparator.json",
+    "lakefile_path": "lakefile.lean",
+    "lean_toolchain_path": "lean-toolchain",
+    "project_path": "",
+    "repository": "DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms",
+    "repository_url": "https://github.com/DiarHaidary/Rerandomized-Subsampled-Trigonometric-Transforms",
+    "solution_path": "Solution.lean"
+  },
+  "stage": "complete",
+  "status": "pass",
+  "surface": {
+    "audit_declarations": [
+      {
+        "declaration": "theorem RerandomizedSTT.problem_5_6 {k d : Nat} (U : Matrix (RerandomizedSTT.Index k) (Fin d) Real)\n  (hU : Eq (HMul.hMul (Matrix.transpose U) U) 1) (hd : LE.le 1 d) (hdn : LE.le d (HPow.hPow 2 k)) (\u03b5 \u03b4 : Real)\n  (h\u03b5 : LT.lt 0 \u03b5) (h\u03b51 : LT.lt \u03b5 1) (h\u03b4 : LT.lt 0 \u03b4) (h\u03b41 : LT.lt \u03b4 (1 / 2)) :\n  And (LE.le 1 (RerandomizedSTT.sampleSize k d \u03b5 \u03b4))\n    (And (LE.le (RerandomizedSTT.sampleSize k d \u03b5 \u03b4) (HPow.hPow 2 k))\n      (And\n        (LE.le (\u2191(RerandomizedSTT.sampleSize k d \u03b5 \u03b4))\n          (HDiv.hDiv (HMul.hMul (HAdd.hAdd (HMul.hMul 8192 (HAdd.hAdd 1 (HDiv.hDiv 432 \u03b4))) 1) \u2191d) (HPow.hPow \u03b5 2)))\n        (LE.le (HSub.hSub 1 \u03b4) (RerandomizedSTT.successProbability U (RerandomizedSTT.sampleSize k d \u03b5 \u03b4) \u03b5))))",
+        "name": "RerandomizedSTT.problem_5_6"
+      }
+    ],
+    "declarations": [
+      "RerandomizedSTT.problem_5_6"
+    ],
+    "imports": [
+      "Mathlib.Analysis.CStarAlgebra.Matrix",
+      "Mathlib.Analysis.SpecialFunctions.Log.Base",
+      "Mathlib.Data.Fintype.BigOperators",
+      "Mathlib.Data.ZMod.Basic"
+    ],
+    "module_doc": "# Rerandomized subsampled trigonometric transforms: the Walsh case\n\nThis statement answers the two-round real Walsh case of Problem 5.6 in\nhttps://arxiv.org/abs/2602.05394v3. Its probability is a literal uniform finite\naverage over two independent sign assignments and a set of distinct rows.\nThe one intentional proof hole is the declaration that Comparator checks\nagainst the complete proof in `Solution.lean`.",
+    "schema_version": 3,
+    "solution_imports": [
+      "Mathlib.Analysis.CStarAlgebra.Matrix",
+      "Mathlib.Analysis.SpecialFunctions.Log.Base",
+      "Mathlib.Data.Fintype.BigOperators",
+      "Mathlib.Data.ZMod.Basic",
+      "SRHT.LinearDimension",
+      "SRHT.Main"
+    ]
+  },
+  "verso_commit": "3bdedf29bada13d8103e6c979001c51dcee210c8",
+  "workflow_url": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34401370525"
+}

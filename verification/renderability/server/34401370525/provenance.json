@@ -1,0 +1,10 @@
+{
+  "workflowUrl": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34401370525",
+  "sourceCommit": "d98e7f29472bf79e350712f710b5c19be7f8db76",
+  "artifactId": 10123838766,
+  "archiveSha256": "f734bde3fb7d70e41f826a0d71e9304726992a0b36000955c8601072335aaad0",
+  "archiveDigestVerified": true,
+  "bundleManifestFilesChecked": 18,
+  "bundleManifestHashesMatched": true,
+  "reportSha256": "cf1b75d5b991b9ff15bd9e936a080ccf878f4644dca5101a6d5e19e4d74f8082"
+}

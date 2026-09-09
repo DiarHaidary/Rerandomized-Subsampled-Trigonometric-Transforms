@@ -1,12 +1,24 @@
 # Challenge renderability diagnostic
 
+**Latest status: official mechanical verification and full Challenge
+rendering passed** for corrected commit
+`d98e7f29472bf79e350712f710b5c19be7f8db76`. See the
+[mechanical record](../palomar/34398823705/README.md) and
+[full Linux rendering record](server/34401370525/README.md).
+The rendering workflow completed successfully by 20:36:43 UTC on
+9 September 2026. The submitter had withdrawn the submission during setup;
+that withdrawal remains in effect. Automated-review completion and
+registration are not claimed. The [applied-fix record](fix/) explains the
+source change and its verification.
+
 **Historical diagnosis: the Challenge at commit `7686734` failed the Palomar
 core-notation audit.** The named-instance compatibility fix has since been
 applied to Challenge and Solution; [fresh evidence is recorded here](fix/).
 
 The following records the original failing source and the investigation.
-The normal Lean build and Verso literate build succeed, but the official audit
-exits with a kernel type mismatch while copying type dependencies into its
+For that original source, the normal Lean build and Verso literate build
+succeeded, but the official audit exited with a kernel type mismatch while
+copying type dependencies into its
 trusted pretty-printing environment:
 
 ```
@@ -16,14 +28,14 @@ but function has type [NeZero 2] → @Fintype (ZMod 2)
 ```
 
 The official renderer runs this audit after the literate build and before HTML
-generation and sanitation. This failure therefore blocks the complete render
-pipeline even though the theorem source compiles normally. It is a separate
+generation and sanitation. That failure therefore blocked the complete render
+pipeline even though the theorem source compiled normally. It is a separate
 diagnostic from the earlier successful proof/Comparator/NanoDa checks.
 
 The tested Challenge is byte-identical to repository commit
 `e39e455ac36c0faaceb0c200b8a4d242b3263ed5`, SHA-256
 `648a4b4ef7dcb4fe2e9a24c699a50945273aaac19319a8d5d6bf801b7686fd1b`.
-The current PalomarSubmission implementation tested is
+The PalomarSubmission implementation used for this historical test was
 `ef2fa1eadcb246c2346ddba39b52eaa53d4bb763`; Verso is pinned at
 `3bdedf29bada13d8103e6c979001c51dcee210c8` for Lean 4.33.0.
 
@@ -87,16 +99,17 @@ output is in `NamedIndex-official.json`, with an empty `NamedIndex-official.err`
 The named instance keeps the existing enumeration while preventing the theorem
 signature from expanding its implementation across the audit's opaque proxies.
 
-The original recommendation was to add it identically to Challenge and Solution and rerun
-the proof build, Comparator, and rendering checks. The proposed change has been
-tested only on the copied Challenge; the complete proof/Comparator workflow has
-not been rerun with it at the time of this diagnostic. Those original tests
+The original recommendation was to add it identically to Challenge and Solution
+and rerun the proof build, Comparator, and rendering checks. At the time of
+this diagnostic, the proposed change had been tested only on the copied
+Challenge; the complete proof/Comparator workflow had not yet been rerun.
+Those original tests
 left the project sources unchanged. See the [subsequent fix record](fix/) for
 the applied change and its verification.
 
 ## Other display checks
 
-- Current Challenge has 85 lines and 4,306 bytes, within the renderer's inline
+- The historical Challenge had 85 lines and 4,306 bytes, within the renderer's inline
   limits of 100 lines and 32 KiB, and selects exactly one compared theorem.
 - Its explicit theorem name has the required generated anchor
   `RerandomizedSTT___problem_5_6` and binding
@@ -104,9 +117,9 @@ the applied change and its verification.
 - Backticked formulas in the documentation are ordinary Markdown under the
   current default documentation settings; they are not a rendering blocker.
 - The inline renderer retains only the selected theorem and its immediate
-  documentation. For clarity, add the word **Walsh** to that theorem's
-  documentation: the current Walsh qualifier appears only in the module
-  introduction, which the inline view hides.
+  documentation. The original recommendation was to add **Walsh** to that
+  theorem's documentation because the qualifier appeared only in the hidden
+  module introduction. The applied fix includes this clarification.
 - The native Windows asset-path failure is separate from Palomar's Linux
   rendering environment. Only the core-notation failure has been reproduced
   as a blocker in the platform-independent Lean audit.
