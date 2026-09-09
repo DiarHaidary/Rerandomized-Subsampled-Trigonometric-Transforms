@@ -1,0 +1,4 @@
+import Mathlib.Data.ZMod.Basic
+
+theorem ordinary_zmod_card_reflexivity :
+    Fintype.card (ZMod 2) = Fintype.card (ZMod 2) := rfl

@@ -1,0 +1,13 @@
+✔ [204/212] Built Verso.Output.Html.ElasticLunr (799ms)
+✔ [205/212] Built Verso.FS (893ms)
+✔ [206/212] Built Verso.Output.Html.ElasticLunr:c.o (71ms)
+✔ [207/212] Built Verso.FS:c.o (3.9s)
+✔ [208/212] Built VersoLiterateCode (3.0s)
+✔ [209/212] Built VersoHtmlMain (2.6s)
+✔ [210/212] Built VersoLiterateCode:c.o (2.8s)
+✔ [211/212] Built VersoHtmlMain:c.o (1.1s)
+✔ [212/212] Built «verso-html»:exe (611ms)
+uncaught exception: no such file or directory (error code: 2)
+  file: .lake/build/palomar-render-raw\-verso-search\../../../static-web/search\domain-mappers.d.ts
+uncaught exception: no such file or directory (error code: 2)
+  file: F:/Sandbox/SRHT Project/Palomar/.cache/render-check/project/.lake/build/palomar-render-raw\-verso-search\../../../static-web/search\domain-mappers.d.ts

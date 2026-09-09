@@ -1,0 +1,6 @@
+uncaught exception: (kernel) application type mismatch
+  ZMod.fintype 2 ⋯
+argument has type
+  NeZero (1 + 1)
+but function has type
+  [NeZero 2] → @Fintype (ZMod 2)

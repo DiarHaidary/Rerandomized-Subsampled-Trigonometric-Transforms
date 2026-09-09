@@ -1,0 +1,4 @@
+warning: verso: repository 'F:\Sandbox\SRHT Project\Palomar\.cache\render-check\project\.lake/packages\verso' has local changes
+✔ [200/212] Built VersoSearch.DomainSearch (1.6s)
+✔ [211/212] Built VersoSearch.DomainSearch:c.o (691ms)
+✔ [212/212] Built «verso-html»:exe (659ms)

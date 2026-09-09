@@ -1,0 +1,7 @@
+diff --git a/src/verso-search/VersoSearch/DomainSearch.lean b/src/verso-search/VersoSearch/DomainSearch.lean
+index e8222be..c85a019 100644
+--- a/src/verso-search/VersoSearch/DomainSearch.lean
++++ b/src/verso-search/VersoSearch/DomainSearch.lean
+@@ -271 +271 @@ public def searchBoxCode : Array (String × ByteArray) :=
+-    else some (name.dropPrefix "../../../static-web/search/" |>.copy, contents)
++    else some ((name.replace "\\" "/").dropPrefix "../../../static-web/search/" |>.copy, contents)

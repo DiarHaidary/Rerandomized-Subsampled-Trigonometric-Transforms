@@ -5,6 +5,11 @@ Comparator, NanoDa, and Lean's default kernel passed. The
 [verification record](verification/ci/34373116757/README.md) preserves the
 reports and exact checked commit.
 
+**Challenge rendering:** the separate Palomar core-notation audit currently
+fails on a `ZMod 2` dependency. The [renderability report](verification/renderability/README.md)
+records the failure and a compatibility fix tested on a copy of Challenge.
+That fix has not been applied to Challenge or Solution.
+
 This repository contains the complete Lean proof development for two-round
 Walsh SRHT embedding bounds and a Palomar Challenge/Solution interface for
 [Problem 5.6 of *Linear Systems and Eigenvalue Problems: Open Questions from a
